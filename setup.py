@@ -53,6 +53,7 @@ setup(
         "pykeops",
         "sphinx-gallery",
         "matplotlib",
+        "sphinxcontrib-httpdomain",
     ],
     extras_require={
         "full": [
