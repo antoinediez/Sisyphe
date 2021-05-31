@@ -2,3 +2,4 @@ pykeops==1.5
 sphinx-gallery==0.9.0 
 matplotlib==3.4.2
 sphinxcontrib-httpdomain==1.7.0
+torch==1.8.1 
