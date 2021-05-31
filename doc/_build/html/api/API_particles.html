@@ -1,0 +1,1364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Particle systems &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Models" href="API_models.html" />
+    <link rel="prev" title="Volume exclusion" href="../_auto_examples/plot_volume_exclusion.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Particle systems</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/API_particles.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="particle-systems">
+<h1>Particle systems<a class="headerlink" href="#particle-systems" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.particles.Particles" title="sisyphe.particles.Particles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Particles</span></code></a>(pos, interaction_radius, box_size)</p></td>
+<td><p>The main class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sisyphe.particles.KineticParticles" title="sisyphe.particles.KineticParticles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KineticParticles</span></code></a>(pos, vel, …[, …])</p></td>
+<td><p>Subclass of kinetic particles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.particles.BOParticles" title="sisyphe.particles.BOParticles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BOParticles</span></code></a>(pos, bo, interaction_radius, …)</p></td>
+<td><p>3D particle with a body-orientation in <span class="math notranslate nohighlight">\(SO(3)\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-sisyphe.particles"></span><dl class="py class">
+<dt id="sisyphe.particles.Particles">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sisyphe.particles.</span></code><code class="sig-name descname"><span class="pre">Particles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vision_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.283185307179586</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_sparse_reduction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_cells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1024</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main class.</p>
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.N">
+<code class="sig-name descname"><span class="pre">N</span></code><a class="headerlink" href="#sisyphe.particles.Particles.N" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.d">
+<code class="sig-name descname"><span class="pre">d</span></code><a class="headerlink" href="#sisyphe.particles.Particles.d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.pos">
+<code class="sig-name descname"><span class="pre">pos</span></code><a class="headerlink" href="#sisyphe.particles.Particles.pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Positions of the particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(N,d) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.R">
+<code class="sig-name descname"><span class="pre">R</span></code><a class="headerlink" href="#sisyphe.particles.Particles.R" title="Permalink to this definition">¶</a></dt>
+<dd><p>Radius of the particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float or (N,) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.L">
+<code class="sig-name descname"><span class="pre">L</span></code><a class="headerlink" href="#sisyphe.particles.Particles.L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Box size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(d,) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.angle">
+<code class="sig-name descname"><span class="pre">angle</span></code><a class="headerlink" href="#sisyphe.particles.Particles.angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vision angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.axis_is_none">
+<code class="sig-name descname"><span class="pre">axis_is_none</span></code><a class="headerlink" href="#sisyphe.particles.Particles.axis_is_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when an axis is specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.axis">
+<code class="sig-name descname"><span class="pre">axis</span></code><a class="headerlink" href="#sisyphe.particles.Particles.axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Axis of the particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(N,d) Tensor or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.bc">
+<code class="sig-name descname"><span class="pre">bc</span></code><a class="headerlink" href="#sisyphe.particles.Particles.bc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boundary conditions. Can be
+one of the following:</p>
+<ul class="simple">
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list or str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.target_method">
+<code class="sig-name descname"><span class="pre">target_method</span></code><a class="headerlink" href="#sisyphe.particles.Particles.target_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of target methods (see the
+function <a class="reference internal" href="#sisyphe.particles.Particles.compute_target" title="sisyphe.particles.Particles.compute_target"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_target()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.target_option_method">
+<code class="sig-name descname"><span class="pre">target_option_method</span></code><a class="headerlink" href="#sisyphe.particles.Particles.target_option_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of options for the
+targets (see the function <a class="reference internal" href="#sisyphe.particles.Particles.compute_target" title="sisyphe.particles.Particles.compute_target"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_target()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.blocksparse">
+<code class="sig-name descname"><span class="pre">blocksparse</span></code><a class="headerlink" href="#sisyphe.particles.Particles.blocksparse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use block sparse reduction or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.iteration">
+<code class="sig-name descname"><span class="pre">iteration</span></code><a class="headerlink" href="#sisyphe.particles.Particles.iteration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.centroids">
+<code class="sig-name descname"><span class="pre">centroids</span></code><a class="headerlink" href="#sisyphe.particles.Particles.centroids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Centroids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.eps">
+<code class="sig-name descname"><span class="pre">eps</span></code><a class="headerlink" href="#sisyphe.particles.Particles.eps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of the cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sisyphe.particles.Particles.keep">
+<code class="sig-name descname"><span class="pre">keep</span></code><a class="headerlink" href="#sisyphe.particles.Particles.keep" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">keep[i,j]</span></code> is True when the cells <code class="docutils literal notranslate"><span class="pre">i</span></code>
+and <code class="docutils literal notranslate"><span class="pre">j</span></code> are contiguous.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>BoolTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.compute_blocksparse_parameters">
+<code class="sig-name descname"><span class="pre">compute_blocksparse_parameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_cells</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.compute_blocksparse_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the centroids, the size of the cells and the keep
+matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>number_of_cells</strong> (<em>int</em>) – The maximal number of cells. It will
+be rounded to the nearest lower power <span class="math notranslate nohighlight">\(d\)</span>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>(nb_cells, d) Tensor, (nb_cells,) Tensor,
+(nb_cells, nb_cells) BoolTensor:</p>
+<p>The centroids the size of the cells and the keep matrix.</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.best_blocksparse_parameters">
+<code class="sig-name descname"><span class="pre">best_blocksparse_parameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_nb_cells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nb_cells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_best</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.best_blocksparse_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the optimal block sparse parameters.</p>
+<p>This function measures the time to execute <strong>nb_calls</strong>
+calls to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code> for different values of the block
+sparse parameters given by the number of cells to the power
+<span class="math notranslate nohighlight">\(1/d\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_nb_cells</strong> (<em>int</em>) – Minimal number of cells to the power
+<span class="math notranslate nohighlight">\(1/d\)</span>.</p></li>
+<li><p><strong>max_nb_cells</strong> (<em>int</em>) – Maximal number of cells to the power
+<span class="math notranslate nohighlight">\(1/d\)</span>.</p></li>
+<li><p><strong>step</strong> (<em>int</em><em>, </em><em>optional</em>) – Step between two numbers of cells.
+Default is 1.</p></li>
+<li><p><strong>nb_calls</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of calls to the function
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code> at each test. Default is 100.</p></li>
+<li><p><strong>loop</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of loops. Default is 1.</p></li>
+<li><p><strong>set_best</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set the block sparse parameters
+to the optimal ones. Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><dl class="simple">
+<dt><strong>fastest</strong> <cite>(int)</cite>: The number of cells which gave the</dt><dd><p>fastest result.</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>nb_cells</strong> <cite>(list)</cite>: The number of cells tested.</p></li>
+<li><dl class="simple">
+<dt><strong>average_simu_time</strong> <cite>(list)</cite>: The average simulation</dt><dd><p>times.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>simulation_time</strong> <cite>(numpy array)</cite>: The total simulation</dt><dd><p>times.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.add_target_method">
+<code class="sig-name descname"><span class="pre">add_target_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.add_target_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a method to the dictionary <a class="reference internal" href="#sisyphe.particles.Particles.target_method" title="sisyphe.particles.Particles.target_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_method</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the method.</p></li>
+<li><p><strong>method</strong> (<em>func</em>) – A method.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.add_target_option_method">
+<code class="sig-name descname"><span class="pre">add_target_option_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.add_target_option_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an option to the dictionary <a class="reference internal" href="#sisyphe.particles.Particles.target_option_method" title="sisyphe.particles.Particles.target_option_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_option_method</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the option.</p></li>
+<li><p><strong>method</strong> (<em>func</em>) – An option.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.compute_target">
+<code class="sig-name descname"><span class="pre">compute_target</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which_target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which_options</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.compute_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a target and apply some options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>which_target</strong> (<em>dict</em>) – <p>Dictionary of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;name&quot;</span>       <span class="p">:</span> <span class="s2">&quot;method_name&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;parameters&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;param1&quot;</span> <span class="p">:</span> <span class="n">param1</span><span class="p">,</span>
+                 <span class="s2">&quot;param2&quot;</span> <span class="p">:</span> <span class="n">param2</span><span class="p">,</span>
+                  <span class="o">...</span>
+                <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The sub-dictionary <code class="docutils literal notranslate"><span class="pre">&quot;parameters&quot;</span></code> (eventually empty)
+contains the keyword arguments to be passed to the
+function found in the dictionary <a class="reference internal" href="#sisyphe.particles.Particles.target_method" title="sisyphe.particles.Particles.target_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_method</span></code></a>
+with the keyword “method_name”.</p>
+</p></li>
+<li><p><strong>which_options</strong> (<em>dict</em>) – <p>Dictionary of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;name_of_option1&quot;</span> <span class="p">:</span> <span class="n">parameters_of_option1</span><span class="p">,</span>
+ <span class="s2">&quot;name_of_option2&quot;</span> <span class="p">:</span> <span class="n">parameters_of_option2</span><span class="p">,</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The dictionary <strong>`parameters_of_option1`</strong> contains
+the keyword arguments to be passed to the method found
+in the dictionary <a class="reference internal" href="#sisyphe.particles.Particles.target_option_method" title="sisyphe.particles.Particles.target_option_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_option_method</span></code></a> with the
+keyword “name_of_option1”.</p>
+</p></li>
+<li><p><strong>**kwargs</strong> – Keywords arguments to be passed to the functions
+which compute the target and the options.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Compute a target using <strong>which_target</strong> and
+then apply the options in <strong>which_options</strong>
+successively.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.linear_local_average">
+<code class="sig-name descname"><span class="pre">linear_local_average</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*to_average</span></em>, <em class="sig-param"><span class="pre">who=None</span></em>, <em class="sig-param"><span class="pre">with_who=None</span></em>, <em class="sig-param"><span class="pre">isaverage=True</span></em>, <em class="sig-param"><span class="pre">kernel=&lt;function</span> <span class="pre">lazy_interaction_kernel&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.linear_local_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fast computation of a linear local average.</p>
+<p>A linear local average is a matrix vector product between an
+interaction kernel (LazyTensor of size (M,N)) and a Tensor
+of size (N,dimU).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*to_average</strong> (<em>Tensor</em>) – The quantities to average. The first
+dimension must be equal to <a class="reference internal" href="#sisyphe.particles.Particles.N" title="sisyphe.particles.Particles.N"><code class="xref py py-attr docutils literal notranslate"><span class="pre">N</span></code></a>.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>isaverage</strong> (<em>bool</em><em>, </em><em>optional</em>) – Divide the result by <a class="reference internal" href="#sisyphe.particles.Particles.N" title="sisyphe.particles.Particles.N"><code class="xref py py-attr docutils literal notranslate"><span class="pre">N</span></code></a>
+if <strong>isaverage</strong> is True. Default is True.</p></li>
+<li><p><strong>kernel</strong> (<em>func</em><em>, </em><em>optional</em>) – The function which returns the
+interaction kernel as a LazyTensor. Default is
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lazy_interaction_kernel()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The linear local averages.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of Tensors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.nonlinear_local_average">
+<code class="sig-name descname"><span class="pre">nonlinear_local_average</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">binary_formula</span></em>, <em class="sig-param"><span class="pre">arg1</span></em>, <em class="sig-param"><span class="pre">arg2</span></em>, <em class="sig-param"><span class="pre">who=None</span></em>, <em class="sig-param"><span class="pre">with_who=None</span></em>, <em class="sig-param"><span class="pre">isaverage=True</span></em>, <em class="sig-param"><span class="pre">kernel=&lt;function</span> <span class="pre">lazy_interaction_kernel&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.nonlinear_local_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fast computation of a nonlinear local average.</p>
+<p>A nonlinear local average is a reduction of the form</p>
+<div class="math notranslate nohighlight">
+\[\sum_j K_{ij} U_{ij}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K_{ij}\)</span> is an interaction kernel (
+LazyTensor of size (M,N)) and <span class="math notranslate nohighlight">\(U_{ij}\)</span> is a
+LazyTensor of size (M,N,dim) computed using a binary
+formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>binary_formula</strong> (<em>func</em>) – Takes two arguments <strong>arg1</strong>
+and <strong>arg2</strong> and returns a LazyTensor of size
+(M,N,dim).</p></li>
+<li><p><strong>arg1</strong> (<em>(</em><em>M</em><em>,</em><em>D1</em><em>) </em><em>Tensor</em>) – First argument of the binary formula.</p></li>
+<li><p><strong>arg2</strong> (<em>(</em><em>N</em><em>,</em><em>D2</em><em>) </em><em>Tensor</em>) – Second argument of the binary
+formula.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>isaverage</strong> (<em>bool</em><em>, </em><em>optional</em>) – Divide the result by <a class="reference internal" href="#sisyphe.particles.Particles.N" title="sisyphe.particles.Particles.N"><code class="xref py py-attr docutils literal notranslate"><span class="pre">N</span></code></a>
+if isaverage is True. Default is True.</p></li>
+<li><p><strong>kernel</strong> (<em>func</em><em>, </em><em>optional</em>) – The function which returns the
+interaction kernel as a LazyTensor. Default is
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lazy_interaction_kernel()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nonlinear local average.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,dim) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.number_of_neighbours">
+<code class="sig-name descname"><span class="pre">number_of_neighbours</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.number_of_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the number of neighbours.</p>
+<p>The number of neighbours of <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> is the number of ones in
+the row corresponding to <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> in the interaction kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The number of neighbours.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.morse_target">
+<code class="sig-name descname"><span class="pre">morse_target</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Ca</span></em>, <em class="sig-param"><span class="pre">la</span></em>, <em class="sig-param"><span class="pre">Cr</span></em>, <em class="sig-param"><span class="pre">lr</span></em>, <em class="sig-param"><span class="pre">p=2</span></em>, <em class="sig-param"><span class="pre">mass=1.0</span></em>, <em class="sig-param"><span class="pre">who=None</span></em>, <em class="sig-param"><span class="pre">with_who=None</span></em>, <em class="sig-param"><span class="pre">local=False</span></em>, <em class="sig-param"><span class="pre">isaverage=True</span></em>, <em class="sig-param"><span class="pre">kernel=&lt;function</span> <span class="pre">lazy_interaction_kernel&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.morse_target" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Compute the force exerted on each particle due to the Morse</dt><dd><p>potential.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ca</strong> (<em>float</em>) – Attraction coefficient.</p></li>
+<li><p><strong>la</strong> (<em>float</em>) – Attraction length.</p></li>
+<li><p><strong>Cr</strong> (<em>float</em>) – Repulsion coefficient.</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – Repulsion length.</p></li>
+<li><p><strong>p</strong> (<em>int</em><em>, </em><em>optional</em>) – Exponent. Default is 2.</p></li>
+<li><p><strong>mass</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Mass of the
+particles. Default is 1.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>local</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <strong>local</strong> is true then the sum
+only considers the y particles within the interaction
+kernel. Default is False.</p></li>
+<li><p><strong>isaverage</strong> (<em>bool</em><em>, </em><em>optional</em>) – If isaverage is True then divide
+the total force by N where N is the number of True in
+:Tensor”<cite>with_who</cite>. Default is True.</p></li>
+<li><p><strong>kernel</strong> (<em>func</em><em>, </em><em>optional</em>) – The interaction kernel to use.
+Default is <code class="xref py py-func docutils literal notranslate"><span class="pre">lazy_interaction_kernel()</span></code></p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The force exerted on each particle located at <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.quadratic_potential_target">
+<code class="sig-name descname"><span class="pre">quadratic_potential_target</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">who=None</span></em>, <em class="sig-param"><span class="pre">with_who=None</span></em>, <em class="sig-param"><span class="pre">kernel=&lt;function</span> <span class="pre">lazy_interaction_kernel&gt;</span></em>, <em class="sig-param"><span class="pre">isaverage=True</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.quadratic_potential_target" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Compute the force exerted on each particle due to the</dt><dd><p>quadratic potential.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>isaverage</strong> (<em>bool</em><em>, </em><em>optional</em>) – If isaverage is True then divide
+the total force by N where N is the number of True in
+:Tensor”<cite>with_who</cite>. Default is True.</p></li>
+<li><p><strong>kernel</strong> (<em>func</em><em>, </em><em>optional</em>) – The interaction kernel to use.
+Default is <code class="xref py py-func docutils literal notranslate"><span class="pre">lazy_interaction_kernel()</span></code></p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The force exerted on each particle located at <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.Particles.overlapping_repulsion_target">
+<code class="sig-name descname"><span class="pre">overlapping_repulsion_target</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.Particles.overlapping_repulsion_target" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Compute the repulsion force exerted on each particle due to</dt><dd><p>the overlapping.</p>
+</dd>
+</dl>
+<p>The force exerted on a particle located at <span class="math notranslate nohighlight">\(x_i\)</span> derives
+from a logarithmic potential and is given by:</p>
+<div class="math notranslate nohighlight">
+\[F = \sum_j K(x_i-x_j) \left(\frac{(R_i+R_j)^2}{|x_i-x_j|^2} - 1\right) (x_i-x_j)\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_j\)</span> is the position of the other particles;
+<span class="math notranslate nohighlight">\(R_i\)</span> and <span class="math notranslate nohighlight">\(R_j\)</span> are the radii of the particles at
+<span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span> respectively and <span class="math notranslate nohighlight">\(K\)</span> is the
+overlapping kernel.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>in the present case, it is simpler to write explicitly
+the reduction formula but the same function could be
+implemented using a binary formula in
+<a class="reference internal" href="#sisyphe.particles.Particles.nonlinear_local_average" title="sisyphe.particles.Particles.nonlinear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">nonlinear_local_average()</span></code></a> with the kernel given by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lazy_overlapping_kernel()</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <a class="reference internal" href="#sisyphe.particles.Particles.pos" title="sisyphe.particles.Particles.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code></a> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The force exerted on each particle located at <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sisyphe.particles.KineticParticles">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sisyphe.particles.</span></code><code class="sig-name descname"><span class="pre">KineticParticles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vision_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.283185307179586</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_sparse_reduction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_cells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1024</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass of kinetic particles.</p>
+<dl class="py attribute">
+<dt id="sisyphe.particles.KineticParticles.vel">
+<code class="sig-name descname"><span class="pre">vel</span></code><a class="headerlink" href="#sisyphe.particles.KineticParticles.vel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(N,d) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.axis">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">axis</span></code><a class="headerlink" href="#sisyphe.particles.KineticParticles.axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a None axis is given, then the default axis is the
+normalised velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(N,d) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.order_parameter">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">order_parameter</span></code><a class="headerlink" href="#sisyphe.particles.KineticParticles.order_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the norm of the average velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The order parameter.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.check_boundary">
+<code class="sig-name descname"><span class="pre">check_boundary</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.check_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the positions and velocities of the particles which
+are outside the boundary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.normalised">
+<code class="sig-name descname"><span class="pre">normalised</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.normalised" title="Permalink to this definition">¶</a></dt>
+<dd><p>The normalised average velocity.</p>
+<p>Given a system of particles with positions <span class="math notranslate nohighlight">\((x_i)_i\)</span> and
+velocities <span class="math notranslate nohighlight">\((v_i)_i\)</span>, the normalised average velocity
+around particle <span class="math notranslate nohighlight">\((x_i,v_i)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\Omega_i = \frac{\sum_j K(x_i-x_j) v_j}{\left|\sum_j K(x_i-x_j) v_j\right|},\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the interaction kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em>) – The concentration
+parameter. If the size of kappa is bigger than 1 then
+its size must be equal to the number of True values in
+<strong>who</strong>.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The normalised averaged velocity multiplied by the
+concentration parameter.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.motsch_tadmor">
+<code class="sig-name descname"><span class="pre">motsch_tadmor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.motsch_tadmor" title="Permalink to this definition">¶</a></dt>
+<dd><p>The average velocity of the neighbours only.</p>
+<p>Given a system of particles with positions <span class="math notranslate nohighlight">\((x_i)_i\)</span> and
+velocities <span class="math notranslate nohighlight">\((v_i)_i\)</span>, the average velocity
+around particle <span class="math notranslate nohighlight">\((x_i,v_i)\)</span> with the Motsch-Tadmor
+normalisation is:</p>
+<div class="math notranslate nohighlight">
+\[\Omega_i = \frac{\sum_j K(x_i-x_j) v_j}{\sum_j K(x_i-x_j)},\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the interaction kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em>) – The concentration
+parameter. If the size of kappa is bigger than 1 then
+its size must be equal to the number of True values in
+<strong>who</strong>.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The average velocity of the neighbours multiplied
+by the concentration parameter.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.mean_field">
+<code class="sig-name descname"><span class="pre">mean_field</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.mean_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-normalised average velocity.</p>
+<p>Given a system of particles with positions <span class="math notranslate nohighlight">\((x_i)_i\)</span> and
+velocities <span class="math notranslate nohighlight">\((v_i)_i\)</span>, the mean-field average velocity
+around particle <span class="math notranslate nohighlight">\((x_i,v_i)\)</span> (without normalisation) is:</p>
+<div class="math notranslate nohighlight">
+\[J_i = \frac{1}{N}\sum_j K(x_i-x_j) v_j,\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the interaction kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em>) – The concentration
+parameter. If the size of kappa is bigger than 1 then
+its size must be equal to the number of True values in
+<strong>who</strong>.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The mean-field average velocity multiplied by a scaling
+parameter and by the concentration parameter. The scaling
+parameter is equal to the volume of the box divided by
+the volume of the ball of radius <code class="xref py py-attr docutils literal notranslate"><span class="pre">R</span></code> in dimension
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">d</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.max_kappa">
+<code class="sig-name descname"><span class="pre">max_kappa</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.max_kappa" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mean-field target with a norm threshold.</p>
+<p>Given a system of particles with positions <span class="math notranslate nohighlight">\((x_i)_i\)</span> and
+velocities <span class="math notranslate nohighlight">\((v_i)_i\)</span>, the mean-field average velocity
+around particle <span class="math notranslate nohighlight">\((x_i,v_i)\)</span> with a cutoff is:</p>
+<div class="math notranslate nohighlight">
+\[\Omega_i = \frac{1}{\frac{1}{\kappa}+\frac{|J_i|}{\kappa_\mathrm{max}}} J_i\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[J_i = \frac{1}{N}\sum_j K(x_i-x_j) v_j,\]</div>
+<p>and <span class="math notranslate nohighlight">\(K\)</span> is the interaction kernel multiplied by the
+scaling parameter. The scaling parameter is equal to the
+volume of the box divided by the volume of the ball of radius
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">R</span></code> in dimension <code class="xref py py-attr docutils literal notranslate"><span class="pre">d</span></code>. The norm of <span class="math notranslate nohighlight">\(\Omega_i\)</span>
+is thus bounded by <span class="math notranslate nohighlight">\(\kappa_\mathrm{max}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em>) – The concentration
+parameter. If the size of kappa is bigger than 1 then
+its size must be equal to the number of True values in
+<strong>who</strong>.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The cutoff average velocity.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.nematic">
+<code class="sig-name descname"><span class="pre">nematic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.nematic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalised average of the nematic velocities.</p>
+<p>Given a system of particles with positions <span class="math notranslate nohighlight">\((x_i)_i\)</span> and
+velocities <span class="math notranslate nohighlight">\((v_i)_i\)</span>, the nematic average velocity
+around particle <span class="math notranslate nohighlight">\((x_i,v_i)\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\Omega_i = (v_i\cdot \overline{\Omega}_i)\overline{\Omega}_i,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline{\Omega}_i\)</span> is any unit eigenvector
+associated to the maximal eigenvalue of the average Q-tensor:</p>
+<div class="math notranslate nohighlight">
+\[Q_i = \sum_j K(x_i-x_j) \left(v_j\otimes v_j - \frac{1}{d} I_d\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the interaction kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em>) – The concentration
+parameter. If the size of kappa is bigger than 1 then
+its size must be equal to the number of True values in
+<strong>who</strong>.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nematic average velocity multiplied by the concentration
+parameter.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.bounded_angular_velocity">
+<code class="sig-name descname"><span class="pre">bounded_angular_velocity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angvel_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.bounded_angular_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bounded angle between the velocity and the target.</p>
+<p>The maximum angle between the velocity and the new target cannot
+exceed the value <code class="docutils literal notranslate"><span class="pre">angvel_max</span> <span class="pre">*</span> <span class="pre">dt</span></code>. The output tensor
+<strong>new_target</strong> is of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_target</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">target</span>
+</pre></div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(a,b&gt;0\)</span> are such that the cosine between
+<strong>new_target</strong> and <a class="reference internal" href="#sisyphe.particles.KineticParticles.vel" title="sisyphe.particles.KineticParticles.vel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vel</span></code></a> is equal to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_cos</span> <span class="p">:</span><span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angvel_max</span> <span class="o">*</span> <span class="n">dt</span><span class="p">),</span> <span class="n">cos_target</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <strong>cos_target</strong> is the cosine between <strong>target</strong> and
+<a class="reference internal" href="#sisyphe.particles.KineticParticles.vel" title="sisyphe.particles.KineticParticles.vel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vel</span></code></a>. The solution is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">max_cos</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cos_target</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">|</span><span class="n">target</span><span class="o">|</span> <span class="o">/</span> <span class="o">|</span><span class="n">vel</span><span class="o">|</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_cos</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">cos_target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Target.</p></li>
+<li><p><strong>angvel_max</strong> (<em>float</em>) – Maximum angular velocity.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Interval of time.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em>, </em><em>optional</em>) – The velocities of the
+particles associated to the target are <code class="docutils literal notranslate"><span class="pre">vel[who,:]</span></code>
+(or <a class="reference internal" href="#sisyphe.particles.KineticParticles.vel" title="sisyphe.particles.KineticParticles.vel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vel</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keywords arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new target.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,d) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.KineticParticles.pseudo_nematic">
+<code class="sig-name descname"><span class="pre">pseudo_nematic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.KineticParticles.pseudo_nematic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choose the closest to the velocity between the
+target and its opposite.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Target.</p></li>
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em>, </em><em>optional</em>) – The velocities of the
+particles associated to the target are <code class="docutils literal notranslate"><span class="pre">vel[who,:]</span></code>
+(or <a class="reference internal" href="#sisyphe.particles.KineticParticles.vel" title="sisyphe.particles.KineticParticles.vel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vel</span></code></a> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keywords arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Take the opposite of <strong>target</strong> if the angle with the
+velocity is larger than <span class="math notranslate nohighlight">\(\pi/2\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,d) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sisyphe.particles.BOParticles">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sisyphe.particles.</span></code><code class="sig-name descname"><span class="pre">BOParticles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vision_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.283185307179586</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_sparse_reduction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_cells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1024</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.BOParticles" title="Permalink to this definition">¶</a></dt>
+<dd><p>3D particle with a body-orientation in <span class="math notranslate nohighlight">\(SO(3)\)</span>.</p>
+<p>A body-orientation is a rotation matrix is <span class="math notranslate nohighlight">\(SO(3)\)</span> or
+equivalently a unit quaternion.
+If <span class="math notranslate nohighlight">\(q = (x, y, z, t)\)</span> is a unit quaternion, the associated
+rotation matrix is <span class="math notranslate nohighlight">\(A = [e_1, e_2, e_3]\)</span> where the column
+vectors are defined by:</p>
+<div class="math notranslate nohighlight">
+\[e_1 = (x^2 + y^2 - z^2 + t^2, 2(xt+yz), 2(yt-xz))^T\]</div>
+<div class="math notranslate nohighlight">
+\[e_2 = (2(yz-xt), x^2 - y^2 + z^2 - t^2, 2(xy+zt))^T\]</div>
+<div class="math notranslate nohighlight">
+\[e_3 = (2(xz+yt), 2(zt-xy), x^2 - y^2 - z^2 + t^2)^T\]</div>
+<p>Conversely, if <span class="math notranslate nohighlight">\(A\)</span> is the rotation of angle <span class="math notranslate nohighlight">\(\theta\)</span>
+around the axis <span class="math notranslate nohighlight">\(u = (u_1, u_2, u_3)^T\)</span> then the associated
+unit quaternion is:</p>
+<div class="math notranslate nohighlight">
+\[q = \cos(\theta/2) + \sin(\theta/2)(iu_1 + ju_2 + ku_3).\]</div>
+<p>or its opposite.</p>
+<dl class="py attribute">
+<dt id="sisyphe.particles.BOParticles.bo">
+<code class="sig-name descname"><span class="pre">bo</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.bo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Body-orientation stored as a unit quaternion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(N,4) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.vel">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">vel</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.vel" title="Permalink to this definition">¶</a></dt>
+<dd><p>The velocity is the first column vector of the
+body-orientation matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The velocity.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(N,3) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.axis">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">axis</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a None axis is given, then the default axis is the
+(normalised) velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(N,3) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.orth_basis">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">orth_basis</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.orth_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>An othogonal basis of the orthogonal plane of the velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>e2</strong> <em>((N,3) Tensor)</em>: Second column vector of the
+body-orientation matrix.</p></li>
+<li><p><strong>e3</strong> <em>((N,3) Tensor)</em>: Third column vector of the
+body-orientation matrix.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.qtensor">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">qtensor</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.qtensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the normalised uniaxial Q-tensors of the particles.</p>
+<p>If <span class="math notranslate nohighlight">\(q\)</span> is a unit quaternion seen as a colum vector of
+dimension 4, the normalised uniaxial Q-tensor is defined by:</p>
+<div class="math notranslate nohighlight">
+\[Q = q \otimes q - \frac{1}{4}I_4\]</div>
+<p>where <span class="math notranslate nohighlight">\(\otimes\)</span> is the tensor product and <span class="math notranslate nohighlight">\(I_4\)</span> the
+identity matrix of size 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Q-tensors of the N particles.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(N,4,4) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.omega_basis">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">omega_basis</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.omega_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local frame associated to the direction of motion.</p>
+<p>The unit vector <span class="math notranslate nohighlight">\(\Omega\)</span> is the direction of motion
+(it is equal to <a class="reference internal" href="#sisyphe.particles.BOParticles.vel" title="sisyphe.particles.BOParticles.vel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vel</span></code></a>) and
+<span class="math notranslate nohighlight">\([\Omega, e_\theta, e_\varphi]\)</span> is the local orthomormal
+frame associated to the spherical cooordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>p</strong> <em>((N,3) Tensor)</em>: <span class="math notranslate nohighlight">\(e_\varphi\)</span>.</p></li>
+<li><p><strong>q</strong> <em>((N,3) Tensor)</em>: <span class="math notranslate nohighlight">\(-e_\theta\)</span>.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.u_in_omega_basis">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">u_in_omega_basis</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.u_in_omega_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coordinates of <span class="math notranslate nohighlight">\(u\)</span> in the frame <span class="math notranslate nohighlight">\([\Omega, p, q]\)</span>
+given by <a class="reference internal" href="#sisyphe.particles.BOParticles.omega_basis" title="sisyphe.particles.BOParticles.omega_basis"><code class="xref py py-attr docutils literal notranslate"><span class="pre">omega_basis</span></code></a> where <span class="math notranslate nohighlight">\(u\)</span> is the second
+column vector of the body-orientation matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.normalised">
+<code class="sig-name descname"><span class="pre">normalised</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_who</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.BOParticles.normalised" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projection of the average body-orientation on <span class="math notranslate nohighlight">\(SO(3)\)</span>.</p>
+<p>Given a system of particles with positions <span class="math notranslate nohighlight">\((x_i)_i\)</span> and
+body-orientation matrices <span class="math notranslate nohighlight">\((A_i)_i\)</span>, the mean-field average
+body-orientation around the particle <span class="math notranslate nohighlight">\((x_i,A_i)\)</span> is
+is the arithmetic average:</p>
+<div class="math notranslate nohighlight">
+\[J_i = \sum_j K(x_i - x_j) A_j\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the interaction kernel. The projection on
+<span class="math notranslate nohighlight">\(SO(3)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[P_{SO(3)}(J_i) = argmax_{A\in SO(3)}( A \cdot J_i )\]</div>
+<p>for the dot product</p>
+<div class="math notranslate nohighlight">
+\[A \cdot B = \frac{1}{2} Tr(A^T B).\]</div>
+<p>The unit quaternion associated to <span class="math notranslate nohighlight">\(P_{SO(3)}(J_i)\)</span> is any
+eigenvector associated to the maximal eigenvalue of the average
+Q-tensor:</p>
+<div class="math notranslate nohighlight">
+\[\overline{Q}_i = \sum_j K(x_i - x_j) Q_j\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q_j\)</span> is the Q-tensor of particle <span class="math notranslate nohighlight">\((x_j,A_j)\)</span>
+given by <a class="reference internal" href="#sisyphe.particles.BOParticles.qtensor" title="sisyphe.particles.BOParticles.qtensor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">qtensor</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The rows of
+the interaction kernel is <code class="docutils literal notranslate"><span class="pre">pos[who,:]</span></code> (or
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>who</strong> is None). Default is None.</p></li>
+<li><p><strong>with_who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The
+columns of the interaction kernel is
+<code class="docutils literal notranslate"><span class="pre">pos[with_who,:]</span></code> (or <code class="xref py py-attr docutils literal notranslate"><span class="pre">pos</span></code> if <strong>with_who</strong> is
+None). Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The unit quaternion associated to the projection of the
+mean-field average body-orientation on <span class="math notranslate nohighlight">\(SO(3)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,4) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.theta">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">theta</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polar angle of the direction of motion</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.phi">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">phi</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.phi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azimuthal angle of the direction of motion</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.global_order">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">global_order</span></code><a class="headerlink" href="#sisyphe.particles.BOParticles.global_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{ N(N-1)} \sum_{i,j} (q_i \cdot q_j)^2.\]</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.build_reflection_quat">
+<code class="sig-name descname"><span class="pre">build_reflection_quat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">who</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.BOParticles.build_reflection_quat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the quaternion associated to the rotation of angle
+<span class="math notranslate nohighlight">\(2\alpha\)</span> and axis <span class="math notranslate nohighlight">\(n\)</span> where <span class="math notranslate nohighlight">\(\alpha\)</span> is the
+angle between <code class="docutils literal notranslate"><span class="pre">vel[who,:]</span></code> and the plane  orthogonal to
+<strong>axis</strong> and <span class="math notranslate nohighlight">\(n\)</span> is the element of this plane obtained by
+a rotation of <span class="math notranslate nohighlight">\(\pi/2\)</span> around <strong>axis</strong> of the normalised
+projection of <code class="docutils literal notranslate"><span class="pre">vel[who,:]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>who</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>BoolTensor</em>) – </p></li>
+<li><p><strong>axis</strong> (<em>int</em>) – The axis number either 0 (<span class="math notranslate nohighlight">\(x\)</span> axis), 1
+(<span class="math notranslate nohighlight">\(y\)</span> axis) or 2 (<span class="math notranslate nohighlight">\(z\)</span> axis).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Rotation (unit quaternion).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,4) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sisyphe.particles.BOParticles.check_boundary">
+<code class="sig-name descname"><span class="pre">check_boundary</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.particles.BOParticles.check_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the positions and body-orientations of the particles
+which are outside the boundary.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="API_models.html" class="btn btn-neutral float-right" title="Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../_auto_examples/plot_volume_exclusion.html" class="btn btn-neutral float-left" title="Volume exclusion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

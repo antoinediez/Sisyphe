@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Tutorial 05: Kernels and averages &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../_auto_examples/index.html" />
+    <link rel="prev" title="Tutorial 04: Block-sparse reduction" href="plot_d_blocksparse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_a_particlesmodels.html">Tutorial 01: Particles and models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_b_targetsoptions.html">Tutorial 02: Targets and options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_c_boundaryconditions.html">Tutorial 03: Boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_d_blocksparse.html">Tutorial 04: Block-sparse reduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorial 05: Kernels and averages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#linear-local-averages">Linear local averages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nonlinear-averages">Nonlinear averages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Tutorial 05: Kernels and averages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_auto_tutorials/plot_e_kernels.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-tutorials-plot-e-kernels-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="tutorial-05-kernels-and-averages">
+<span id="tuto-averages"></span><span id="sphx-glr-auto-tutorials-plot-e-kernels-py"></span><h1>Tutorial 05: Kernels and averages<a class="headerlink" href="#tutorial-05-kernels-and-averages" title="Permalink to this headline">¶</a></h1>
+<p>Simulating swarming models requires expensive mean-field convolution operations of the form:</p>
+<div class="math notranslate nohighlight">
+\[J^i = \frac{1}{N}\sum_{j=1}^N K(|X^j-X^i|) U^j,\]</div>
+<p>for <span class="math notranslate nohighlight">\(1\leq i\leq N\)</span>, where <span class="math notranslate nohighlight">\((X^i)_{1\leq i \leq N}\)</span> are the positions of the particles, <span class="math notranslate nohighlight">\((U^j)_{1\leq j\leq N}\)</span> are given vectors and <span class="math notranslate nohighlight">\(K\)</span> is an <strong>observation kernel</strong>. Typically, <span class="math notranslate nohighlight">\(K(|X^i-X^j|)\)</span> is equal to 1 if <span class="math notranslate nohighlight">\(X^i\)</span> and <span class="math notranslate nohighlight">\(X^j\)</span> are at distance smaller than a fixed interaction distance and 0 otherwise. Other kernels are defined in the module <a class="reference internal" href="../api/API_kernels.html#module-sisyphe.kernels" title="sisyphe.kernels"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sisyphe.kernels</span></code></a>. Below, we show a simple application case.</p>
+<div class="section" id="linear-local-averages">
+<h2>Linear local averages<a class="headerlink" href="#linear-local-averages" title="Permalink to this headline">¶</a></h2>
+<p>First, some standard imports…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span>
+</pre></div>
+</div>
+<p>Let the <span class="math notranslate nohighlight">\(N\)</span> particles be uniformly scattered in a box of size <span class="math notranslate nohighlight">\(L\)</span> with interaction radius  <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">R</span> <span class="o">=</span> <span class="o">.</span><span class="mi">15</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also assume that the particles have a bounded cone of vision around an axis (defined by a unit vector). The default behaviour is a full vision angle equal to <span class="math notranslate nohighlight">\(2\pi\)</span> in which case the axis is a <code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code> object. Here we take a cone of vision with angle <span class="math notranslate nohighlight">\(\pi/2\)</span> around an axis which is sampled uniformly. For the <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.KineticParticles" title="sisyphe.particles.KineticParticles"><code class="xref py py-class docutils literal notranslate"><span class="pre">sisyphe.particles.KineticParticles</span></code></a>, the default axis is the velocity.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">axis</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Let us create an instance of a particle system with these parameters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.particles</span> <span class="k">import</span> <span class="n">Particles</span>
+
+<span class="n">particles</span> <span class="o">=</span> <span class="n">Particles</span><span class="p">(</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">,</span>
+    <span class="n">interaction_radius</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+    <span class="n">box_size</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
+    <span class="n">vision_angle</span> <span class="o">=</span> <span class="n">angle</span><span class="p">,</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the system and the operations below are defined with periodic boundary conditions.</p>
+</div>
+<p>As a simple application, we can compute the number of neighbours of each particle and print the number of neighbours of the first particle. This operation is already implemented in the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.number_of_neighbours" title="sisyphe.particles.Particles.number_of_neighbours"><code class="xref py py-func docutils literal notranslate"><span class="pre">number_of_neighbours()</span></code></a>. It simply corresponds to the average:</p>
+<div class="math notranslate nohighlight">
+\[N^i_\mathrm{neigh} = \sum_{j=1}^N K(|X^j-X^i|).\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Nneigh</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">number_of_neighbours</span><span class="p">()</span>
+
+<span class="n">Nneigh0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Nneigh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The first particle sees &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Nneigh0</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; other particles.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The first particle sees 1796 other particles.
+</pre></div>
+</div>
+<p>For custom objects, the mean-field average can be computed using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.linear_local_average" title="sisyphe.particles.Particles.linear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_local_average()</span></code></a>. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity <span class="math notranslate nohighlight">\(U\)</span> that we want to average. Here it is simply the positions of the particles.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span>
+</pre></div>
+</div>
+<p>Then we compute the mean field average which is the standard convolution over the <span class="math notranslate nohighlight">\(N\)</span> particles. To get the center of mass, we simply renormalise this average by the actual number of neighbours.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mean_field_average</span><span class="p">,</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">linear_local_average</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="n">center_of_mass</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="n">Nneigh</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">mean_field_average</span>
+</pre></div>
+</div>
+<p>In the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.linear_local_average" title="sisyphe.particles.Particles.linear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_local_average()</span></code></a>, the default observation kernel is a <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTensor</span></code> of size <span class="math notranslate nohighlight">\((N,N)\)</span> whose <span class="math notranslate nohighlight">\((i,j)\)</span> component is equal to 1 when particle <span class="math notranslate nohighlight">\(j\)</span> belongs to the cone of vision of particle <span class="math notranslate nohighlight">\(i\)</span> and 0 otherwise. To retrieve the indexes of the particles which belong to the cone of vision of the first particle, we can use the <a class="reference external" href="https://www.kernel-operations.io/keops/_auto_tutorials/knn/plot_knn_mnist.html#sphx-glr-auto-tutorials-knn-plot-knn-mnist-py">K-nearest-neighbours reduction</a> provided by the <a class="reference external" href="https://www.kernel-operations.io/keops/index.html">KeOps</a> library.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.kernels</span> <span class="k">import</span> <span class="n">lazy_interaction_kernel</span>
+
+<span class="n">interaction_kernel</span> <span class="o">=</span> <span class="n">lazy_interaction_kernel</span><span class="p">(</span>
+    <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>
+    <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span>
+    <span class="n">particles</span><span class="o">.</span><span class="n">R</span><span class="p">,</span>
+    <span class="n">particles</span><span class="o">.</span><span class="n">L</span><span class="p">,</span>
+    <span class="n">boundary_conditions</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">bc</span><span class="p">,</span>
+    <span class="n">vision_angle</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="n">K_ij</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">interaction_kernel</span>
+
+<span class="n">neigh0</span> <span class="o">=</span> <span class="n">K_ij</span><span class="o">.</span><span class="n">argKmin</span><span class="p">(</span><span class="n">Nneigh0</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The indexes of the neighbours of the first particles are: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">neigh0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[pyKeOps] Compiling libKeOpstorchf2f35c967b in /data/and18/.cache/pykeops-1.5-cpython-38:
+       formula: ArgKMin_Reduction((Var(8,1,2) - (Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))))))),1796,0)
+       aliases: Var(0,2,1); Var(1,2,0); Var(2,2,2); Var(3,1,2); Var(4,1,2); Var(5,1,2); Var(6,2,0); Var(7,1,2); Var(8,1,2);
+       dtype  : float32
+...
+Done.
+The indexes of the neighbours of the first particles are:
+tensor([    0,    28,    99,  ..., 99923, 99939, 99999], device=&#39;cuda:0&#39;)
+</pre></div>
+</div>
+<p>Finally, a fancy display of what we have computed. We plot the full particle system in black, the first particle in orange, its neighbours in blue and the center of mass of the neighbours in red.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xall</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">yall</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">neigh0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">neigh0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="n">xc</span> <span class="o">=</span> <span class="n">center_of_mass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">yc</span> <span class="o">=</span> <span class="n">center_of_mass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xall</span><span class="p">,</span> <span class="n">yall</span><span class="p">,</span> <span class="n">s</span><span class="o">=.</span><span class="mi">003</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=.</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="plot e kernels" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_e_kernels_001.png" />
+</div>
+<div class="section" id="nonlinear-averages">
+<h2>Nonlinear averages<a class="headerlink" href="#nonlinear-averages" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, we need to compute a <strong>nonlinear average</strong> of the form</p>
+<div class="math notranslate nohighlight">
+\[J^i = \frac{1}{N}\sum_{j=1}^N K(|X^j-X^i|) b(U^i,V^j),\]</div>
+<p>where <span class="math notranslate nohighlight">\((U^i)_{1\leq i \leq N}\)</span> and <span class="math notranslate nohighlight">\((V^j)_{1\leq j \leq N}\)</span> are given vectors and <span class="math notranslate nohighlight">\(b\)</span> is a given function. When the <strong>binary formula</strong> <span class="math notranslate nohighlight">\(b\)</span> can be written as a <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTensor</span></code>, this can be computed with the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.nonlinear_local_average" title="sisyphe.particles.Particles.nonlinear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">nonlinear_local_average()</span></code></a>.</p>
+<p>For instance, let us compute the local mean square distance:</p>
+<div class="math notranslate nohighlight">
+\[J^i = \frac{\sum_{j=1}^N K(|X^j-X^i|) |X^j-X^i|^2}{\sum_{j=1}^N K(|X^j-X^i|)}.\]</div>
+<p>In this case, we can use the function <a class="reference internal" href="../api/API_kernels.html#sisyphe.kernels.lazy_xy_matrix" title="sisyphe.kernels.lazy_xy_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">sisyphe.kernels.lazy_xy_matrix()</span></code></a> to define a custom binary formula. Given two vectors <span class="math notranslate nohighlight">\(X=(X^i)_{1\leq i\leq M}\)</span> and <span class="math notranslate nohighlight">\(Y = (Y^j)_{1\leq j\leq N}\)</span>, respectively of sizes <span class="math notranslate nohighlight">\((M,d)\)</span> and <span class="math notranslate nohighlight">\((N,d)\)</span>, the <span class="math notranslate nohighlight">\(XY\)</span> matrix is a <span class="math notranslate nohighlight">\((M,N,d)\)</span> LazyTensor whose <span class="math notranslate nohighlight">\((i,j,:)\)</span> component is the vector <span class="math notranslate nohighlight">\(Y^j-X^i\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.kernels</span> <span class="k">import</span> <span class="n">lazy_xy_matrix</span>
+
+<span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">K_ij</span> <span class="o">=</span> <span class="n">lazy_xy_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">particles</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">K_ij</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span>
+<span class="n">mean_square_dist</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="n">Nneigh</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">particles</span><span class="o">.</span><span class="n">nonlinear_local_average</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since the particles are uniformly scattered in the box, the theoretical value is</p>
+<div class="math notranslate nohighlight">
+\[MSD_0 = \frac{\int_0^R \int_0^{\pi/2} r^3 \mathrm{d}r\mathrm{d}\theta}{\int_0^R \int_0^{\pi/2} r \mathrm{d}r\mathrm{d}\theta} = \frac{R^2}{2}\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Theoretical value: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Experimental value: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean_square_dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Theoretical value: 0.01125
+Experimental value: 0.011330570094287395
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  31.300 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-tutorials-plot-e-kernels-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/874774adf3eccd0f17c81f0b667d1b57/plot_e_kernels.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_e_kernels.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/869e866ff1c5cb640fbd51e15245165b/plot_e_kernels.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_e_kernels.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../_auto_examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_d_blocksparse.html" class="btn btn-neutral float-left" title="Tutorial 04: Block-sparse reduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

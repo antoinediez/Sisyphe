@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Tutorial 04: Block-sparse reduction &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial 05: Kernels and averages" href="plot_e_kernels.html" />
+    <link rel="prev" title="Tutorial 03: Boundary conditions" href="plot_c_boundaryconditions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_a_particlesmodels.html">Tutorial 01: Particles and models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_b_targetsoptions.html">Tutorial 02: Targets and options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_c_boundaryconditions.html">Tutorial 03: Boundary conditions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorial 04: Block-sparse reduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-and-benchmarks">Set up and benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-it-work">How does it work</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cell-size-and-number-of-cells">Cell size and number of cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-block-sparse-parameters">The block-sparse parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plot_e_kernels.html">Tutorial 05: Kernels and averages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Tutorial 04: Block-sparse reduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_auto_tutorials/plot_d_blocksparse.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-tutorials-plot-d-blocksparse-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="tutorial-04-block-sparse-reduction">
+<span id="tutobsr"></span><span id="sphx-glr-auto-tutorials-plot-d-blocksparse-py"></span><h1>Tutorial 04: Block-sparse reduction<a class="headerlink" href="#tutorial-04-block-sparse-reduction" title="Permalink to this headline">¶</a></h1>
+<p>In many cases, the interaction radius <span class="math notranslate nohighlight">\(R\)</span> is much smaller than the size of the domain. Consequently, the sums in the local averages (see <a class="reference internal" href="plot_e_kernels.html#tuto-averages"><span class="std std-ref">Tutorial 05: Kernels and averages</span></a>) contain only a small fraction of non zero terms. To gain in efficiency, we can follow the classical strategy:</p>
+<ul class="simple">
+<li><p>Subdivide the domain into a fixed number of cells of size at least <span class="math notranslate nohighlight">\(R\)</span>.</p></li>
+<li><p>For a particle in a given cell, only look at the contiguous cells to compute the local averages. In dimension <span class="math notranslate nohighlight">\(d\)</span>, there are <span class="math notranslate nohighlight">\(3^d\)</span> contiguous cells (including the cell itself).</p></li>
+</ul>
+<p>A practical implementation is called the <em>Verlet list method</em>. However, the implementation below is different than the classical one. It is adapted from the <a class="reference external" href="https://www.kernel-operations.io/keops/_auto_examples/pytorch/plot_grid_cluster_pytorch.html">block-sparse reduction method</a> implemented in the <a class="reference external" href="https://www.kernel-operations.io/keops/index.html">KeOps</a> library.</p>
+<p>We illustrate the gain in efficency for the Vicsek model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The method is sub-optimal for moderate numbers of particles. As a rule of thumb, the block-sparse reduction method becomes useful for systems with at least <span class="math notranslate nohighlight">\(10^4\)</span> particles.</p>
+</div>
+<div class="section" id="set-up-and-benchmarks">
+<h2>Set up and benchmarks<a class="headerlink" href="#set-up-and-benchmarks" title="Permalink to this headline">¶</a></h2>
+<p>First, some standard imports…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span>
+</pre></div>
+</div>
+<p>Let the <span class="math notranslate nohighlight">\(N\)</span> particles be uniformly scattered in a box of size <span class="math notranslate nohighlight">\(L\)</span> with interaction radius  <span class="math notranslate nohighlight">\(R\)</span> and uniformly sampled velocities.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.models</span> <span class="k">import</span> <span class="n">Vicsek</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">simu</span><span class="o">=</span><span class="n">Vicsek</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span><span class="n">vel</span><span class="o">=</span><span class="n">vel</span><span class="p">,</span>
+            <span class="n">v</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+            <span class="n">sigma</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">nu</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span>
+            <span class="n">interaction_radius</span><span class="o">=</span><span class="n">R</span><span class="p">,</span>
+            <span class="n">box_size</span><span class="o">=</span><span class="n">L</span><span class="p">)</span>
+
+<span class="n">simu</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span> <span class="c1">#GPU warmup...</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;position&#39;: tensor([[31.6564,  6.3145],
+        [61.3271, 90.9929],
+        [88.1392,  1.8941],
+        ...,
+        [98.8685, 90.9011],
+        [28.4884, 29.0810],
+        [15.1606, 66.4232]], device=&#39;cuda:0&#39;), &#39;velocity&#39;: tensor([[ 0.9581, -0.2866],
+        [-0.2292, -0.9734],
+        [-0.8279, -0.5608],
+        ...,
+        [-0.6027, -0.7979],
+        [ 0.9594, -0.2821],
+        [-0.4047, -0.9145]], device=&#39;cuda:0&#39;)}
+</pre></div>
+</div>
+<p>Without block-sparse reduction, let us compute the simulation time of 100 iterations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simu_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">simu</span><span class="p">)</span> <span class="c1"># Make a new deepcopy</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">simu_copy</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">simulation_time</span> <span class="o">=</span> <span class="n">e</span><span class="o">-</span><span class="n">s</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average simulation time without block-sparse reduction: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulation_time</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Average simulation time without block-sparse reduction: 2.9741082191467285 seconds.
+</pre></div>
+</div>
+<p>Then with block-sparse reduction… First, turn on the attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">blocksparse</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simu</span><span class="o">.</span><span class="n">blocksparse</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Then, we need to define the maximum number of cells. This can be set by the keyword argument <code class="docutils literal notranslate"><span class="pre">number_of_cells</span></code> when an instance of the class <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles" title="sisyphe.particles.Particles"><code class="xref py py-class docutils literal notranslate"><span class="pre">sisyphe.particles.Particles</span></code></a> is created. The number of cells has a strong influence on the efficiency of the method and should be chosen wisely.  When the optimal value is not known a priori, it is recommanded to use the  method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.best_blocksparse_parameters" title="sisyphe.particles.Particles.best_blocksparse_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">best_blocksparse_parameters()</span></code></a> which will time 100 iterations of the simulation for various numbers of cells and automatically choose the best one. Below, we test all the numbers of cells which are powers of the dimension (here <span class="math notranslate nohighlight">\(d=2\)</span>) between <span class="math notranslate nohighlight">\(10^2\)</span> and <span class="math notranslate nohighlight">\(70^2\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ncell_min</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ncell_max</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">fastest</span><span class="p">,</span> <span class="n">nb_cells</span><span class="p">,</span> <span class="n">average_simu_time</span><span class="p">,</span> <span class="n">simulation_time</span> <span class="o">=</span> <span class="n">simu</span><span class="o">.</span><span class="n">best_blocksparse_parameters</span><span class="p">(</span><span class="n">ncell_min</span><span class="p">,</span> <span class="n">ncell_max</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_calls</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0.0%
+Progress:1.67%
+Progress:3.33%
+Progress:5.0%
+Progress:6.67%
+Progress:8.33%
+Progress:10.0%
+Progress:11.67%
+Progress:13.33%
+Progress:15.0%
+Progress:16.67%
+Progress:18.33%
+Progress:20.0%
+Progress:21.67%
+Progress:23.33%
+Progress:25.0%
+Progress:26.67%
+Progress:28.33%
+Progress:30.0%
+Progress:31.67%
+Progress:33.33%
+Progress:35.0%
+Progress:36.67%
+Progress:38.33%
+Progress:40.0%
+Progress:41.67%
+Progress:43.33%
+Progress:45.0%
+Progress:46.67%
+Progress:48.33%
+Progress:50.0%
+Progress:51.67%
+Progress:53.33%
+Progress:55.0%
+Progress:56.67%
+Progress:58.33%
+Progress:60.0%
+Progress:61.67%
+Progress:63.33%
+Progress:65.0%
+Progress:66.67%
+Progress:68.33%
+Progress:70.0%
+Progress:71.67%
+Progress:73.33%
+Progress:75.0%
+Progress:76.67%
+Progress:78.33%
+Progress:80.0%
+Progress:81.67%
+Progress:83.33%
+Progress:85.0%
+Progress:86.67%
+Progress:88.33%
+Progress:90.0%
+Progress:91.67%
+Progress:93.33%
+Progress:95.0%
+Progress:96.67%
+Progress:98.33%
+</pre></div>
+</div>
+<p>We plot the average simulation time as a function of the square root of the number of cells and print the best.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nb_cells</span><span class="p">,</span><span class="n">average_simu_time</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Square root of the number of cells&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Simulation time&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average simulation time with block-sparse reduction: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">average_simu_time</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot; seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="plot d blocksparse" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_d_blocksparse_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Average simulation time with block-sparse reduction: 0.4012424945831299 seconds.
+</pre></div>
+</div>
+<p>Same experiment with one million particles.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+
+<span class="n">simu</span><span class="o">=</span><span class="n">Vicsek</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span><span class="n">vel</span><span class="o">=</span><span class="n">vel</span><span class="p">,</span>
+            <span class="n">v</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+            <span class="n">sigma</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">nu</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span>
+            <span class="n">interaction_radius</span><span class="o">=</span><span class="n">R</span><span class="p">,</span>
+            <span class="n">box_size</span><span class="o">=</span><span class="n">L</span><span class="p">,</span>
+            <span class="n">block_sparse_reduction</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">simu_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">simu</span><span class="p">)</span> <span class="c1"># Make a new deepcopy</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">simu_copy</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">simulation_time</span> <span class="o">=</span> <span class="n">e</span><span class="o">-</span><span class="n">s</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average simulation time without block-sparse reduction: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulation_time</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Average simulation time without block-sparse reduction: 274.7271876335144 seconds.
+</pre></div>
+</div>
+<p>With block-sparse reduction…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simu</span><span class="o">.</span><span class="n">blocksparse</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">fastest</span><span class="p">,</span> <span class="n">nb_cells</span><span class="p">,</span> <span class="n">average_simu_time</span><span class="p">,</span> <span class="n">simulation_time</span> <span class="o">=</span> <span class="n">simu</span><span class="o">.</span><span class="n">best_blocksparse_parameters</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">nb_calls</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0.0%
+Progress:1.43%
+Progress:2.86%
+Progress:4.29%
+Progress:5.71%
+Progress:7.14%
+Progress:8.57%
+Progress:10.0%
+Progress:11.43%
+Progress:12.86%
+Progress:14.29%
+Progress:15.71%
+Progress:17.14%
+Progress:18.57%
+Progress:20.0%
+Progress:21.43%
+Progress:22.86%
+Progress:24.29%
+Progress:25.71%
+Progress:27.14%
+Progress:28.57%
+Progress:30.0%
+Progress:31.43%
+Progress:32.86%
+Progress:34.29%
+Progress:35.71%
+Progress:37.14%
+Progress:38.57%
+Progress:40.0%
+Progress:41.43%
+Progress:42.86%
+Progress:44.29%
+Progress:45.71%
+Progress:47.14%
+Progress:48.57%
+Progress:50.0%
+Progress:51.43%
+Progress:52.86%
+Progress:54.29%
+Progress:55.71%
+Progress:57.14%
+Progress:58.57%
+Progress:60.0%
+Progress:61.43%
+Progress:62.86%
+Progress:64.29%
+Progress:65.71%
+Progress:67.14%
+Progress:68.57%
+Progress:70.0%
+Progress:71.43%
+Progress:72.86%
+Progress:74.29%
+Progress:75.71%
+Progress:77.14%
+Progress:78.57%
+Progress:80.0%
+Progress:81.43%
+Progress:82.86%
+Progress:84.29%
+Progress:85.71%
+Progress:87.14%
+Progress:88.57%
+Progress:90.0%
+Progress:91.43%
+Progress:92.86%
+Progress:94.29%
+Progress:95.71%
+Progress:97.14%
+Progress:98.57%
+</pre></div>
+</div>
+<p>We plot the average simulation time as a function of the square root of the number of cells and print the best.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nb_cells</span><span class="p">,</span><span class="n">average_simu_time</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Square root of the number of cells&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Simulation time&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average simulation time with block-sparse reduction: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">average_simu_time</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot; seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="plot d blocksparse" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_d_blocksparse_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Average simulation time with block-sparse reduction: 2.2031195163726807 seconds.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The optimal parameters chosen initially may not stay optimal in the course of the simulation. This may be the case in particular if there is a strong concentration of particles.</p>
+</div>
+</div>
+<div class="section" id="how-does-it-work">
+<h2>How does it work<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cell-size-and-number-of-cells">
+<h3>Cell size and number of cells<a class="headerlink" href="#cell-size-and-number-of-cells" title="Permalink to this headline">¶</a></h3>
+<p>The cells have a rectangular shape. The length of the cells along each dimension cannot be smaller than the interaction radius <span class="math notranslate nohighlight">\(R\)</span>. The maximum number of cells is thus equal to:</p>
+<div class="math notranslate nohighlight">
+\[n_\mathrm{max} = \prod_{k=1}^d \left\lfloor \frac{L_k}{R} \right\rfloor,\]</div>
+<p>where <span class="math notranslate nohighlight">\(L_k\)</span> is the length of the (rectangular) domain along dimension <span class="math notranslate nohighlight">\(k\)</span>. This corresponds to rectangular cells with a length along dimension <span class="math notranslate nohighlight">\(k\)</span> equal to:</p>
+<div class="math notranslate nohighlight">
+\[\varepsilon_k = \frac{L_k}{\left\lfloor \frac{L_k}{R} \right\rfloor}.\]</div>
+<p>If the number of cells demanded <span class="math notranslate nohighlight">\(n_0\)</span> exceeds <span class="math notranslate nohighlight">\(n_\mathrm{max}\)</span>, this will be the chosen value. Otherwise, we first compute the typical length:</p>
+<div class="math notranslate nohighlight">
+\[\varepsilon_0 = \left(\frac{\prod_{k=1}^d L_k}{n_0}\right)^{1/d}\]</div>
+<p>Then the length of the cells along dimension <span class="math notranslate nohighlight">\(k\)</span> is set to</p>
+<div class="math notranslate nohighlight">
+\[\varepsilon_k = \frac{L_k}{\left\lfloor\frac{L_k}{\varepsilon_0}\right\rfloor}.\]</div>
+<p>In particular, in a square domain <span class="math notranslate nohighlight">\(L_k=L\)</span> for all <span class="math notranslate nohighlight">\(k\)</span> and when <span class="math notranslate nohighlight">\(n_0\)</span> is a power of <span class="math notranslate nohighlight">\(d\)</span>, then there are exactly <span class="math notranslate nohighlight">\(n_0\)</span> square cells with length <span class="math notranslate nohighlight">\(L/n_0^{1/d}\)</span>.</p>
+</div>
+<div class="section" id="the-block-sparse-parameters">
+<h3>The block-sparse parameters<a class="headerlink" href="#the-block-sparse-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The initialisation or the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.best_blocksparse_parameters" title="sisyphe.particles.Particles.best_blocksparse_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">best_blocksparse_parameters()</span></code></a> define three attributes which are used to speed up the computations. Given a number of cells, they are computed by the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.compute_blocksparse_parameters" title="sisyphe.particles.Particles.compute_blocksparse_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_blocksparse_parameters()</span></code></a>.</p>
+<ul class="simple">
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">centroids</span></code> : the coordinates of the centers of the cells.</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">keep</span></code> : a square BoolTensor which indicates whether two cells are contiguous.</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">eps</span></code> : the length of the cells along each dimension.</p></li>
+</ul>
+<p>The particles are clustered into the cells using the method <a class="reference internal" href="../api/API_toolbox.html#sisyphe.toolbox.uniform_grid_separation" title="sisyphe.toolbox.uniform_grid_separation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">uniform_grid_separation()</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A drawback of the method is the high memory cost needed to store the boolean mask <code class="xref py py-attr docutils literal notranslate"><span class="pre">keep</span></code>. As a consequence, unlike the classical Verlet list method, the optimal number of cells is often <strong>not</strong> the maximum one. In the examples presented in this documentation, the optimal number of cells is always smaller than <span class="math notranslate nohighlight">\(10^4\)</span>.</p>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 8 minutes  9.001 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-tutorials-plot-d-blocksparse-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/58ecf1c230252359d87d42a97a7d0994/plot_d_blocksparse.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_d_blocksparse.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/6b94b35b57c0df94a093bbe9fd108235/plot_d_blocksparse.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_d_blocksparse.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_e_kernels.html" class="btn btn-neutral float-right" title="Tutorial 05: Kernels and averages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_c_boundaryconditions.html" class="btn btn-neutral float-left" title="Tutorial 03: Boundary conditions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

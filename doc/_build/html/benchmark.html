@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Benchmarks &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="_auto_tutorials/index.html" />
+    <link rel="prev" title="Simulation of Systems of Particles with High Efficiency" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_auto_tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Benchmarks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/benchmark.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="benchmarks">
+<h1>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h1>
+<p>We compare</p>
+<ul class="simple">
+<li><p>a <a class="reference external" href="https://github.com/smotsch/Vicsek_microFlat">Fortran implementation</a> due to Sébastien Motsch using the Verlet list method with double precision float numbers, run on the <a class="reference external" href="http://sysnews.ma.ic.ac.uk/compute-cluster/">NextGen</a> compute cluster at Imperial College London.</p></li>
+<li><p>the CPU version of SiSyPHE with double precision tensors (float64) and the blocksparse-reduction method (BSR), run on an Intel MacBook Pro (2GHz Intel Core i5 processor with 8 Go of memory) ;</p></li>
+<li><p>the GPU version of SiSyPHE with single precision tensors (float32) with and without the <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">blocksparse-reduction method</span></a> (BSR), run on a <a class="reference external" href="http://sysnews.ma.ic.ac.uk/GPU-computing/">GPU cluster</a> at Imperial College London using an nVidia GTX 2080 Ti GPU ;</p></li>
+<li><p>the GPU version of SiSyPHE with double precision tensors (float64) with and without the <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">blocksparse-reduction method</span></a> (BSR), run on a <a class="reference external" href="http://sysnews.ma.ic.ac.uk/GPU-computing/">GPU cluster</a> at Imperial College London using an nVidia GTX 2080 Ti GPU.</p></li>
+</ul>
+<p>We run a <a class="reference internal" href="api/API_models.html#sisyphe.models.Vicsek" title="sisyphe.models.Vicsek"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vicsek</span></code></a> model in a square periodic box with fixed parameters <span class="math notranslate nohighlight">\(L=100\)</span>, <span class="math notranslate nohighlight">\(\nu=5\)</span>, <span class="math notranslate nohighlight">\(\sigma=1\)</span>, <span class="math notranslate nohighlight">\(c=R\)</span>, <span class="math notranslate nohighlight">\(dt=0.01\)</span> and various choices of <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. The simulation is run for 10 units of time (i.e. 1000 iterations).</p>
+<p>For each value of <span class="math notranslate nohighlight">\(N\)</span>, three value of <span class="math notranslate nohighlight">\(R\)</span> are tested which correspond to a dilute regime, a moderate regime and a dense mean-field regime. When the particles are uniformly scattered in the box, the average number of neighbours in the three regimes is respectively <span class="math notranslate nohighlight">\(\sim3\)</span>, <span class="math notranslate nohighlight">\(\sim30\)</span> and <span class="math notranslate nohighlight">\(\sim300\)</span>. The regime has a strong effect on the efficiency of the Verlet list and blocksparse reduction methods.</p>
+<p>In the table below, the total computation times are given in seconds except when they exceed 12 hours. The best times are indicated in <strong>bold</strong> and the worst times in <em>italic</em>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"></th>
+<th class="head"><div class="line-block">
+<div class="line">Fortran</div>
+<div class="line"><br /></div>
+</div>
+</th>
+<th class="head"><div class="line-block">
+<div class="line">sisyphe64</div>
+<div class="line">CPU BSR</div>
+</div>
+</th>
+<th class="head"><div class="line-block">
+<div class="line">sisyphe32</div>
+<div class="line">GPU</div>
+</div>
+</th>
+<th class="head"><div class="line-block">
+<div class="line">sisyphe32</div>
+<div class="line">GPU BSR</div>
+</div>
+</th>
+<th class="head"><div class="line-block">
+<div class="line">sisyphe64</div>
+<div class="line">GPU</div>
+</div>
+</th>
+<th class="head"><div class="line-block">
+<div class="line">sisyphe64</div>
+<div class="line">GPU BSR</div>
+</div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>N = 10k</p></td>
+<td><p>R = 1</p></td>
+<td><p>19s</p></td>
+<td><p><em>26s</em></p></td>
+<td rowspan="3"><p><strong>2.1s</strong></p></td>
+<td><p>3.3s</p></td>
+<td rowspan="3"><p>13s</p></td>
+<td><p>3.6s</p></td>
+</tr>
+<tr class="row-odd"><td><p>R = 3</p></td>
+<td><p><em>59s</em></p></td>
+<td><p>29s</p></td>
+<td><p>3.4s</p></td>
+<td><p>3.9s</p></td>
+</tr>
+<tr class="row-even"><td><p>R = 10</p></td>
+<td><p><em>494s</em></p></td>
+<td><p>69s</p></td>
+<td><p>3.4s</p></td>
+<td><p>7.9s</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>N = 100k</p></td>
+<td><p>R = 0.3</p></td>
+<td><p>309s</p></td>
+<td><p><em>323s</em></p></td>
+<td rowspan="3"><p>29s</p></td>
+<td><p><strong>4.3s</strong></p></td>
+<td rowspan="3"><p>973s</p></td>
+<td><p>9.3s</p></td>
+</tr>
+<tr class="row-even"><td><p>R = 1</p></td>
+<td><p><em>1522s</em></p></td>
+<td><p>384s</p></td>
+<td><p><strong>4.5s</strong></p></td>
+<td><p>11s</p></td>
+</tr>
+<tr class="row-odd"><td><p>R = 3</p></td>
+<td><p><em>3286s</em></p></td>
+<td><p>796s</p></td>
+<td><p><strong>4.9s</strong></p></td>
+<td><p>28s</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>N = 1M</p></td>
+<td><p>R = 0.1</p></td>
+<td><p><em>&gt;12h</em></p></td>
+<td><p>6711s</p></td>
+<td rowspan="3"><p>2738s</p></td>
+<td><p><strong>22s</strong></p></td>
+<td rowspan="3"><p><em>&gt;12h</em></p></td>
+<td><p>120s</p></td>
+</tr>
+<tr class="row-odd"><td><p>R = 0.3</p></td>
+<td><p><em>&gt;12h</em></p></td>
+<td><p>6992s</p></td>
+<td><p><strong>23s</strong></p></td>
+<td><p>135s</p></td>
+</tr>
+<tr class="row-even"><td><p>R = 1</p></td>
+<td><p><em>&gt;12h</em></p></td>
+<td><p>9245s</p></td>
+<td><p><strong>26s</strong></p></td>
+<td><p>194s</p></td>
+</tr>
+</tbody>
+</table>
+<p>The GPU implementation is at least 5 times faster in the dilute regime and outperform the other methods by three orders of magnitude in the mean-field regime with large values of <span class="math notranslate nohighlight">\(N\)</span>. Without the block-sparse reduction method, the GPU implementation does suffer from the quadratic complexity. The block-sparse reduction method is less sensitive to the density of particles than the traditional Verlet list method. It comes at the price of a higher memory cost (see <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">Tutorial 04: Block-sparse reduction</span></a>) but allows to run large scale simulations even on a CPU. On a CPU, the performances are not critically affected by the precision of the floating-point format so only simulations with double precision tensors are shown.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_auto_tutorials/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Simulation of Systems of Particles with High Efficiency" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

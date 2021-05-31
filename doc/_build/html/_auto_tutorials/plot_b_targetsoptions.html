@@ -1,0 +1,881 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Tutorial 02: Targets and options &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial 03: Boundary conditions" href="plot_c_boundaryconditions.html" />
+    <link rel="prev" title="Tutorial 01: Particles and models" href="plot_a_particlesmodels.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_a_particlesmodels.html">Tutorial 01: Particles and models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorial 02: Targets and options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#an-example-variants-of-the-vicsek-model">An example: variants of the Vicsek model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-classical-non-normalised-vicsek-model">The classical non-normalised Vicsek model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-normalised-vicsek-model">Non-normalised Vicsek model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nematic-vicsek-model">Nematic Vicsek model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-target-dictionary">The target dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plot_c_boundaryconditions.html">Tutorial 03: Boundary conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_d_blocksparse.html">Tutorial 04: Block-sparse reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_e_kernels.html">Tutorial 05: Kernels and averages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Tutorial 02: Targets and options</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_auto_tutorials/plot_b_targetsoptions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-tutorials-plot-b-targetsoptions-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="tutorial-02-targets-and-options">
+<span id="sphx-glr-auto-tutorials-plot-b-targetsoptions-py"></span><h1>Tutorial 02: Targets and options<a class="headerlink" href="#tutorial-02-targets-and-options" title="Permalink to this headline">¶</a></h1>
+<p>Many useful <strong>local averages</strong> (see <a class="reference internal" href="plot_e_kernels.html#tuto-averages"><span class="std std-ref">Tutorial 05: Kernels and averages</span></a>) are pre-defined and may be directly used in the simulation of new or classical models. This tutorial showcases the basic usage of the <strong>target methods</strong> to simulate the variants of the Vicsek model.</p>
+<div class="section" id="an-example-variants-of-the-vicsek-model">
+<h2>An example: variants of the Vicsek model<a class="headerlink" href="#an-example-variants-of-the-vicsek-model" title="Permalink to this headline">¶</a></h2>
+<p>In its most abstract form, the Vicsek model reads:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{d}X^i_t = c_0 V^i_t \mathrm{d} t\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{d}V^i_t = \sigma\mathsf{P}(V^i_t)\circ ( J^i_t \mathrm{d}t + \mathrm{d} B^i_t),\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_0\)</span> is the speed, <span class="math notranslate nohighlight">\(\mathsf{P}(v)\)</span> is the orthogonal projection on the orthogonal plane to <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> is the diffusion coefficient. The drift coefficient <span class="math notranslate nohighlight">\(J^i_t\)</span> is called a <strong>target</strong>. In synchronous and asynchronous Vicsek models, the target is the center of the sampling distribution. A comparison of classical targets is shown below.</p>
+<p>First, some standard imports…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sisyphe.models</span> <span class="k">import</span> <span class="n">Vicsek</span>
+<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="k">import</span> <span class="n">display_kinetic_particles</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span>
+</pre></div>
+</div>
+<div class="section" id="the-classical-non-normalised-vicsek-model">
+<h3>The classical non-normalised Vicsek model<a class="headerlink" href="#the-classical-non-normalised-vicsek-model" title="Permalink to this headline">¶</a></h3>
+<p>The target is:</p>
+<div class="math notranslate nohighlight">
+\[J^i_t = \kappa\frac{\sum_{j=1}^N K(|X^j_t-X^i_t|)V^j_t}{|\sum_{j=1}^N K(|X^j_t-X^i_t|)V^j_t|}.\]</div>
+<p>The parameters of the model…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">nu</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">01</span>
+</pre></div>
+</div>
+<p>The choice of the target is implemented in the keyword argument <code class="docutils literal notranslate"><span class="pre">variant</span></code>. For the classical normalised target, it is given by the following dictionary.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">variant</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;normalised&quot;</span><span class="p">,</span> <span class="s2">&quot;parameters&quot;</span> <span class="p">:</span> <span class="p">{}}</span>
+
+<span class="n">simu</span> <span class="o">=</span> <span class="n">Vicsek</span><span class="p">(</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span><span class="p">,</span>
+    <span class="n">interaction_radius</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+    <span class="n">box_size</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">,</span>
+    <span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span><span class="p">,</span>
+    <span class="n">block_sparse_reduction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">number_of_cells</span> <span class="o">=</span> <span class="mi">40</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally run the simulation over 300 units of time….</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="mf">42.</span><span class="p">,</span> <span class="mf">71.</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">257</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">it</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="n">display_kinetic_particles</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=0.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_001.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=5.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_002.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=10.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_003.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=30.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_004.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=42.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_005.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=71.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_006.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=100.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_007.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=124.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_008.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=161.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_009.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=206.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_010.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=257.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_011.png" />
+</li>
+<li><img alt="Vicsek(normalised)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=300.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_012.png" />
+</li>
+<li><img alt="plot b targetsoptions" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_013.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0%
+Progress:1%
+Progress:2%
+Progress:3%
+Progress:4%
+Progress:5%
+Progress:6%
+Progress:7%
+Progress:8%
+Progress:9%
+Progress:10%
+Progress:11%
+Progress:12%
+Progress:13%
+Progress:14%
+Progress:15%
+Progress:16%
+Progress:17%
+Progress:18%
+Progress:19%
+Progress:20%
+Progress:21%
+Progress:22%
+Progress:23%
+Progress:24%
+Progress:25%
+Progress:26%
+Progress:27%
+Progress:28%
+Progress:29%
+Progress:30%
+Progress:31%
+Progress:32%
+Progress:33%
+Progress:34%
+Progress:35%
+Progress:36%
+Progress:37%
+Progress:38%
+Progress:39%
+Progress:40%
+Progress:41%
+Progress:42%
+Progress:43%
+Progress:44%
+Progress:45%
+Progress:46%
+Progress:47%
+Progress:48%
+Progress:49%
+Progress:50%
+Progress:51%
+Progress:52%
+Progress:53%
+Progress:54%
+Progress:55%
+Progress:56%
+Progress:57%
+Progress:58%
+Progress:59%
+Progress:60%
+Progress:61%
+Progress:62%
+Progress:63%
+Progress:64%
+Progress:65%
+Progress:66%
+Progress:67%
+Progress:68%
+Progress:69%
+Progress:70%
+Progress:71%
+Progress:72%
+Progress:73%
+Progress:74%
+Progress:75%
+Progress:76%
+Progress:77%
+Progress:78%
+Progress:79%
+Progress:80%
+Progress:81%
+Progress:82%
+Progress:83%
+Progress:84%
+Progress:85%
+Progress:86%
+Progress:87%
+Progress:88%
+Progress:89%
+Progress:90%
+Progress:91%
+Progress:92%
+Progress:93%
+Progress:94%
+Progress:95%
+Progress:96%
+Progress:97%
+Progress:98%
+Progress:99%
+</pre></div>
+</div>
+<p>Print the total simulation time and the average time per iteration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average time per iteration: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">simu</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 140.3169023990631 seconds
+Average time per iteration: 0.00467723007996877 seconds
+</pre></div>
+</div>
+<p>Plot the histogram of the angles of the directions of motion.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="plot b targetsoptions" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_b_targetsoptions_014.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if s != self._text:
+</pre></div>
+</div>
+<p>After an initial clustering phase, the system self-organizes into a uniform flock.</p>
+</div>
+<div class="section" id="non-normalised-vicsek-model">
+<h3>Non-normalised Vicsek model<a class="headerlink" href="#non-normalised-vicsek-model" title="Permalink to this headline">¶</a></h3>
+<p>The target is:</p>
+<div class="math notranslate nohighlight">
+\[J^i_t = \frac{\frac{1}{N}\sum_{j=1}^N K(|X^j_t-X^i_t|)V^j_t}{\frac{1}{\kappa}+\frac{1}{\kappa_0}|\frac{1}{N}\sum_{j=1}^N K(|X^j_t-X^i_t|)V^j_t|}.\]</div>
+<p>Define the corresponding dictionary…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kappa_0</span> <span class="o">=</span> <span class="mf">15.</span>
+
+<span class="n">variant</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;max_kappa&quot;</span><span class="p">,</span> <span class="s2">&quot;parameters&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;kappa_max&quot;</span> <span class="p">:</span> <span class="n">kappa_0</span><span class="p">}}</span>
+
+<span class="n">simu</span> <span class="o">=</span> <span class="n">Vicsek</span><span class="p">(</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span><span class="p">,</span>
+    <span class="n">interaction_radius</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+    <span class="n">box_size</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">,</span>
+    <span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span><span class="p">,</span>
+    <span class="n">block_sparse_reduction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">number_of_cells</span> <span class="o">=</span> <span class="mi">40</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally run the simulation over 300 units of time….</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="mf">42.</span><span class="p">,</span> <span class="mf">71.</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">257</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">it</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="n">display_kinetic_particles</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=0.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_015.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=5.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_016.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=10.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_017.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=30.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_018.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=42.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_019.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=71.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_020.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=100.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_021.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=124.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_022.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=161.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_023.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=206.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_024.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=257.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_025.png" />
+</li>
+<li><img alt="Vicsek(max_kappa)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=300.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_026.png" />
+</li>
+<li><img alt="plot b targetsoptions" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_027.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0%
+Progress:1%
+Progress:2%
+Progress:3%
+Progress:4%
+Progress:5%
+Progress:6%
+Progress:7%
+Progress:8%
+Progress:9%
+Progress:10%
+Progress:11%
+Progress:12%
+Progress:13%
+Progress:14%
+Progress:15%
+Progress:16%
+Progress:17%
+Progress:18%
+Progress:19%
+Progress:20%
+Progress:21%
+Progress:22%
+Progress:23%
+Progress:24%
+Progress:25%
+Progress:26%
+Progress:27%
+Progress:28%
+Progress:29%
+Progress:30%
+Progress:31%
+Progress:32%
+Progress:33%
+Progress:34%
+Progress:35%
+Progress:36%
+Progress:37%
+Progress:38%
+Progress:39%
+Progress:40%
+Progress:41%
+Progress:42%
+Progress:43%
+Progress:44%
+Progress:45%
+Progress:46%
+Progress:47%
+Progress:48%
+Progress:49%
+Progress:50%
+Progress:51%
+Progress:52%
+Progress:53%
+Progress:54%
+Progress:55%
+Progress:56%
+Progress:57%
+Progress:58%
+Progress:59%
+Progress:60%
+Progress:61%
+Progress:62%
+Progress:63%
+Progress:64%
+Progress:65%
+Progress:66%
+Progress:67%
+Progress:68%
+Progress:69%
+Progress:70%
+Progress:71%
+Progress:72%
+Progress:73%
+Progress:74%
+Progress:75%
+Progress:76%
+Progress:77%
+Progress:78%
+Progress:79%
+Progress:80%
+Progress:81%
+Progress:82%
+Progress:83%
+Progress:84%
+Progress:85%
+Progress:86%
+Progress:87%
+Progress:88%
+Progress:89%
+Progress:90%
+Progress:91%
+Progress:92%
+Progress:93%
+Progress:94%
+Progress:95%
+Progress:96%
+Progress:97%
+Progress:98%
+Progress:99%
+</pre></div>
+</div>
+<p>Print the total simulation time and the average time per iteration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average time per iteration: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">simu</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 157.864102602005 seconds
+Average time per iteration: 0.005262136753400167 seconds
+</pre></div>
+</div>
+<p>Plot the histogram of the angles of the directions of motion.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="plot b targetsoptions" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_b_targetsoptions_028.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if s != self._text:
+</pre></div>
+</div>
+<p>The system self-organizes into a strongly clustered flock with band-like structures.</p>
+</div>
+<div class="section" id="nematic-vicsek-model">
+<h3>Nematic Vicsek model<a class="headerlink" href="#nematic-vicsek-model" title="Permalink to this headline">¶</a></h3>
+<p>The target is:</p>
+<div class="math notranslate nohighlight">
+\[J^i_t = \kappa (V^i_t\cdot \overline{\Omega}^i_t)\overline{\Omega}^i_t,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline{\Omega}^i_t\)</span> is any unit eigenvector associated to the maximal eigenvalue of the average Q-tensor:</p>
+<div class="math notranslate nohighlight">
+\[Q^i_t = \frac{1}{N}\sum_{j=1}^N K(|X^j_t-X^i_t|){\left(V^j_t\otimes V^j_t - \frac{1}{d} I_d\right)}.\]</div>
+<p>Define the corresponding dictionary…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">variant</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;nematic&quot;</span><span class="p">,</span> <span class="s2">&quot;parameters&quot;</span> <span class="p">:</span> <span class="p">{}}</span>
+
+<span class="n">simu</span> <span class="o">=</span> <span class="n">Vicsek</span><span class="p">(</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span><span class="p">,</span>
+    <span class="n">interaction_radius</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+    <span class="n">box_size</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">,</span>
+    <span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span><span class="p">,</span>
+    <span class="n">block_sparse_reduction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">number_of_cells</span> <span class="o">=</span> <span class="mi">40</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally run the simulation over 100 units of time… The color code indicates the angle of the direction of motion between <span class="math notranslate nohighlight">\(-\pi\)</span> and <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="mf">42.</span><span class="p">,</span> <span class="mf">71.</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">it</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="n">display_kinetic_particles</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=0.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_029.png" />
+</li>
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=5.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_030.png" />
+</li>
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=10.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_031.png" />
+</li>
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=30.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_032.png" />
+</li>
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=42.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_033.png" />
+</li>
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=71.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_034.png" />
+</li>
+<li><img alt="Vicsek(nematic)  Parameters: N=100000 ; R=3.0 ; nu=5.0 ; sigma=1.0 ; v=3.0  Time=100.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_035.png" />
+</li>
+<li><img alt="plot b targetsoptions" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_b_targetsoptions_036.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0%
+Progress:1%
+Progress:2%
+Progress:3%
+Progress:4%
+Progress:5%
+Progress:6%
+Progress:7%
+Progress:8%
+Progress:9%
+Progress:10%
+Progress:11%
+Progress:12%
+Progress:13%
+Progress:14%
+Progress:15%
+Progress:16%
+Progress:17%
+Progress:18%
+Progress:19%
+Progress:20%
+Progress:21%
+Progress:22%
+Progress:23%
+Progress:24%
+Progress:25%
+Progress:26%
+Progress:27%
+Progress:28%
+Progress:29%
+Progress:30%
+Progress:31%
+Progress:32%
+Progress:33%
+Progress:34%
+Progress:35%
+Progress:36%
+Progress:37%
+Progress:38%
+Progress:39%
+Progress:40%
+Progress:41%
+Progress:42%
+Progress:43%
+Progress:44%
+Progress:45%
+Progress:46%
+Progress:47%
+Progress:48%
+Progress:49%
+Progress:50%
+Progress:51%
+Progress:52%
+Progress:53%
+Progress:54%
+Progress:55%
+Progress:56%
+Progress:57%
+Progress:58%
+Progress:59%
+Progress:60%
+Progress:61%
+Progress:62%
+Progress:63%
+Progress:64%
+Progress:65%
+Progress:66%
+Progress:67%
+Progress:68%
+Progress:69%
+Progress:70%
+Progress:71%
+Progress:72%
+Progress:73%
+Progress:74%
+Progress:75%
+Progress:76%
+Progress:77%
+Progress:78%
+Progress:79%
+Progress:80%
+Progress:81%
+Progress:82%
+Progress:83%
+Progress:84%
+Progress:85%
+Progress:86%
+Progress:87%
+Progress:88%
+Progress:89%
+Progress:90%
+Progress:91%
+Progress:92%
+Progress:93%
+Progress:94%
+Progress:95%
+Progress:96%
+Progress:97%
+Progress:98%
+Progress:99%
+</pre></div>
+</div>
+<p>Print the total simulation time and the average time per iteration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average time per iteration: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">simu</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 56.27582669258118 seconds
+Average time per iteration: 0.005627582669258118 seconds
+</pre></div>
+</div>
+<p>Plot the histogram of the angles of the directions of motion.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = -1</span>
+
+<span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="plot b targetsoptions" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_b_targetsoptions_037.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if s != self._text:
+</pre></div>
+</div>
+<p>There are two modes separated by an angle <span class="math notranslate nohighlight">\(\pi\)</span> which indicates that two groups of equal size are moving in opposite direction. This a <em>nematic flock</em>.</p>
+</div>
+</div>
+<div class="section" id="the-target-dictionary">
+<h2>The target dictionary<a class="headerlink" href="#the-target-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>Several other targets are implemented. The complete list of available targets can be found in the <strong>dictionary of targets</strong> <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.target_method" title="sisyphe.particles.Particles.target_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_method</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">target_method</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;max_kappa&#39;: &lt;bound method KineticParticles.max_kappa of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;mean_field&#39;: &lt;bound method KineticParticles.mean_field of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;morse&#39;: &lt;bound method Particles.morse_target of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;motsch_tadmor&#39;: &lt;bound method KineticParticles.motsch_tadmor of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;nematic&#39;: &lt;bound method KineticParticles.nematic of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;normalised&#39;: &lt;bound method KineticParticles.normalised of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;overlapping_repulsion&#39;: &lt;bound method Particles.overlapping_repulsion_target of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
+ &#39;quadratic_potential&#39;: &lt;bound method Particles.quadratic_potential_target of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;}
+</pre></div>
+</div>
+<p>Custom targets can be added to the dictionary of targets using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.add_target_method" title="sisyphe.particles.Particles.add_target_method"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_target_method()</span></code></a>. Then a target can be readily used in a simulation using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.compute_target" title="sisyphe.particles.Particles.compute_target"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_target()</span></code></a>.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Customized targets can also be defined by applying an <strong>option</strong> which modifies an existing target. See <a class="reference internal" href="../_auto_examples/plot_milling.html#examplemill"><span class="std std-ref">Mills</span></a>.</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 6 minutes  21.321 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-tutorials-plot-b-targetsoptions-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/d1e718dfc06d55c48e700f34d859eb46/plot_b_targetsoptions.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_b_targetsoptions.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/c92db039db94a57e2d8b6509b396d517/plot_b_targetsoptions.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_b_targetsoptions.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_c_boundaryconditions.html" class="btn btn-neutral float-right" title="Tutorial 03: Boundary conditions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_a_particlesmodels.html" class="btn btn-neutral float-left" title="Tutorial 01: Particles and models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
