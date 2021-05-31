@@ -50,6 +50,7 @@ setup(
     install_requires=[
         "numpy",
         "torch",
+        "pykeops",
     ],
     extras_require={
         "full": [
