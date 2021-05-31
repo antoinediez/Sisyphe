@@ -52,6 +52,7 @@ setup(
         "torch",
         "pykeops",
         "sphinx-gallery",
+        "matplotlib",
     ],
     extras_require={
         "full": [
