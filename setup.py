@@ -9,7 +9,7 @@ from setuptools import setup
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, "sisyphe", "readme.md"), encoding="utf-8") as f:
+with open(path.join(here, "sisyphe", "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 
