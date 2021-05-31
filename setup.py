@@ -51,6 +51,7 @@ setup(
         "numpy",
         "torch",
         "pykeops",
+        "sphinx-gallery",
     ],
     extras_require={
         "full": [
