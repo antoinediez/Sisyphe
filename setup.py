@@ -17,7 +17,7 @@ setup(
     name="sisyphe",
     version="0.1",
     description="Simulation of Systems of Particles with High Efficiency",  # Required
-    long_description=long_description,
+    long_description="Simulation of Systems of Particles with High Efficiency",
     long_description_content_type="text/markdown",
     url="sisyphe.readthedocs.io",
     project_urls={
