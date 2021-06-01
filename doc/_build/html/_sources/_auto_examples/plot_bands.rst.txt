@@ -27,7 +27,7 @@ The classical Vicsek model in a square periodic domain `is known <https://arxiv.
 
 First of all, some standard imports. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-23
+.. GENERATED FROM PYTHON SOURCE LINES 11-24
 
 .. code-block:: default
 
@@ -35,6 +35,7 @@ First of all, some standard imports.
     import os
     import sys
     import time
+    import math
     import torch
     import numpy as np 
     from matplotlib import pyplot as plt
@@ -50,11 +51,11 @@ First of all, some standard imports.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-25
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
 
 Set the parameters and create an instance of the Vicsek model. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-56
+.. GENERATED FROM PYTHON SOURCE LINES 26-57
 
 .. code-block:: default
 
@@ -96,11 +97,11 @@ Set the parameters and create an instance of the Vicsek model.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 57-58
+.. GENERATED FROM PYTHON SOURCE LINES 58-59
 
 Check that we are in a mean field regime... 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-65
+.. GENERATED FROM PYTHON SOURCE LINES 59-66
 
 .. code-block:: default
 
@@ -121,17 +122,17 @@ Check that we are in a mean field regime...
 
  .. code-block:: none
 
-    The most isolated particle has 240.0 neighbours.
-    The least isolated particle has 398.0 neighbours.
+    The most isolated particle has 232.0 neighbours.
+    The least isolated particle has 404.0 neighbours.
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 66-67
+.. GENERATED FROM PYTHON SOURCE LINES 67-68
 
 Set the block sparse parameters to their optimal value. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-73
+.. GENERATED FROM PYTHON SOURCE LINES 68-74
 
 .. code-block:: default
 
@@ -159,17 +160,23 @@ Set the block sparse parameters to their optimal value.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-75
+.. GENERATED FROM PYTHON SOURCE LINES 75-76
 
-Create the function which compute the center of mass of the system.
+Create the function which compute the center of mass of the system (on the torus).
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-80
+.. GENERATED FROM PYTHON SOURCE LINES 76-87
 
 .. code-block:: default
 
 
     def center_of_mass(particles):
-        return (1. / particles.N) * particles.pos.sum(0)
+        cos_pos = torch.cos((2*math.pi / L) * particles.pos)
+        sin_pos = torch.sin((2*math.pi / L) * particles.pos)
+        average_cos = cos_pos.sum(0)
+        average_sin = sin_pos.sum(0)
+        center = torch.atan2(average_sin, average_cos)
+        center = (L / (2*math.pi)) * torch.remainder(center, 2*math.pi)
+        return center
 
 
 
@@ -179,18 +186,18 @@ Create the function which compute the center of mass of the system.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-82
+.. GENERATED FROM PYTHON SOURCE LINES 88-89
 
 Let us save the positions and velocities of 100k particles and the center of mass of the system during 300 units of time. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-91
+.. GENERATED FROM PYTHON SOURCE LINES 89-98
 
 .. code-block:: default
 
 
     from sisyphe.display import save
 
-    frames = [100., 200., 300.]
+    frames = [50., 100., 300.]
 
     s = time.time()
     data = save(simu,frames,["pos", "vel"],[center_of_mass], Nsaved=100000, save_file=False)
@@ -210,11 +217,11 @@ Let us save the positions and velocities of 100k particles and the center of mas
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-93
+.. GENERATED FROM PYTHON SOURCE LINES 99-100
 
 Print the total simulation time and the average time per iteration. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-98
+.. GENERATED FROM PYTHON SOURCE LINES 100-105
 
 .. code-block:: default
 
@@ -233,17 +240,17 @@ Print the total simulation time and the average time per iteration.
 
  .. code-block:: none
 
-    Total time: 1375.54452252388 seconds
-    Average time per iteration: 0.045849955752270924 seconds
+    Total time: 1619.642599105835 seconds
+    Average time per iteration: 0.05398628709395804 seconds
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-100
+.. GENERATED FROM PYTHON SOURCE LINES 106-107
 
 At the end of the simulation, we plot the particles and the evolution of the center of mass. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-135
+.. GENERATED FROM PYTHON SOURCE LINES 107-142
 
 .. code-block:: default
 
@@ -291,7 +298,7 @@ At the end of the simulation, we plot the particles and the evolution of the cen
     *
 
       .. image:: /_auto_examples/images/sphx_glr_plot_bands_002.png
-          :alt: time=0, time=100.00000000001425, time=200.00999999996307, time=300.00999999987215
+          :alt: time=0, time=50.00999999999862, time=100.00000000001425, time=300.00999999987215
           :class: sphx-glr-multi-img
 
     *
@@ -310,11 +317,11 @@ At the end of the simulation, we plot the particles and the evolution of the cen
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 136-137
+.. GENERATED FROM PYTHON SOURCE LINES 143-144
 
 We are still in a mean-field regime. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-145
+.. GENERATED FROM PYTHON SOURCE LINES 144-152
 
 .. code-block:: default
 
@@ -336,8 +343,8 @@ We are still in a mean-field regime.
 
  .. code-block:: none
 
-    The most isolated particle has 37.0 neighbours.
-    The least isolated particle has 6175.0 neighbours.
+    The most isolated particle has 34.0 neighbours.
+    The least isolated particle has 6125.0 neighbours.
 
 
 
@@ -345,7 +352,7 @@ We are still in a mean-field regime.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 25 minutes  27.966 seconds)
+   **Total running time of the script:** ( 29 minutes  34.952 seconds)
 
 
 .. _sphx_glr_download__auto_examples_plot_bands.py:

@@ -106,7 +106,7 @@ print('Average time per iteration: '+str((e-s)/simu.iteration)+' seconds')
 angle = torch.atan2(simu.vel[:,1],simu.vel[:,0])
 angle = angle.cpu().numpy()
 h = plt.hist(angle, bins=1000)
-plt.xlabel(angle)
+plt.xlabel("angle")
 plt.show()
 
 ##########################################
@@ -163,7 +163,7 @@ print('Average time per iteration: '+str((e-s)/simu.iteration)+' seconds')
 angle = torch.atan2(simu.vel[:,1],simu.vel[:,0])
 angle = angle.cpu().numpy()
 h = plt.hist(angle, bins=1000)
-plt.xlabel(angle)
+plt.xlabel("angle")
 plt.show()
 
 #############################################################
@@ -225,7 +225,7 @@ print('Average time per iteration: '+str((e-s)/simu.iteration)+' seconds')
 angle = torch.atan2(simu.vel[:,1],simu.vel[:,0])
 angle = angle.cpu().numpy()
 h = plt.hist(angle, bins=1000)
-plt.xlabel(angle)
+plt.xlabel("angle")
 plt.show()
 
 ###################################################

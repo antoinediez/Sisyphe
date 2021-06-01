@@ -12,6 +12,7 @@ The classical Vicsek model in a square periodic domain `is known <https://arxiv.
 import os
 import sys
 import time
+import math
 import torch
 import numpy as np 
 from matplotlib import pyplot as plt
@@ -71,10 +72,16 @@ plt.plot(nb_cells,average_simu_time)
 plt.show()
 
 ###########################################
-# Create the function which compute the center of mass of the system.
+# Create the function which compute the center of mass of the system (on the torus).
 
 def center_of_mass(particles):
-    return (1. / particles.N) * particles.pos.sum(0)
+    cos_pos = torch.cos((2*math.pi / L) * particles.pos)
+    sin_pos = torch.sin((2*math.pi / L) * particles.pos)
+    average_cos = cos_pos.sum(0)
+    average_sin = sin_pos.sum(0)
+    center = torch.atan2(average_sin, average_cos)
+    center = (L / (2*math.pi)) * torch.remainder(center, 2*math.pi)
+    return center
 
 
 ############################################
@@ -82,7 +89,7 @@ def center_of_mass(particles):
 
 from sisyphe.display import save
 
-frames = [100., 200., 300.]
+frames = [50., 100., 300.]
 
 s = time.time()
 data = save(simu,frames,["pos", "vel"],[center_of_mass], Nsaved=100000, save_file=False)

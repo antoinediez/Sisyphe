@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:22.882** total execution time for **_auto_tutorials** files:
+**06:25.941** total execution time for **_auto_tutorials** files:
 
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__auto_tutorials_plot_a_particlesmodels.py` (``plot_a_particlesmodels.py``)       | 00:22.882 | 0.0 MB |
+| :ref:`sphx_glr__auto_tutorials_plot_b_targetsoptions.py` (``plot_b_targetsoptions.py``)         | 06:25.941 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__auto_tutorials_plot_b_targetsoptions.py` (``plot_b_targetsoptions.py``)         | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__auto_tutorials_plot_a_particlesmodels.py` (``plot_a_particlesmodels.py``)       | 00:00.000 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr__auto_tutorials_plot_c_boundaryconditions.py` (``plot_c_boundaryconditions.py``) | 00:00.000 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+

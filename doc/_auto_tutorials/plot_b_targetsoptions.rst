@@ -273,8 +273,8 @@ Print the total simulation time and the average time per iteration.
 
  .. code-block:: none
 
-    Total time: 140.3169023990631 seconds
-    Average time per iteration: 0.00467723007996877 seconds
+    Total time: 145.67891550064087 seconds
+    Average time per iteration: 0.004855963850021362 seconds
 
 
 
@@ -291,7 +291,7 @@ Plot the histogram of the angles of the directions of motion.
     angle = torch.atan2(simu.vel[:,1],simu.vel[:,0])
     angle = angle.cpu().numpy()
     h = plt.hist(angle, bins=1000)
-    plt.xlabel(angle)
+    plt.xlabel("angle")
     plt.show()
 
 
@@ -301,15 +301,6 @@ Plot the histogram of the angles of the directions of motion.
     :alt: plot b targetsoptions
     :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
-      if s != self._text:
 
 
 
@@ -493,8 +484,8 @@ Print the total simulation time and the average time per iteration.
 
  .. code-block:: none
 
-    Total time: 157.864102602005 seconds
-    Average time per iteration: 0.005262136753400167 seconds
+    Total time: 156.8030505180359 seconds
+    Average time per iteration: 0.005226768350601196 seconds
 
 
 
@@ -511,7 +502,7 @@ Plot the histogram of the angles of the directions of motion.
     angle = torch.atan2(simu.vel[:,1],simu.vel[:,0])
     angle = angle.cpu().numpy()
     h = plt.hist(angle, bins=1000)
-    plt.xlabel(angle)
+    plt.xlabel("angle")
     plt.show()
 
 
@@ -521,15 +512,6 @@ Plot the histogram of the angles of the directions of motion.
     :alt: plot b targetsoptions
     :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
-      if s != self._text:
 
 
 
@@ -685,8 +667,8 @@ Print the total simulation time and the average time per iteration.
 
  .. code-block:: none
 
-    Total time: 56.27582669258118 seconds
-    Average time per iteration: 0.005627582669258118 seconds
+    Total time: 56.330119132995605 seconds
+    Average time per iteration: 0.00563301191329956 seconds
 
 
 
@@ -705,7 +687,7 @@ Plot the histogram of the angles of the directions of motion.
     angle = torch.atan2(simu.vel[:,1],simu.vel[:,0])
     angle = angle.cpu().numpy()
     h = plt.hist(angle, bins=1000)
-    plt.xlabel(angle)
+    plt.xlabel("angle")
     plt.show()
 
 
@@ -715,15 +697,6 @@ Plot the histogram of the angles of the directions of motion.
     :alt: plot b targetsoptions
     :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
-      if s != self._text:
 
 
 
@@ -756,14 +729,14 @@ Several other targets are implemented. The complete list of available targets ca
 
  .. code-block:: none
 
-    {'max_kappa': <bound method KineticParticles.max_kappa of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'mean_field': <bound method KineticParticles.mean_field of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'morse': <bound method Particles.morse_target of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'motsch_tadmor': <bound method KineticParticles.motsch_tadmor of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'nematic': <bound method KineticParticles.nematic of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'normalised': <bound method KineticParticles.normalised of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'overlapping_repulsion': <bound method Particles.overlapping_repulsion_target of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>,
-     'quadratic_potential': <bound method Particles.quadratic_potential_target of <sisyphe.models.Vicsek object at 0x7fbd9357d670>>}
+    {'max_kappa': <bound method KineticParticles.max_kappa of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'mean_field': <bound method KineticParticles.mean_field of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'morse': <bound method Particles.morse_target of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'motsch_tadmor': <bound method KineticParticles.motsch_tadmor of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'nematic': <bound method KineticParticles.nematic of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'normalised': <bound method KineticParticles.normalised of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'overlapping_repulsion': <bound method Particles.overlapping_repulsion_target of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>,
+     'quadratic_potential': <bound method Particles.quadratic_potential_target of <sisyphe.models.Vicsek object at 0x7efb4e14e970>>}
 
 
 
@@ -782,7 +755,7 @@ Customized targets can also be defined by applying an **option** which modifies 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 6 minutes  21.321 seconds)
+   **Total running time of the script:** ( 6 minutes  25.941 seconds)
 
 
 .. _sphx_glr_download__auto_tutorials_plot_b_targetsoptions.py:

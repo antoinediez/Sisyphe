@@ -77,15 +77,22 @@ Nneigh0 = int(Nneigh[0].item())
 print("The first particle sees " + str(Nneigh0) + " other particles.")
 
 #######################################
-# For custom objects, the mean-field average can be computed using the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_local_average>`. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity :math:`U` that we want to average. Here it is simply the positions of the particles. 
+# For custom objects, the mean-field average can be computed using the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_local_average>`. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity :math:`U` that we want to average. Here, since we are working on a torus, there are two: the sine and the cosine of the spatial coordinates. 
 
-U = particles.pos
+cos_pos = torch.cos((2*math.pi / L) * particles.pos)
+sin_pos = torch.sin((2*math.pi / L) * particles.pos)
 
 ######################################
-# Then we compute the mean field average which is the standard convolution over the :math:`N` particles. To get the center of mass, we simply renormalise this average by the actual number of neighbours. 
+# Then we compute the two mean field averages, i.e. the standard convolution over the :math:`N` particles. The center of mass along each dimension is the argument of the complex number whose coordinates are the average cosine and sine. 
 
-mean_field_average, = particles.linear_local_average(U)
-center_of_mass = N/Nneigh.reshape((N,1)) * mean_field_average
+average_cos, average_sin = particles.linear_local_average(cos_pos, sin_pos)
+center_x = torch.atan2(average_sin[:,0], average_cos[:,0])
+center_x = (L / (2*math.pi)) * torch.remainder(center_x, 2*math.pi)
+center_y = torch.atan2(average_sin[:,1], average_cos[:,1])
+center_y = (L / (2*math.pi)) * torch.remainder(center_y, 2*math.pi)
+
+center_of_mass = torch.cat((center_x.reshape((N,1)), center_y.reshape((N,1))),
+                            dim=1)
 
 #############################################
 # In the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_local_average>`, the default observation kernel is a :class:`LazyTensor` of size :math:`(N,N)` whose :math:`(i,j)` component is equal to 1 when particle :math:`j` belongs to the cone of vision of particle :math:`i` and 0 otherwise. To retrieve the indexes of the particles which belong to the cone of vision of the first particle, we can use the `K-nearest-neighbours reduction <https://www.kernel-operations.io/keops/_auto_tutorials/knn/plot_knn_mnist.html#sphx-glr-auto-tutorials-knn-plot-knn-mnist-py>`_ provided by the `KeOps <https://www.kernel-operations.io/keops/index.html>`_ library. 

@@ -608,7 +608,7 @@ class Particles:
                      isaverage=True,
                      kernel=lazy_interaction_kernel, **kwargs):
         r"""Compute the force exerted on each particle due to the Morse
-           potential.
+        potential.
 
         Args:
             Ca (float): Attraction coefficient.
@@ -671,7 +671,7 @@ class Particles:
                                    kernel=lazy_interaction_kernel,
                                    isaverage=True, **kwargs):
         r"""Compute the force exerted on each particle due to the
-           quadratic potential.
+        quadratic potential.
 
         Args:
             who ((N,) BoolTensor or None, optional): The rows of
@@ -711,7 +711,7 @@ class Particles:
 
     def overlapping_repulsion_target(self, who=None, with_who=None, **kwargs):
         r"""Compute the repulsion force exerted on each particle due to
-           the overlapping.
+        the overlapping.
 
         The force exerted on a particle located at :math:`x_i` derives
         from a logarithmic potential and is given by:

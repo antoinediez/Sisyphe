@@ -194,6 +194,7 @@ to download the full example code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -241,8 +242,8 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The most isolated particle has 240.0 neighbours.
-The least isolated particle has 398.0 neighbours.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The most isolated particle has 232.0 neighbours.
+The least isolated particle has 404.0 neighbours.
 </pre></div>
 </div>
 <p>Set the block sparse parameters to their optimal value.</p>
@@ -316,15 +317,21 @@ Progress:96.67%
 Progress:98.33%
 </pre></div>
 </div>
-<p>Create the function which compute the center of mass of the system.</p>
+<p>Create the function which compute the center of mass of the system (on the torus).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span><span class="n">particles</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">particles</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">cos_pos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">sin_pos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">average_cos</span> <span class="o">=</span> <span class="n">cos_pos</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">average_sin</span> <span class="o">=</span> <span class="n">sin_pos</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">average_sin</span><span class="p">,</span> <span class="n">average_cos</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">remainder</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">center</span>
 </pre></div>
 </div>
 <p>Let us save the positions and velocities of 100k particles and the center of mass of the system during 300 units of time.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="k">import</span> <span class="n">save</span>
 
-<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">200.</span><span class="p">,</span> <span class="mf">300.</span><span class="p">]</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mf">50.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">300.</span><span class="p">]</span>
 
 <span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">save</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span><span class="n">frames</span><span class="p">,[</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="s2">&quot;vel&quot;</span><span class="p">],[</span><span class="n">center_of_mass</span><span class="p">],</span> <span class="n">Nsaved</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -441,8 +448,8 @@ Progress:100%
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 1375.54452252388 seconds
-Average time per iteration: 0.045849955752270924 seconds
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 1619.642599105835 seconds
+Average time per iteration: 0.05398628709395804 seconds
 </pre></div>
 </div>
 <p>At the end of the simulation, we plot the particles and the evolution of the center of mass.</p>
@@ -482,7 +489,7 @@ Average time per iteration: 0.045849955752270924 seconds
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><img alt="time=0, time=100.00000000001425, time=200.00999999996307, time=300.00999999987215" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_bands_002.png" />
+<li><img alt="time=0, time=50.00999999999862, time=100.00000000001425, time=300.00999999987215" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_bands_002.png" />
 </li>
 <li><img alt="plot bands" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_bands_003.png" />
 </li>
@@ -497,11 +504,11 @@ Average time per iteration: 0.045849955752270924 seconds
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The most isolated particle has 37.0 neighbours.
-The least isolated particle has 6175.0 neighbours.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The most isolated particle has 34.0 neighbours.
+The least isolated particle has 6125.0 neighbours.
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 25 minutes  27.966 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 29 minutes  34.952 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-bands-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/de1e61e57f8b5c2b4575153bc6538f87/plot_bands.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_bands.py</span></code></a></p>

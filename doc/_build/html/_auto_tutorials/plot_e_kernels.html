@@ -249,16 +249,32 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The first particle sees 1796 other particles.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The first particle sees 1754 other particles.
 </pre></div>
 </div>
-<p>For custom objects, the mean-field average can be computed using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.linear_local_average" title="sisyphe.particles.Particles.linear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_local_average()</span></code></a>. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity <span class="math notranslate nohighlight">\(U\)</span> that we want to average. Here it is simply the positions of the particles.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span>
+<p>For custom objects, the mean-field average can be computed using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.linear_local_average" title="sisyphe.particles.Particles.linear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_local_average()</span></code></a>. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity <span class="math notranslate nohighlight">\(U\)</span> that we want to average. Here, since we are working on a torus, there are two: the sine and the cosine of the spatial coordinates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cos_pos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="n">sin_pos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">particles</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Then we compute the mean field average which is the standard convolution over the <span class="math notranslate nohighlight">\(N\)</span> particles. To get the center of mass, we simply renormalise this average by the actual number of neighbours.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mean_field_average</span><span class="p">,</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">linear_local_average</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-<span class="n">center_of_mass</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="n">Nneigh</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">mean_field_average</span>
+<p>Then we compute the two mean field averages, i.e. the standard convolution over the <span class="math notranslate nohighlight">\(N\)</span> particles. The center of mass along each dimension is the argument of the complex number whose coordinates are the average cosine and sine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">average_cos</span><span class="p">,</span> <span class="n">average_sin</span> <span class="o">=</span> <span class="n">particles</span><span class="o">.</span><span class="n">linear_local_average</span><span class="p">(</span><span class="n">cos_pos</span><span class="p">,</span> <span class="n">sin_pos</span><span class="p">)</span>
+<span class="n">center_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">average_sin</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">average_cos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">center_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">remainder</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">center_y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">average_sin</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">average_cos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">center_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">remainder</span><span class="p">(</span><span class="n">center_y</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="n">center_of_mass</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">center_x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> <span class="n">center_y</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))),</span>
+                            <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[pyKeOps] Compiling libKeOpstorch3dcd0c2195 in /data/and18/.cache/pykeops-1.5-cpython-38:
+       formula: Sum_Reduction(((Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2)))))))))) * Var(8,4,1)),0)
+       aliases: Var(0,2,1); Var(1,2,0); Var(2,2,2); Var(3,1,2); Var(4,1,2); Var(5,1,2); Var(6,2,0); Var(7,1,2); Var(8,4,1);
+       dtype  : float32
+...
+Done.
 </pre></div>
 </div>
 <p>In the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.linear_local_average" title="sisyphe.particles.Particles.linear_local_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_local_average()</span></code></a>, the default observation kernel is a <code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTensor</span></code> of size <span class="math notranslate nohighlight">\((N,N)\)</span> whose <span class="math notranslate nohighlight">\((i,j)\)</span> component is equal to 1 when particle <span class="math notranslate nohighlight">\(j\)</span> belongs to the cone of vision of particle <span class="math notranslate nohighlight">\(i\)</span> and 0 otherwise. To retrieve the indexes of the particles which belong to the cone of vision of the first particle, we can use the <a class="reference external" href="https://www.kernel-operations.io/keops/_auto_tutorials/knn/plot_knn_mnist.html#sphx-glr-auto-tutorials-knn-plot-knn-mnist-py">K-nearest-neighbours reduction</a> provided by the <a class="reference external" href="https://www.kernel-operations.io/keops/index.html">KeOps</a> library.</p>
@@ -282,14 +298,14 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[pyKeOps] Compiling libKeOpstorchf2f35c967b in /data/and18/.cache/pykeops-1.5-cpython-38:
-       formula: ArgKMin_Reduction((Var(8,1,2) - (Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))))))),1796,0)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[pyKeOps] Compiling libKeOpstorchaf7a666555 in /data/and18/.cache/pykeops-1.5-cpython-38:
+       formula: ArgKMin_Reduction((Var(8,1,2) - (Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))))))),1754,0)
        aliases: Var(0,2,1); Var(1,2,0); Var(2,2,2); Var(3,1,2); Var(4,1,2); Var(5,1,2); Var(6,2,0); Var(7,1,2); Var(8,1,2);
        dtype  : float32
 ...
 Done.
 The indexes of the neighbours of the first particles are:
-tensor([    0,    28,    99,  ..., 99923, 99939, 99999], device=&#39;cuda:0&#39;)
+tensor([    0,    29,   130,  ..., 99811, 99868, 99982], device=&#39;cuda:0&#39;)
 </pre></div>
 </div>
 <p>Finally, a fancy display of what we have computed. We plot the full particle system in black, the first particle in orange, its neighbours in blue and the center of mass of the neighbours in red.</p>
@@ -347,10 +363,10 @@ tensor([    0,    28,    99,  ..., 99923, 99939, 99999], device=&#39;cuda:0&#39;
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Theoretical value: 0.01125
-Experimental value: 0.011330570094287395
+Experimental value: 0.01103969756513834
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  31.300 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  49.544 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-tutorials-plot-e-kernels-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/874774adf3eccd0f17c81f0b667d1b57/plot_e_kernels.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_e_kernels.py</span></code></a></p>

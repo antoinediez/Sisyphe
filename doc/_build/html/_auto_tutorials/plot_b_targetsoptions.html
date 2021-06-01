@@ -403,24 +403,19 @@ Progress:99%
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 140.3169023990631 seconds
-Average time per iteration: 0.00467723007996877 seconds
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 145.67891550064087 seconds
+Average time per iteration: 0.004855963850021362 seconds
 </pre></div>
 </div>
 <p>Plot the histogram of the angles of the directions of motion.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;angle&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="plot b targetsoptions" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_b_targetsoptions_014.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
-  if s != self._text:
-</pre></div>
-</div>
 <p>After an initial clustering phase, the system self-organizes into a uniform flock.</p>
 </div>
 <div class="section" id="non-normalised-vicsek-model">
@@ -592,24 +587,19 @@ Progress:99%
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 157.864102602005 seconds
-Average time per iteration: 0.005262136753400167 seconds
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 156.8030505180359 seconds
+Average time per iteration: 0.005226768350601196 seconds
 </pre></div>
 </div>
 <p>Plot the histogram of the angles of the directions of motion.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;angle&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="plot b targetsoptions" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_b_targetsoptions_028.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
-  if s != self._text:
-</pre></div>
-</div>
 <p>The system self-organizes into a strongly clustered flock with band-like structures.</p>
 </div>
 <div class="section" id="nematic-vicsek-model">
@@ -772,8 +762,8 @@ Progress:99%
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 56.27582669258118 seconds
-Average time per iteration: 0.005627582669258118 seconds
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 56.330119132995605 seconds
+Average time per iteration: 0.00563301191329956 seconds
 </pre></div>
 </div>
 <p>Plot the histogram of the angles of the directions of motion.</p>
@@ -782,16 +772,11 @@ Average time per iteration: 0.005627582669258118 seconds
 <span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">simu</span><span class="o">.</span><span class="n">vel</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;angle&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="plot b targetsoptions" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_b_targetsoptions_037.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/and18/.local/lib/python3.8/site-packages/matplotlib/text.py:1215: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
-  if s != self._text:
-</pre></div>
-</div>
 <p>There are two modes separated by an angle <span class="math notranslate nohighlight">\(\pi\)</span> which indicates that two groups of equal size are moving in opposite direction. This a <em>nematic flock</em>.</p>
 </div>
 </div>
@@ -802,14 +787,14 @@ Average time per iteration: 0.005627582669258118 seconds
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;max_kappa&#39;: &lt;bound method KineticParticles.max_kappa of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;mean_field&#39;: &lt;bound method KineticParticles.mean_field of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;morse&#39;: &lt;bound method Particles.morse_target of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;motsch_tadmor&#39;: &lt;bound method KineticParticles.motsch_tadmor of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;nematic&#39;: &lt;bound method KineticParticles.nematic of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;normalised&#39;: &lt;bound method KineticParticles.normalised of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;overlapping_repulsion&#39;: &lt;bound method Particles.overlapping_repulsion_target of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;,
- &#39;quadratic_potential&#39;: &lt;bound method Particles.quadratic_potential_target of &lt;sisyphe.models.Vicsek object at 0x7fbd9357d670&gt;&gt;}
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;max_kappa&#39;: &lt;bound method KineticParticles.max_kappa of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;mean_field&#39;: &lt;bound method KineticParticles.mean_field of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;morse&#39;: &lt;bound method Particles.morse_target of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;motsch_tadmor&#39;: &lt;bound method KineticParticles.motsch_tadmor of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;nematic&#39;: &lt;bound method KineticParticles.nematic of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;normalised&#39;: &lt;bound method KineticParticles.normalised of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;overlapping_repulsion&#39;: &lt;bound method Particles.overlapping_repulsion_target of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;,
+ &#39;quadratic_potential&#39;: &lt;bound method Particles.quadratic_potential_target of &lt;sisyphe.models.Vicsek object at 0x7efb4e14e970&gt;&gt;}
 </pre></div>
 </div>
 <p>Custom targets can be added to the dictionary of targets using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.add_target_method" title="sisyphe.particles.Particles.add_target_method"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_target_method()</span></code></a>. Then a target can be readily used in a simulation using the method <a class="reference internal" href="../api/API_particles.html#sisyphe.particles.Particles.compute_target" title="sisyphe.particles.Particles.compute_target"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_target()</span></code></a>.</p>
@@ -817,7 +802,7 @@ Average time per iteration: 0.005627582669258118 seconds
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Customized targets can also be defined by applying an <strong>option</strong> which modifies an existing target. See <a class="reference internal" href="../_auto_examples/plot_milling.html#examplemill"><span class="std std-ref">Mills</span></a>.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 6 minutes  21.321 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 6 minutes  25.941 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-tutorials-plot-b-targetsoptions-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/d1e718dfc06d55c48e700f34d859eb46/plot_b_targetsoptions.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_b_targetsoptions.py</span></code></a></p>

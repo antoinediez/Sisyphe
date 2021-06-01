@@ -162,40 +162,22 @@ As a simple application, we can compute the number of neighbours of each particl
 
  .. code-block:: none
 
-    The first particle sees 1796 other particles.
+    The first particle sees 1754 other particles.
 
 
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 80-81
 
-For custom objects, the mean-field average can be computed using the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_local_average>`. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity :math:`U` that we want to average. Here it is simply the positions of the particles. 
+For custom objects, the mean-field average can be computed using the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_local_average>`. As an example, let us compute the center of mass of the neighbours of each particle. First we define the quantity :math:`U` that we want to average. Here, since we are working on a torus, there are two: the sine and the cosine of the spatial coordinates. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-84
-
-.. code-block:: default
-
-
-    U = particles.pos
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 85-86
-
-Then we compute the mean field average which is the standard convolution over the :math:`N` particles. To get the center of mass, we simply renormalise this average by the actual number of neighbours. 
-
-.. GENERATED FROM PYTHON SOURCE LINES 86-90
+.. GENERATED FROM PYTHON SOURCE LINES 81-85
 
 .. code-block:: default
 
 
-    mean_field_average, = particles.linear_local_average(U)
-    center_of_mass = N/Nneigh.reshape((N,1)) * mean_field_average
+    cos_pos = torch.cos((2*math.pi / L) * particles.pos)
+    sin_pos = torch.sin((2*math.pi / L) * particles.pos)
 
 
 
@@ -204,11 +186,49 @@ Then we compute the mean field average which is the standard convolution over th
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-92
+.. GENERATED FROM PYTHON SOURCE LINES 86-87
+
+Then we compute the two mean field averages, i.e. the standard convolution over the :math:`N` particles. The center of mass along each dimension is the argument of the complex number whose coordinates are the average cosine and sine. 
+
+.. GENERATED FROM PYTHON SOURCE LINES 87-97
+
+.. code-block:: default
+
+
+    average_cos, average_sin = particles.linear_local_average(cos_pos, sin_pos)
+    center_x = torch.atan2(average_sin[:,0], average_cos[:,0])
+    center_x = (L / (2*math.pi)) * torch.remainder(center_x, 2*math.pi)
+    center_y = torch.atan2(average_sin[:,1], average_cos[:,1])
+    center_y = (L / (2*math.pi)) * torch.remainder(center_y, 2*math.pi)
+
+    center_of_mass = torch.cat((center_x.reshape((N,1)), center_y.reshape((N,1))),
+                                dim=1)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    [pyKeOps] Compiling libKeOpstorch3dcd0c2195 in /data/and18/.cache/pykeops-1.5-cpython-38:
+           formula: Sum_Reduction(((Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2)))))))))) * Var(8,4,1)),0)
+           aliases: Var(0,2,1); Var(1,2,0); Var(2,2,2); Var(3,1,2); Var(4,1,2); Var(5,1,2); Var(6,2,0); Var(7,1,2); Var(8,4,1); 
+           dtype  : float32
+    ... 
+    Done.
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 98-99
 
 In the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_local_average>`, the default observation kernel is a :class:`LazyTensor` of size :math:`(N,N)` whose :math:`(i,j)` component is equal to 1 when particle :math:`j` belongs to the cone of vision of particle :math:`i` and 0 otherwise. To retrieve the indexes of the particles which belong to the cone of vision of the first particle, we can use the `K-nearest-neighbours reduction <https://www.kernel-operations.io/keops/_auto_tutorials/knn/plot_knn_mnist.html#sphx-glr-auto-tutorials-knn-plot-knn-mnist-py>`_ provided by the `KeOps <https://www.kernel-operations.io/keops/index.html>`_ library. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-111
+.. GENERATED FROM PYTHON SOURCE LINES 99-118
 
 .. code-block:: default
 
@@ -241,23 +261,23 @@ In the method :func:`linear_local_average() <sisyphe.particles.Particles.linear_
 
  .. code-block:: none
 
-    [pyKeOps] Compiling libKeOpstorchf2f35c967b in /data/and18/.cache/pykeops-1.5-cpython-38:
-           formula: ArgKMin_Reduction((Var(8,1,2) - (Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))))))),1796,0)
+    [pyKeOps] Compiling libKeOpstorchaf7a666555 in /data/and18/.cache/pykeops-1.5-cpython-38:
+           formula: ArgKMin_Reduction((Var(8,1,2) - (Step((Var(5,1,2) - Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))) * Step((Var(7,1,2) + (Sum(((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))) * Var(6,2,0))) / Sqrt(Sum(Square((((Var(0,2,1) - Var(1,2,0)) + (Step(((Minus(Var(2,2,2)) / Var(3,1,2)) - (Var(0,2,1) - Var(1,2,0)))) * Var(2,2,2))) - (Step(((Var(0,2,1) - Var(1,2,0)) - (Var(2,2,2) / Var(4,1,2)))) * Var(2,2,2))))))))))),1754,0)
            aliases: Var(0,2,1); Var(1,2,0); Var(2,2,2); Var(3,1,2); Var(4,1,2); Var(5,1,2); Var(6,2,0); Var(7,1,2); Var(8,1,2); 
            dtype  : float32
     ... 
     Done.
     The indexes of the neighbours of the first particles are: 
-    tensor([    0,    28,    99,  ..., 99923, 99939, 99999], device='cuda:0')
+    tensor([    0,    29,   130,  ..., 99811, 99868, 99982], device='cuda:0')
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-113
+.. GENERATED FROM PYTHON SOURCE LINES 119-120
 
 Finally, a fancy display of what we have computed. We plot the full particle system in black, the first particle in orange, its neighbours in blue and the center of mass of the neighbours in red. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-135
+.. GENERATED FROM PYTHON SOURCE LINES 120-142
 
 .. code-block:: default
 
@@ -294,7 +314,7 @@ Finally, a fancy display of what we have computed. We plot the full particle sys
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 136-155
+.. GENERATED FROM PYTHON SOURCE LINES 143-162
 
 Nonlinear averages
 ---------------------------------
@@ -316,7 +336,7 @@ For instance, let us compute the local mean square distance:
 In this case, we can use the function :func:`sisyphe.kernels.lazy_xy_matrix` to define a custom binary formula. Given two vectors :math:`X=(X^i)_{1\leq i\leq M}` and :math:`Y = (Y^j)_{1\leq j\leq N}`, respectively of sizes :math:`(M,d)` and :math:`(N,d)`, the :math:`XY` matrix is a :math:`(M,N,d)` LazyTensor whose :math:`(i,j,:)` component is the vector :math:`Y^j-X^i`. 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-166
+.. GENERATED FROM PYTHON SOURCE LINES 162-173
 
 .. code-block:: default
 
@@ -338,7 +358,7 @@ In this case, we can use the function :func:`sisyphe.kernels.lazy_xy_matrix` to 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-173
+.. GENERATED FROM PYTHON SOURCE LINES 174-180
 
 Since the particles are uniformly scattered in the box, the theoretical value is 
 
@@ -347,7 +367,7 @@ Since the particles are uniformly scattered in the box, the theoretical value is
         MSD_0 = \frac{\int_0^R \int_0^{\pi/2} r^3 \mathrm{d}r\mathrm{d}\theta}{\int_0^R \int_0^{\pi/2} r \mathrm{d}r\mathrm{d}\theta} = \frac{R^2}{2}
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 173-186
+.. GENERATED FROM PYTHON SOURCE LINES 180-193
 
 .. code-block:: default
 
@@ -375,7 +395,7 @@ Since the particles are uniformly scattered in the box, the theoretical value is
  .. code-block:: none
 
     Theoretical value: 0.01125
-    Experimental value: 0.011330570094287395
+    Experimental value: 0.01103969756513834
 
 
 
@@ -383,7 +403,7 @@ Since the particles are uniformly scattered in the box, the theoretical value is
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  31.300 seconds)
+   **Total running time of the script:** ( 2 minutes  49.544 seconds)
 
 
 .. _sphx_glr_download__auto_tutorials_plot_e_kernels.py:
