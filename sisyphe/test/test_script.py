@@ -31,7 +31,7 @@ def test_sisyphe():
         import pykeops
         pykeops.test_torch_bindings()
     except ImportError:
-        print("[SiSyPHE]: pyKeops not found.")
+        print("[SiSyPHE]: pyKeOps not found.")
         return
     except:
         print("[SiSyPHE]: unexpected error.")
