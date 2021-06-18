@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Kernels &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sampling" href="API_sampling.html" />
+    <link rel="prev" title="Models" href="API_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Kernels</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/API_kernels.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kernels">
+<h1>Kernels<a class="headerlink" href="#kernels" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.kernels.lazy_xy_matrix" title="sisyphe.kernels.lazy_xy_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lazy_xy_matrix</span></code></a>(x, y, L[, boundary_conditions])</p></td>
+<td><p>XY matrix as LazyTensors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sisyphe.kernels.lazy_interaction_kernel" title="sisyphe.kernels.lazy_interaction_kernel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lazy_interaction_kernel</span></code></a>(x, y, Rx, L, …[, …])</p></td>
+<td><p>Interaction kernel as LazyTensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.kernels.lazy_overlapping_kernel" title="sisyphe.kernels.lazy_overlapping_kernel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lazy_overlapping_kernel</span></code></a>(x, y, Rx, Ry, L, …)</p></td>
+<td><p>Overlapping kernel as LazyTensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sisyphe.kernels.lazy_morse" title="sisyphe.kernels.lazy_morse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lazy_morse</span></code></a>(x, y, Ca, la, Cr, lr[, p, mx, my])</p></td>
+<td><p>LazyTensor of the forces derived from the Morse potential.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.kernels.lazy_quadratic" title="sisyphe.kernels.lazy_quadratic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lazy_quadratic</span></code></a>(x, y, R, L[, boundary_conditions])</p></td>
+<td><p>LazyTensor of the forces derived from of a quadratic potential.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-sisyphe.kernels"></span><dl class="py function">
+<dt id="sisyphe.kernels.squared_distances_tensor">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">squared_distances_tensor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.squared_distances_tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Squared distances matrix as torch Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Columns.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The tensor whose <span class="math notranslate nohighlight">\((i,j)\)</span> coordinate is the squared
+distance between <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> and <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.lazy_xy_matrix">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">lazy_xy_matrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.lazy_xy_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>XY matrix as LazyTensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em>) – Columns.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor <code class="docutils literal notranslate"><span class="pre">A</span></code> such that for each coordinate <span class="math notranslate nohighlight">\((i,j)\)</span>,
+<code class="docutils literal notranslate"><span class="pre">A[i,j,:]</span></code> is the LazyTensor <code class="docutils literal notranslate"><span class="pre">LazyTensor(y[j,:]-x[i,:])</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N,d) LazyTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.squared_distances">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">squared_distances</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.squared_distances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Squared distances LazyTensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em>) – Columns.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor whose <span class="math notranslate nohighlight">\((i,j)\)</span> coordinate is the squared
+distance between <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> and <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N) LazyTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.sqdist_angles">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">sqdist_angles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.sqdist_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Squared distances and angles LazyTensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em>) – Columns.</p></li>
+<li><p><strong>x_orientation</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Orientation of x.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor whose <span class="math notranslate nohighlight">\((i,j)\)</span> coordinate is the squared
+distance between <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> and <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code> and the LazyTensor
+whose <span class="math notranslate nohighlight">\((i,j)\)</span> coordinate is the cosine of the angle
+between <code class="docutils literal notranslate"><span class="pre">y[j,:]-x[i,:]</span></code> and <code class="docutils literal notranslate"><span class="pre">x_orientation[i,:]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N) LazyTensor, (M,N) LazyTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.lazy_interaction_kernel">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">lazy_interaction_kernel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vision_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.283185307179586</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.lazy_interaction_kernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interaction kernel as LazyTensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Row.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Columns.</p></li>
+<li><p><strong>Rx</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>float</em>) – Interaction radius of x.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+<li><p><strong>vision_angle</strong> (<em>float</em><em>, </em><em>optional</em>) – Angle of vision of x. Default is
+<span class="math notranslate nohighlight">\(2\pi\)</span>.</p></li>
+<li><p><strong>axis</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em><em>, </em><em>optional</em>) – Orientation of <strong>x</strong>. Default is
+<code class="docutils literal notranslate"><span class="pre">None</span></code>. Must be specified if <strong>vision_angle</strong> is not
+<span class="math notranslate nohighlight">\(2\pi\)</span>.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keywords arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor whose <span class="math notranslate nohighlight">\((i,j)\)</span> coordinate is 1 if <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code>
+is in the cone of vision of <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> and 0 otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N) LazyTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.lazy_overlapping_kernel">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">lazy_overlapping_kernel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.lazy_overlapping_kernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overlapping kernel as LazyTensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Columns.</p></li>
+<li><p><strong>Rx</strong> (<em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>float</em>) – Radius of x.</p></li>
+<li><p><strong>Ry</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tenosr</em><em> or </em><em>float</em>) – Radius of y.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keywords arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor whose <span class="math notranslate nohighlight">\((i,j)\)</span> coordinate is 1 if <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code>
+and <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code> are at a distance smaller than <code class="docutils literal notranslate"><span class="pre">Rx[i]+Ry[j]</span></code>
+(or smaller than <code class="docutils literal notranslate"><span class="pre">Rx+Ry</span></code> if all the <strong>x</strong> and <strong>y</strong> particles
+have the same radius).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N) LazyTensor</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>NotImplementerError</strong> – if <strong>Rx</strong> and <strong>Ry</strong> do not have the
+    same type, or when <strong>Rx</strong> and <strong>Ry</strong> are float but <strong>Rx</strong>
+    is not equal to <strong>Ry</strong>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.lazy_morse">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">lazy_morse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ca</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">la</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.lazy_morse" title="Permalink to this definition">¶</a></dt>
+<dd><p>LazyTensor of the forces derived from the Morse potential.</p>
+<p>The Morse potential is defined by</p>
+<div class="math notranslate nohighlight">
+\[U(z) = -C_a \exp(-|z|^p / \ell_a^p) + C_r \exp(-|z|^p / \ell_r^p)\]</div>
+<p>The force exerted by a particle located in <span class="math notranslate nohighlight">\(y_j\)</span> on a particle
+located on <span class="math notranslate nohighlight">\(x_i\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[F = - m_x m_y  \nabla U(x_i - y_j)\]</div>
+<p>where <span class="math notranslate nohighlight">\(m_x\)</span> and <span class="math notranslate nohighlight">\(m_y\)</span> are the masses of the particles in
+<span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(y_j\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Columns.</p></li>
+<li><p><strong>Ca</strong> (<em>float</em>) – Attraction coefficient.</p></li>
+<li><p><strong>la</strong> (<em>float</em>) – Attraction length.</p></li>
+<li><p><strong>Cr</strong> (<em>float</em>) – Repulsion coefficient.</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – Repulsion length.</p></li>
+<li><p><strong>p</strong> (<em>int</em><em>, </em><em>optional</em>) – Exponent. Default is 2.</p></li>
+<li><p><strong>mx</strong> (<em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Mass of <strong>x</strong>. Default is 1.</p></li>
+<li><p><strong>my</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Mass of <strong>y</strong>. Default is 1.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keywords arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor whose <span class="math notranslate nohighlight">\((i,j,:)\)</span> coordinate is the force
+exerted by <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code> on <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> derived from the Morse
+potential.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N,d) LazyTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.kernels.lazy_quadratic">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.kernels.</span></code><code class="sig-name descname"><span class="pre">lazy_quadratic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_conditions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'periodic'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.kernels.lazy_quadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>LazyTensor of the forces derived from of a quadratic potential.</p>
+<p>The quadratic potential is defined by:</p>
+<div class="math notranslate nohighlight">
+\[U(z) =  \frac{1}{2R} |z|^2 - |z|\]</div>
+<p>where <span class="math notranslate nohighlight">\(R\)</span> is a fixed parameter. The force exerted on a
+particle located on <span class="math notranslate nohighlight">\(y_j\)</span> on a particle located on <span class="math notranslate nohighlight">\(x_i\)</span>
+is</p>
+<div class="math notranslate nohighlight">
+\[F = \left(\frac{1}{R}-\frac{1}{|y_j-x_i|}\right)(y_j-x_i).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>(</em><em>M</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Rows.</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>N</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Columns.</p></li>
+<li><p><strong>R</strong> (<em>(</em><em>M</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>float</em>) – Radius of the <strong>x</strong> particles.</p></li>
+<li><p><strong>L</strong> (<em>(</em><em>d</em><em>,</em><em>) </em><em>Tensor</em>) – Box size.</p></li>
+<li><p><strong>boundary_conditions</strong> (<em>list</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <p>Boundary conditions.
+Can be one of the following:</p>
+<ul>
+<li><p>list of size <span class="math notranslate nohighlight">\(d\)</span> containing 0 (periodic) or 1
+(wall with reflecting boundary conditions) for each
+dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;open&quot;</span></code> : no boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code> : periodic boundary conditions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;spherical&quot;</span></code> : reflecting boundary conditions on the
+sphere of radius <code class="docutils literal notranslate"><span class="pre">L[0]/2</span></code> and center <strong>L</strong>/2.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">&quot;periodic&quot;</span></code>.</p>
+</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keywords arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The LazyTensor whose <span class="math notranslate nohighlight">\((i,j,:)\)</span> coordinate is the force
+exerted by <code class="docutils literal notranslate"><span class="pre">y[j,:]</span></code> on <code class="docutils literal notranslate"><span class="pre">x[i,:]</span></code> derived from the quadratic
+potential.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(M,N,d) LazyTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="API_sampling.html" class="btn btn-neutral float-right" title="Sampling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="API_models.html" class="btn btn-neutral float-left" title="Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

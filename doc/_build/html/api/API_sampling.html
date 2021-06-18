@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Sampling &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Display" href="API_display.html" />
+    <link rel="prev" title="Kernels" href="API_kernels.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_kernels.html">Kernels</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Sampling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/API_sampling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sampling">
+<h1>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.sampling.uniform_sphere_rand" title="sisyphe.sampling.uniform_sphere_rand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_sphere_rand</span></code></a>(N, d, device[, dtype])</p></td>
+<td><p>Uniform sample on the unit sphere <span class="math notranslate nohighlight">\(\mathbb{S}^{d-1}\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sisyphe.sampling.uniform_angle_rand" title="sisyphe.sampling.uniform_angle_rand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_angle_rand</span></code></a>(mu, eta)</p></td>
+<td><p>Uniform sample in an angle interval in dimension 2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.sampling.vonmises_rand" title="sisyphe.sampling.vonmises_rand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vonmises_rand</span></code></a>(mu, kappa)</p></td>
+<td><p>Von Mises sample on the sphere <span class="math notranslate nohighlight">\(\mathbb{S}^{d-1}\)</span> using the Ulrich-Wood algorithm <a class="reference internal" href="#w1994" id="id1"><span>[W1994]</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sisyphe.sampling.uniformball_unitquat_rand" title="sisyphe.sampling.uniformball_unitquat_rand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniformball_unitquat_rand</span></code></a>(q, scales)</p></td>
+<td><p>Sample rotations at random in balls centered around q, with radii given by the scales array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sisyphe.sampling.vonmises_quat_rand" title="sisyphe.sampling.vonmises_quat_rand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vonmises_quat_rand</span></code></a>(q, kappa)</p></td>
+<td><p>Von Mises random variables on the space of quaternions with center <strong>q</strong> and concentration parameter <strong>kappa</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-sisyphe.sampling"></span><dl class="py function">
+<dt id="sisyphe.sampling.uniform_sphere_rand">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">uniform_sphere_rand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.float32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.uniform_sphere_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uniform sample on the unit sphere <span class="math notranslate nohighlight">\(\mathbb{S}^{d-1}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – Number of samples.</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – Dimension</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – Device on which the samples are created</p></li>
+<li><p><strong>dtype</strong> (<em>torch.dtype</em><em>, </em><em>optional</em>) – Default is torch.float32</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sample.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,D) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.uniform_angle_rand">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">uniform_angle_rand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.uniform_angle_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uniform sample in an angle interval in dimension 2.</p>
+<p>Add a uniform angle in <span class="math notranslate nohighlight">\([-\pi\eta,\pi\eta]\)</span> to the angle of
+<strong>mu</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mu</strong> (<em>(</em><em>N</em><em>,</em><em>2</em><em>) </em><em>Tensor</em>) – Center of the distribution for each of the
+N samples.</p></li>
+<li><p><strong>eta</strong> (<em>(</em><em>N</em><em>,</em><em>2</em><em>) </em><em>Tensor</em><em> or </em><em>float</em>) – Deviation for each of the N samples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sample.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,2) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.sample_W">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">sample_W</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.sample_W" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample the first coordinate of a von Mises distribution with
+center at <span class="math notranslate nohighlight">\((1,0,...0)^T\)</span> and concentration <strong>kappa</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tensor</em>) – Concentration parameter.
+Also accept (1,) Tensor if all the samples have the same
+concentration parameter.</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – Number of samples. Must be equal to the size of kappa
+when the size of kappa is &gt;1.</p></li>
+<li><p><strong>d</strong> – Dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Random sample in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.vonmises_rand">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">vonmises_rand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.vonmises_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Von Mises sample on the sphere <span class="math notranslate nohighlight">\(\mathbb{S}^{d-1}\)</span> using
+the Ulrich-Wood algorithm <a class="reference internal" href="#w1994" id="id2"><span>[W1994]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="w1994"><span class="brackets">W1994</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>A. Wood, Simulation of the von Mises Fisher distribution,
+<em>Comm. Statist. Simulation Comput.</em>, Vol. 23, No. 1 (1994).</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mu</strong> (<em>(</em><em>N</em><em>,</em><em>d</em><em>) </em><em>Tensor</em>) – Centers of the N samples.</p></li>
+<li><p><strong>kappa</strong> – ((N,) Tensor or (1,) Tensor): Concentration parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sample with center <strong>mu</strong> and concentration parameter <strong>kappa</strong>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,d) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.sample_angles">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">sample_angles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scales</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.sample_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample angles by rejection sampling.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.uniformball_unitquat_rand">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">uniformball_unitquat_rand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scales</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.uniformball_unitquat_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample rotations at random in balls centered around q,
+with radii given by the scales array.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.uniform_unitquat_rand">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">uniform_unitquat_rand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.float32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.uniform_unitquat_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uniform sample in the space of unit quaternions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – Number of samples.</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – Device on which the samples are created.</p></li>
+<li><p><strong>dtype</strong> (<em>torch.dtype</em><em>, </em><em>optional</em>) – Default is torch.float32.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,4) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.sample_q0">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">sample_q0</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.sample_q0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample <strong>N</strong> random variables distributed according to the von
+Mises distribution on the space of quaternions with center
+<span class="math notranslate nohighlight">\((1,0,0,0)\)</span> and concentration parameter <strong>kappa</strong>.</p>
+<p>Use the BACG method described in <a class="reference internal" href="#kgm2018" id="id3"><span>[KGM2018]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="kgm2018"><span class="brackets"><a class="fn-backref" href="#id3">KGM2018</a></span></dt>
+<dd><p>J. Kent, A. Ganeiber &amp; K. Mardia, A New Unified Approach
+for the Simulation of a Wide Class of Directional Distributions,
+<em>J. Comput. Graph. Statist.</em>, Vol. 27, No. 2 (2018).</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em>) – Concentration parameter.</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – Number of samples. Must be equal to the size of kappa
+when the size of kappa is &gt;1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sample.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sisyphe.sampling.vonmises_quat_rand">
+<code class="sig-prename descclassname"><span class="pre">sisyphe.sampling.</span></code><code class="sig-name descname"><span class="pre">vonmises_quat_rand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sisyphe.sampling.vonmises_quat_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Von Mises random variables on the space of quaternions with
+center <strong>q</strong> and concentration parameter <strong>kappa</strong>.</p>
+<p>Multiply <strong>q</strong> with a sample from the von Mises distribution on the
+space of quaternions with center <span class="math notranslate nohighlight">\((1,0,0,0)\)</span> and concentration
+parameter <strong>kappa</strong>. See <a class="reference internal" href="#sisyphe.sampling.sample_q0" title="sisyphe.sampling.sample_q0"><code class="xref py py-func docutils literal notranslate"><span class="pre">sample_q0()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<em>(</em><em>N</em><em>,</em><em>4</em><em>) </em><em>Tensor</em>) – Center of the distribution.</p></li>
+<li><p><strong>kappa</strong> (<em>(</em><em>N</em><em>,</em><em>) </em><em>Tensor</em><em> or </em><em>(</em><em>1</em><em>,</em><em>) </em><em>Tensor</em>) – Concentration parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sample.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(N,4) Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="API_display.html" class="btn btn-neutral float-right" title="Display" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="API_kernels.html" class="btn btn-neutral float-left" title="Kernels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

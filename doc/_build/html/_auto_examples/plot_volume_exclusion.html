@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Volume exclusion &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Particle systems" href="../api/API_particles.html" />
+    <link rel="prev" title="Boundary clusters in a disk" href="plot_sphere_bands.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../_auto_tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_bands.html">Bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_bo_milling.html">Body-oriented mill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_milling.html">Mills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_sphere_bands.html">Boundary clusters in a disk</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Volume exclusion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#repulsion-force">Repulsion force</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repulsion-force-random-births-and-random-deaths">Repulsion force, random births and random deaths</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Examples</a> &raquo;</li>
+        
+      <li>Volume exclusion</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_auto_examples/plot_volume_exclusion.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-volume-exclusion-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="volume-exclusion">
+<span id="sphx-glr-auto-examples-plot-volume-exclusion-py"></span><h1>Volume exclusion<a class="headerlink" href="#volume-exclusion" title="Permalink to this headline">¶</a></h1>
+<p>This model is introduced in</p>
+<ol class="upperalpha simple" start="19">
+<li><p>Motsch, D. Peurichard, From short-range repulsion to Hele-Shaw problem in a model of tumor growth, <em>J. Math. Biology</em>, Vol. 76, No. 1, 2017.</p></li>
+</ol>
+<p>First of all, some standard imports.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">sisyphe.models</span> <span class="k">as</span> <span class="nn">models</span>
+<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="k">import</span> <span class="n">scatter_particles</span>
+
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span>
+</pre></div>
+</div>
+<div class="section" id="repulsion-force">
+<h2>Repulsion force<a class="headerlink" href="#repulsion-force" title="Permalink to this headline">¶</a></h2>
+<p>Each particle is a disk with a (fixed) random radius. The particles repel each other when they overlap. The force exerted by a particle located at <span class="math notranslate nohighlight">\(x_j\)</span> with radius <span class="math notranslate nohighlight">\(R_j\)</span> on a particle located at <span class="math notranslate nohighlight">\(x_i\)</span> with radius <span class="math notranslate nohighlight">\(R_i\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[F = -\frac{\alpha}{R_i} \nabla_{x_i} U\left(\frac{|x_i - x_j|^2}{(R_i + R_j)^2}\right),\]</div>
+<p>where the potential is</p>
+<div class="math notranslate nohighlight">
+\[U(s) = -\log(s) + s - 1\,\,\text{for}\,\, s&lt;1 \,\,\text{and}\,\, U(s) = 0\,\, \text{for}\,\, s&gt;1.\]</div>
+<p>Initially, the particles are clustered in a small region with a strong overlapping.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">rmin</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">rmax</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">rmax</span><span class="o">-</span><span class="n">rmin</span><span class="p">)</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">+</span><span class="n">rmin</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">D0</span> <span class="o">=</span> <span class="mf">20.</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">D0</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">-</span><span class="n">D0</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+
+<span class="n">simu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">VolumeExclusion</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
+                 <span class="n">interaction_radius</span><span class="o">=</span><span class="n">R</span><span class="p">,</span>
+                 <span class="n">box_size</span><span class="o">=</span><span class="n">L</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                 <span class="n">division_rate</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                 <span class="n">death_rate</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                 <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run the simulation over 200 units of time using an adaptive time-step which ensures that the energy <code class="xref py py-attr docutils literal notranslate"><span class="pre">E</span></code> of the system decreases.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 13</span>
+
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">scatter_particles</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span><span class="n">frames</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=0.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_001.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=1.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_002.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=2.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_003.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=3.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_004.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=4.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_005.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=5.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_006.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=10.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_007.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=30.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_008.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=50.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_009.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=75.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_010.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=100.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_011.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=150.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_012.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.0 ; Death rate=0.0  Time=200.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_013.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0%
+Progress:1%
+Progress:2%
+Progress:3%
+Progress:4%
+Progress:5%
+Progress:6%
+Progress:7%
+Progress:8%
+Progress:9%
+Progress:10%
+Progress:11%
+Progress:12%
+Progress:13%
+Progress:14%
+Progress:15%
+Progress:16%
+Progress:17%
+Progress:18%
+Progress:19%
+Progress:20%
+Progress:21%
+Progress:22%
+Progress:23%
+Progress:24%
+Progress:25%
+Progress:26%
+Progress:27%
+Progress:28%
+Progress:29%
+Progress:30%
+Progress:31%
+Progress:32%
+Progress:33%
+Progress:34%
+Progress:35%
+Progress:36%
+Progress:37%
+Progress:38%
+Progress:39%
+Progress:40%
+Progress:41%
+Progress:42%
+Progress:43%
+Progress:44%
+Progress:45%
+Progress:46%
+Progress:47%
+Progress:48%
+Progress:49%
+Progress:50%
+Progress:51%
+Progress:52%
+Progress:53%
+Progress:54%
+Progress:55%
+Progress:56%
+Progress:57%
+Progress:58%
+Progress:59%
+Progress:60%
+Progress:61%
+Progress:62%
+Progress:63%
+Progress:64%
+Progress:65%
+Progress:66%
+Progress:67%
+Progress:68%
+Progress:69%
+Progress:70%
+Progress:71%
+Progress:72%
+Progress:73%
+Progress:74%
+Progress:75%
+Progress:76%
+Progress:77%
+Progress:78%
+Progress:79%
+Progress:80%
+Progress:81%
+Progress:82%
+Progress:83%
+Progress:84%
+Progress:85%
+Progress:86%
+Progress:87%
+Progress:88%
+Progress:89%
+Progress:90%
+Progress:91%
+Progress:92%
+Progress:93%
+Progress:94%
+Progress:95%
+Progress:96%
+Progress:97%
+Progress:98%
+Progress:99%
+Progress:100%
+</pre></div>
+</div>
+<p>Print the total simulation time and the average time per iteration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average time per iteration: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">simu</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 326.2268440723419 seconds
+Average time per iteration: 0.01703801347847401 seconds
+</pre></div>
+</div>
+<p>Note this funny behaviour: the particles are clustered by size!</p>
+</div>
+<div class="section" id="repulsion-force-random-births-and-random-deaths">
+<h2>Repulsion force, random births and random deaths<a class="headerlink" href="#repulsion-force-random-births-and-random-deaths" title="Permalink to this headline">¶</a></h2>
+<p>Same system but this time, particles die at a constant rate and give birth to new particles at the same rate. A new particle is added next to its parent and has the same radius.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">rmin</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">rmax</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">rmax</span><span class="o">-</span><span class="n">rmin</span><span class="p">)</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">+</span><span class="n">rmin</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">D0</span> <span class="o">=</span> <span class="mf">20.</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">D0</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">-</span><span class="n">D0</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+
+<span class="n">simu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">VolumeExclusion</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
+                 <span class="n">interaction_radius</span><span class="o">=</span><span class="n">R</span><span class="p">,</span>
+                 <span class="n">box_size</span><span class="o">=</span><span class="n">L</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                 <span class="n">division_rate</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">death_rate</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+                 <span class="n">Nmax</span> <span class="o">=</span> <span class="mi">20000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run the simulation over 200 units of time using an adaptive time-step which ensures that the energy <a class="reference internal" href="../api/API_models.html#sisyphe.models.VolumeExclusion.E" title="sisyphe.models.VolumeExclusion.E"><code class="xref py py-attr docutils literal notranslate"><span class="pre">E</span></code></a> of the system decreases.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">scatter_particles</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span><span class="n">frames</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img alt="Volume exclusion  Parameters: N=10000 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=0.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_014.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9985 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=1.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_015.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10007 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=2.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_016.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9950 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=3.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_017.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=10014 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=4.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_018.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9972 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=5.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_019.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9874 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=10.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_020.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9540 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=30.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_021.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9245 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=50.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_022.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=9550 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=75.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_023.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=8759 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=100.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_024.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=7871 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=150.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_025.png" />
+</li>
+<li><img alt="Volume exclusion  Parameters: N=6484 ; alpha=2.5 ; Division rate=0.3 ; Death rate=0.3  Time=200.0" class="sphx-glr-multi-img" src="../_images/sphx_glr_plot_volume_exclusion_026.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Progress:0%
+Progress:1%
+Progress:2%
+Progress:3%
+Progress:4%
+Progress:5%
+Progress:6%
+Progress:7%
+Progress:8%
+Progress:9%
+Progress:10%
+Progress:11%
+Progress:12%
+Progress:13%
+Progress:14%
+Progress:15%
+Progress:16%
+Progress:17%
+Progress:18%
+Progress:19%
+Progress:20%
+Progress:21%
+Progress:22%
+Progress:23%
+Progress:24%
+Progress:25%
+Progress:26%
+Progress:27%
+Progress:28%
+Progress:29%
+Progress:30%
+Progress:31%
+Progress:32%
+Progress:33%
+Progress:34%
+Progress:35%
+Progress:36%
+Progress:37%
+Progress:38%
+Progress:39%
+Progress:40%
+Progress:41%
+Progress:42%
+Progress:43%
+Progress:44%
+Progress:45%
+Progress:46%
+Progress:47%
+Progress:48%
+Progress:49%
+Progress:50%
+Progress:51%
+Progress:52%
+Progress:53%
+Progress:54%
+Progress:55%
+Progress:56%
+Progress:57%
+Progress:58%
+Progress:59%
+Progress:60%
+Progress:61%
+Progress:62%
+Progress:63%
+Progress:64%
+Progress:65%
+Progress:66%
+Progress:67%
+Progress:68%
+Progress:69%
+Progress:70%
+Progress:71%
+Progress:72%
+Progress:73%
+Progress:74%
+Progress:75%
+Progress:76%
+Progress:77%
+Progress:78%
+Progress:79%
+Progress:80%
+Progress:81%
+Progress:82%
+Progress:83%
+Progress:84%
+Progress:85%
+Progress:86%
+Progress:87%
+Progress:88%
+Progress:89%
+Progress:90%
+Progress:91%
+Progress:92%
+Progress:93%
+Progress:94%
+Progress:95%
+Progress:96%
+Progress:97%
+Progress:98%
+Progress:99%
+Progress:100%
+</pre></div>
+</div>
+<p>Print the total simulation time and the average time per iteration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average time per iteration: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">simu</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total time: 200.29545760154724 seconds
+Average time per iteration: 0.007975450250917705 seconds
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 8 minutes  53.860 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-volume-exclusion-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/ab45e20b011f048fbc95c95a72c9d8d5/plot_volume_exclusion.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_volume_exclusion.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/b28b3128bfbc5580d3a6104773222078/plot_volume_exclusion.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_volume_exclusion.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../api/API_particles.html" class="btn btn-neutral float-right" title="Particle systems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_sphere_bands.html" class="btn btn-neutral float-left" title="Boundary clusters in a disk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
