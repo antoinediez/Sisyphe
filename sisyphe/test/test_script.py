@@ -18,7 +18,7 @@ def test_sisyphe():
     """
     print("Welcome! This test function will create a system of body-oriented particles in a ``milling configuration'' (cf. the example gallery). The test will be considered as successful if the computed milling speed is within a 5% relative error range around the theoretical value.")
     
-    print("\n Running test...")
+    print("\n Running test, this may take a few minutes...")
     N = 1500000
     L = 1
     R = .025
