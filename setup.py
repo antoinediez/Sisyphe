@@ -15,11 +15,11 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name="sisyphe",
-    version="0.1",
+    version="0.1.3",
     description="Simulation of Systems of Particles with High Efficiency",  # Required
     long_description="Simulation of Systems of Particles with High Efficiency",
     long_description_content_type="text/markdown",
-    url="sisyphe.readthedocs.io",
+    url="https://sisyphe.readthedocs.io",
     project_urls={
         "Bug Reports": "https://github.com/antoinediez/Sisyphe/issues",
         "Source": "https://github.com/antoinediez/Sisyphe",
@@ -40,6 +40,7 @@ setup(
     keywords="particles gpu",
     packages=[
         "sisyphe",
+        "sisyphe.test",
     ],
     package_data={
         "sisyphe": [

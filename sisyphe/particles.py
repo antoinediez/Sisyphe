@@ -1183,7 +1183,7 @@ class KineticParticles(Particles):
         if self.d == 2:
             targets = maximal_eigenvector_dim2(J)
         else:
-            eivel, eivec = torch.symeig(J.to('cpu'), eigenvectors=True)
+            eivel, eivec = torch.linalg.eigh(J.to('cpu'))
             targets = eivec[:, :, -1]
             targets = targets.to(J.device)
         dot = (self.vel[who, :] * targets).sum(1).reshape((M, 1))
@@ -1546,7 +1546,7 @@ class BOParticles(Particles):
         M = J.shape[0]
         J = J.reshape(M, 4, 4)
         # Faster on the cpu !
-        eivel, eivec = torch.symeig(J.to('cpu'), eigenvectors=True)
+        eivel, eivec = torch.linalg.eigh(J.to('cpu'))
         targets = eivec[:, :, 3]
         # Back to the gpu.
         targets = targets.to(J.device)
