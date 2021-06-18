@@ -18,7 +18,3 @@ wheels/
 MANIFEST
 
 
-# Build junk
-doc/_build
-doc/_auto_examples
-doc/_auto_tutorials
