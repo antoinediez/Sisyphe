@@ -6,14 +6,30 @@
 Simulation of Systems of Particles with High Efficiency
 ==============================================================================
 
+.. image:: _static/ball.png
+    :scale: 70% 
+    :alt: Ball
+    :align: center
+
 The SiSyPHE library builds on recent advances in hardware and software for the efficient simulation of **large scale interacting particle systems**, both on the **GPU** and on the CPU. The implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate tensor (array) computations, namely the `PyTorch <https://github.com/pytorch/pytorch>`_ package and the `KeOps <https://www.kernel-operations.io/keops/index.html>`_ library. The **versatile object-oriented Python interface** is well suited to the comparison of new and classical many-particle models, enabling ambitious numerical experiments and leading to novel conjectures. The SiSyPHE library speeds up both traditional Python and low-level implementations by **one to three orders of magnitude**. 
 
-The project is hosted on `GitHub <https://github.com/antoinediez/Sisyphe>`_, under the permissive `MIT license <https://en.wikipedia.org/wiki/MIT_License>`_.
+The project is hosted on `GitHub <https://github.com/antoinediez/Sisyphe>`_, under the permissive `MIT license <https://en.wikipedia.org/wiki/MIT_License>`_. |br|  
+|PyPi version| 
+
+
+|mill|       |band|
+
+
 
 Author
 --------
 
 `Antoine Diez <https://antoinediez.gitlab.io/>`_, Imperial College London 
+
+
+
+Table of contents
+-------------------
 
 .. toctree::
    :maxdepth: 2
@@ -44,11 +60,25 @@ Author
    api/API_toolbox
    
 
-
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. |band| image:: _static/band.gif
+    :scale: 100% 
+    :alt: Band
+
+.. |mill| image:: _static/mill.gif
+    :scale: 100% 
+    :alt: Mill
+
+
+.. |PyPi version| image:: https://img.shields.io/pypi/v/sisyphe?color=blue
+   :target: https://pypi.org/project/sisyphe/
+   
+.. |br| raw:: html
+
+  <br/>
