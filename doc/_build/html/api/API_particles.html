@@ -91,6 +91,11 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#testing-the-installation">Testing the installation</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials and examples</span></p>
@@ -1014,7 +1019,7 @@ exceed the value <code class="docutils literal notranslate"><span class="pre">an
 </div>
 <p>where <span class="math notranslate nohighlight">\(a,b&gt;0\)</span> are such that the cosine between
 <strong>new_target</strong> and <a class="reference internal" href="#sisyphe.particles.KineticParticles.vel" title="sisyphe.particles.KineticParticles.vel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vel</span></code></a> is equal to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_cos</span> <span class="p">:</span><span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angvel_max</span> <span class="o">*</span> <span class="n">dt</span><span class="p">),</span> <span class="n">cos_target</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_cos</span> <span class="o">:=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">angvel_max</span> <span class="o">*</span> <span class="n">dt</span><span class="p">),</span> <span class="n">cos_target</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where <strong>cos_target</strong> is the cosine between <strong>target</strong> and

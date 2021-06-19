@@ -18,6 +18,11 @@ Author
 .. toctree::
    :maxdepth: 2
 
+   installation.rst
+
+.. toctree::
+   :maxdepth: 2
+
    benchmark.rst
 
 .. toctree::
