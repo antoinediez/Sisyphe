@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Background and motivation &mdash; SiSyPHE  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Simulation of Systems of Particles with High Efficiency" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> SiSyPHE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Background and motivation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-do-we-need-to-simulate-particle-systems">Why do we need to simulate particle systems?</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="benchmark.html">Benchmarks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials and examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_auto_tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_auto_examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/API_particles.html">Particle systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_kernels.html">Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_sampling.html">Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/API_toolbox.html">Toolbox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SiSyPHE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Background and motivation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/background.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="background-and-motivation">
+<h1>Background and motivation<a class="headerlink" href="#background-and-motivation" title="Permalink to this headline">¶</a></h1>
+<p>Over the past decades, the study of systems of particles has become an important part of many research areas, from theoretical physics to applied biology and computational mathematics. Some current research trends include the following.</p>
+<ul class="simple">
+<li><p>Since the 80’s, there is a joint effort from biologists, physicists, computer graphics scientists and more recently mathematicians to propose accurate models for large <strong>self-organized</strong> animal societies. While the motivations of the different communities are largely independent, a commmon goal is to be able to explain and reproduce the <strong>emergence of complex patterns from simple interaction rules</strong>. Typical examples of complex systems include flocks of birds, fish schools, herds of mammals or ant colonies. It seems clear that none of these animals has an accute consciousness of the whole system organization but rather follows simple behavioral patterns: stay close to the group, do not collide with another individual, copy the attitude of the close neighbours etc.</p></li>
+<li><p>The microscopic world if full of complex systems made of many simple entities. Colonies of bacteria are a natural example reminiscent of the macroscopic animal societies described above. But complex patterns can also emerge from <strong>systems of non-living particles</strong>. Our body is actually a very complex self-organized assembly of cells which dictate every aspect of our life: our brain works thanks to the communications between billions of neurons, the reproduction is based on the competition between millions of spermatozoa and sometimes, death is sadly caused by the relentless division of cancer cells. For sure, there is no universal mechanism which explains these phenomena. Some models are based on chemical factors, other on physical (geometrical) constraints etc.</p></li>
+<li><p>On a completely different side, there is an ever growing number of methods in computational mathematics which are based on the simulation of systems of particles. The pioneering Particle Swarm Optimization method has shown how biologically-inspired artificial systems of particles can be used to solve tough optimization problems. Following these ideas, other <strong>Swarm Intelligence</strong> optimization algorithms have been proposed up to very recently. Since the beginning of the 2000’s, particle systems are also at the core of widely used filtering and sampling methods. Recently, a particle-based interpretation of the training task of neural networks has lead to new theoretical convergence results.</p></li>
+</ul>
+<div class="section" id="why-do-we-need-to-simulate-particle-systems">
+<h2>Why do we need to simulate particle systems?<a class="headerlink" href="#why-do-we-need-to-simulate-particle-systems" title="Permalink to this headline">¶</a></h2>
+<p>Beyond the self-explanatory applications for particle-based algorithms in computational mathematics, the simulation of systems of particles is also a crucial <strong>modelling tool</strong> in Physics and Biology. On the one hand, field experiments are useful to collect data and trigger new modelling ideas. On the other hand, numerical simulations become necessary to test these ideas and to calibrate the models. In the Physics of Active Matter, numerical experiments are conducted to identify which mechanisms are able to produce a specific phenomena in a <strong>controlled environment</strong>. Mathematicians often seek theoretical proofs and quantitative explanations for the observed phenomena. In turns out that the direct mathematical study of particle systems can rapidly become incredibly difficult. Inspired by the kinetic theory of gases, many <strong>mesoscopic</strong> models have been proposed to model the average statistical behavior of particle systems rather than the individual motion of each particle. These models are often based on Partial Differential Equations (PDE) which are more easily theoretically and numerically tractable. However, <strong>cheking the validity</strong> of these models is not always easy and is sometimes only postulated based on phenomenological considerations. In order to design good models, it is often necessary to go back-and-forth between the PDE models and the numerical simulation of the underlying particle systems.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Simulation of Systems of Particles with High Efficiency" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Antoine Diez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

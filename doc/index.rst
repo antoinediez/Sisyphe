@@ -37,6 +37,11 @@ Table of contents
 .. toctree::
    :maxdepth: 2
 
+   background.rst
+
+.. toctree::
+   :maxdepth: 2
+
    installation.rst
 
 .. toctree::

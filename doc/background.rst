@@ -1,0 +1,20 @@
+===============================
+Background and motivation
+===============================
+
+Over the past decades, the study of systems of particles has become an important part of many research areas, from theoretical physics to applied biology and computational mathematics. Some current research trends include the following. 
+
+* Since the 80's, there is a joint effort from biologists, physicists, computer graphics scientists and more recently mathematicians to propose accurate models for large **self-organized** animal societies. While the motivations of the different communities are largely independent, a commmon goal is to be able to explain and reproduce the **emergence of complex patterns from simple interaction rules**. Typical examples of complex systems include flocks of birds, fish schools, herds of mammals or ant colonies. It seems clear that none of these animals has an accute consciousness of the whole system organization but rather follows simple behavioral patterns: stay close to the group, do not collide with another individual, copy the attitude of the close neighbours etc.
+
+* The microscopic world if full of complex systems made of many simple entities. Colonies of bacteria are a natural example reminiscent of the macroscopic animal societies described above. But complex patterns can also emerge from **systems of non-living particles**. Our body is actually a very complex self-organized assembly of cells which dictate every aspect of our life: our brain works thanks to the communications between billions of neurons, the reproduction is based on the competition between millions of spermatozoa and sometimes, death is sadly caused by the relentless division of cancer cells. For sure, there is no universal mechanism which explains these phenomena. Some models are based on chemical factors, other on physical (geometrical) constraints etc. 
+
+* On a completely different side, there is an ever growing number of methods in computational mathematics which are based on the simulation of systems of particles. The pioneering Particle Swarm Optimization method has shown how biologically-inspired artificial systems of particles can be used to solve tough optimization problems. Following these ideas, other **Swarm Intelligence** optimization algorithms have been proposed up to very recently. Since the beginning of the 2000's, particle systems are also at the core of widely used filtering and sampling methods. Recently, a particle-based interpretation of the training task of neural networks has lead to new theoretical convergence results.
+
+Why do we need to simulate particle systems?
+==================================================
+
+Beyond the self-explanatory applications for particle-based algorithms in computational mathematics, the simulation of systems of particles is also a crucial **modelling tool** in Physics and Biology. On the one hand, field experiments are useful to collect data and trigger new modelling ideas. On the other hand, numerical simulations become necessary to test these ideas and to calibrate the models. In the Physics of Active Matter, numerical experiments are conducted to identify which mechanisms are able to produce a specific phenomena in a **controlled environment**. Mathematicians often seek theoretical proofs and quantitative explanations for the observed phenomena. In turns out that the direct mathematical study of particle systems can rapidly become incredibly difficult. Inspired by the kinetic theory of gases, many **mesoscopic** models have been proposed to model the average statistical behavior of particle systems rather than the individual motion of each particle. These models are often based on Partial Differential Equations (PDE) which are more easily theoretically and numerically tractable. However, **cheking the validity** of these models is not always easy and is sometimes only postulated based on phenomenological considerations. In order to design good models, it is often necessary to go back-and-forth between the PDE models and the numerical simulation of the underlying particle systems. 
+
+
+
+
