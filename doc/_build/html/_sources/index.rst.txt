@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Simulation of Systems of Particles with High Efficiency
-==============================================================================
+**********************************************************
 
 .. image:: _static/ball.png
     :scale: 70% 
@@ -22,14 +22,17 @@ The project is hosted on `GitHub <https://github.com/antoinediez/Sisyphe>`_, und
 
 
 Author
---------
+===========
 
 `Antoine Diez <https://antoinediez.gitlab.io/>`_, Imperial College London 
 
+Acknowledgments
+-------------------
 
+The development of this library would not have been possible without the help of `Jean Feydy  <https://www.jeanfeydy.com/>`_, his constant support and precious advice. This project was initiated by `Pierre Degond <https://sites.google.com/site/degond/>`_ and has grown out of many discussions with him. 
 
 Table of contents
--------------------
+========================
 
 .. toctree::
    :maxdepth: 2
