@@ -231,7 +231,7 @@
 <p>where <span class="math notranslate nohighlight">\((B^i_t)_t\)</span> are <span class="math notranslate nohighlight">\(N\)</span> independent Brownian motions and the coefficients <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are called the <em>drift</em> and <em>diffusion</em> coefficients. In most cases, these coefficients are <em>linear</em> or <em>quasi-linear</em> which means that they are of the form</p>
 <div class="math notranslate nohighlight">
 \[b(X^i_t,\mu_{\mathcal{X}^N_t}) = \tilde{b}{\left(X^i_t, \frac{1}{N}\sum_{j=1}^N K(X^i_t,X^j_t)\right)},\]</div>
-<p>for two given functions <span class="math notranslate nohighlight">\(\tilde{b}:\mathbb{R}^d\times\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(K:\mathbb{R}^d\times\mathbb{R}^d\to \mathbb{R}^n\)</span>.</p>
+<p>for two given functions <span class="math notranslate nohighlight">\(\tilde{b}:\mathbb{R}^d\times\mathbb{R}^n\to\mathbb{R}^d\)</span> and <span class="math notranslate nohighlight">\(K:\mathbb{R}^d\times\mathbb{R}^d\to \mathbb{R}^n\)</span>.</p>
 <p>When the particles are initially statistically independent, it can be shown that when <span class="math notranslate nohighlight">\(N\to+\infty\)</span>, each particle <span class="math notranslate nohighlight">\(X^i_t\)</span> converges towards an independent copy of the solution of the so-called <strong>McKean-Vlasov</strong> diffusion process defined by the Stochastic Differential Equation</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{d}\overline{X}_t = b(\overline{X}_t,f_t)\mathrm{d}t + \sigma(\overline{X}_t,f_t)\mathrm{d} B_t,\]</div>
@@ -267,8 +267,8 @@
 </div>
 <div class="section" id="the-sisyphe-library">
 <h2>The SiSyPHE library<a class="headerlink" href="#the-sisyphe-library" title="Permalink to this headline">¶</a></h2>
-<p>The present implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate such tensor (array) computations, namely the <a class="reference external" href="https://github.com/pytorch/pytorch">PyTorch</a> package and the <a class="reference external" href="https://www.kernel-operations.io/keops/index.html">KeOps</a> library.</p>
-<p>The <strong>versatile object-oriented Python interface</strong> is well suited to the comparison of new and classical many-particle models, enabling ambitious numerical experiments and leading to novel conjectures. The SiSyPHE library speeds up both traditional Python and low-level implementations by <strong>one to three orders of magnitude</strong>.</p>
+<p>The present implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate such tensor (array) computations, namely the <a class="reference external" href="https://github.com/pytorch/pytorch">PyTorch</a> package and the <a class="reference external" href="https://www.kernel-operations.io/keops/index.html">KeOps</a> library. Using the KeOps framework, the kernel matrix is a <strong>symbolic matrix</strong> defined by a mathematical formula and no approximation is required in the computation of the interactions (up to the time discretization). The SiSyPHE library speeds up both traditional Python and low-level CPU implementations by <strong>one to three orders of magnitude</strong>. Although the library is mainly intended to be used on a GPU, the implementation is fully functional on the CPU with a significant gain in efficiency.</p>
+<p>Moreover, the <strong>versatile object-oriented Python interface</strong> is well suited to the comparison and study of new and classical many-particle models. This aspect is fundamental in applications in order to conduct ambitious numerical experiments in a systematic framework, even for particles with a complex structure and with a significantly reduced computational cost</p>
 </div>
 </div>
 

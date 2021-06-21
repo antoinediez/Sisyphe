@@ -70,7 +70,7 @@ where :math:`(B^i_t)_t` are :math:`N` independent Brownian motions and the coeff
 
     b(X^i_t,\mu_{\mathcal{X}^N_t}) = \tilde{b}{\left(X^i_t, \frac{1}{N}\sum_{j=1}^N K(X^i_t,X^j_t)\right)}, 
 
-for two given functions :math:`\tilde{b}:\mathbb{R}^d\times\mathbb{R}^n` and :math:`K:\mathbb{R}^d\times\mathbb{R}^d\to \mathbb{R}^n`. 
+for two given functions :math:`\tilde{b}:\mathbb{R}^d\times\mathbb{R}^n\to\mathbb{R}^d` and :math:`K:\mathbb{R}^d\times\mathbb{R}^d\to \mathbb{R}^n`. 
 
 When the particles are initially statistically independent, it can be shown that when :math:`N\to+\infty`, each particle :math:`X^i_t` converges towards an independent copy of the solution of the so-called **McKean-Vlasov** diffusion process defined by the Stochastic Differential Equation 
 
@@ -130,11 +130,9 @@ All these methods require an significant amount of work, either in terms of code
 The SiSyPHE library
 ========================
 
-The present implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate such tensor (array) computations, namely the `PyTorch <https://github.com/pytorch/pytorch>`_ package and the `KeOps <https://www.kernel-operations.io/keops/index.html>`_ library. 
+The present implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate such tensor (array) computations, namely the `PyTorch <https://github.com/pytorch/pytorch>`_ package and the `KeOps <https://www.kernel-operations.io/keops/index.html>`_ library. Using the KeOps framework, the kernel matrix is a **symbolic matrix** defined by a mathematical formula and no approximation is required in the computation of the interactions (up to the time discretization). The SiSyPHE library speeds up both traditional Python and low-level CPU implementations by **one to three orders of magnitude**. Although the library is mainly intended to be used on a GPU, the implementation is fully functional on the CPU with a significant gain in efficiency.   
 
-
-The **versatile object-oriented Python interface** is well suited to the comparison of new and classical many-particle models, enabling ambitious numerical experiments and leading to novel conjectures. The SiSyPHE library speeds up both traditional Python and low-level implementations by **one to three orders of magnitude**. 
-
+Moreover, the **versatile object-oriented Python interface** is well suited to the comparison and study of new and classical many-particle models. This aspect is fundamental in applications in order to conduct ambitious numerical experiments in a systematic framework, even for particles with a complex structure and with a significantly reduced computational cost
 
 
 
