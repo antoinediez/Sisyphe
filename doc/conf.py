@@ -49,9 +49,12 @@ extensions = [
     "sphinxcontrib.httpdomain",
     "sphinx_gallery.gen_gallery",
     "sphinx.ext.napoleon",
+    "sphinxcontrib.bibtex",
     # 'sphinx.ext.viewcode',
     # "sphinx.ext.linkcode",
 ]
+
+bibtex_bibfiles = ['biblio_sisyphe.bib']
 
 from sphinx_gallery.sorting import FileNameSortKey
 

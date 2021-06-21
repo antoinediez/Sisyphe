@@ -91,6 +91,12 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background and motivation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials and examples</span></p>
@@ -226,11 +232,11 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>We take a small discretisation time step.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">01</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mf">.01</span>
 </pre></div>
 </div>
 <p>Finally, we define an instance of the Vicsek model with these parameters.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.models</span> <span class="k">import</span> <span class="n">Vicsek</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.models</span> <span class="kn">import</span> <span class="n">Vicsek</span>
 
 <span class="n">simu</span> <span class="o">=</span> <span class="n">Vicsek</span><span class="p">(</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">,</span>
@@ -263,7 +269,7 @@ Current iteration: 1
 </pre></div>
 </div>
 <p>Using the method <a class="reference internal" href="../api/API_display.html#sisyphe.display.display_kinetic_particles" title="sisyphe.display.display_kinetic_particles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sisyphe.display.display_kinetic_particles()</span></code></a>, the simulation will run until the last time in the list <code class="xref py py-data docutils literal notranslate"><span class="pre">frames</span></code>. The method also displays a scatter plot of the particle system at each of the times specified in the list and finally compute and plot the order parameter.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="k">import</span> <span class="n">display_kinetic_particles</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="kn">import</span> <span class="n">display_kinetic_particles</span>
 
 <span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">it</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="n">display_kinetic_particles</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

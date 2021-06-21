@@ -91,6 +91,12 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background and motivation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials and examples</span></p>
@@ -201,9 +207,9 @@ to download the full example code</p>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">sisyphe.models</span> <span class="k">as</span> <span class="nn">models</span>
-<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="k">import</span> <span class="n">display_kinetic_particles</span>
+<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="kn">import</span> <span class="n">display_kinetic_particles</span>
 
 <span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
 <span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span>
@@ -230,13 +236,13 @@ to download the full example code</p>
 <span class="n">mass</span> <span class="o">=</span> <span class="mf">1000.</span>
 <span class="n">L</span> <span class="o">=</span> <span class="mf">10.</span>
 
-<span class="n">Ca</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="n">Ca</span> <span class="o">=</span> <span class="mf">.5</span>
 <span class="n">la</span> <span class="o">=</span> <span class="mf">2.</span>
 <span class="n">Cr</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="n">lr</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">.5</span>
 
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.6</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">.5</span>
 <span class="n">v0</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span>
 
 <span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
@@ -244,7 +250,7 @@ to download the full example code</p>
 <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">vel</span> <span class="o">=</span> <span class="n">v0</span><span class="o">*</span><span class="n">vel</span>
 
-<span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">01</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">.01</span>
 
 <span class="n">simu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AttractionRepulsion</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
                  <span class="n">vel</span><span class="o">=</span><span class="n">vel</span><span class="p">,</span>
@@ -416,17 +422,17 @@ Average time per iteration: 0.008600608777999877 seconds
 <span class="n">L</span> <span class="o">=</span> <span class="mf">20.</span>
 
 <span class="n">nu</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">.02</span>
 <span class="n">kappa</span> <span class="o">=</span> <span class="n">nu</span><span class="o">/</span><span class="n">sigma</span>
 
-<span class="n">c</span> <span class="o">=</span> <span class="o">.</span><span class="mi">175</span>
-<span class="n">angvel_max</span> <span class="o">=</span> <span class="o">.</span><span class="mi">175</span><span class="o">/</span><span class="n">nu</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">.175</span>
+<span class="n">angvel_max</span> <span class="o">=</span> <span class="mf">.175</span><span class="o">/</span><span class="n">nu</span>
 
 <span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
 <span class="n">vel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
 <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
-<span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">01</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">.01</span>
 </pre></div>
 </div>
 <p>We add an option to the target</p>

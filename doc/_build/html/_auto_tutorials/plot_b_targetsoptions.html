@@ -91,6 +91,12 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background and motivation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../benchmark.html">Benchmarks</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials and examples</span></p>
@@ -212,9 +218,9 @@ to download the full example code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">sisyphe.models</span> <span class="k">import</span> <span class="n">Vicsek</span>
-<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="k">import</span> <span class="n">display_kinetic_particles</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sisyphe.models</span> <span class="kn">import</span> <span class="n">Vicsek</span>
+<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="kn">import</span> <span class="n">display_kinetic_particles</span>
 
 <span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
 <span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span>
@@ -238,7 +244,7 @@ to download the full example code</p>
 <span class="n">nu</span> <span class="o">=</span> <span class="mf">5.</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
 
-<span class="n">dt</span> <span class="o">=</span> <span class="o">.</span><span class="mi">01</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">.01</span>
 </pre></div>
 </div>
 <p>The choice of the target is implemented in the keyword argument <code class="docutils literal notranslate"><span class="pre">variant</span></code>. For the classical normalised target, it is given by the following dictionary.</p>
