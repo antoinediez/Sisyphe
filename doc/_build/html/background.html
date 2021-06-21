@@ -37,6 +37,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -91,7 +92,14 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Background and motivation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scope-of-application">Scope of application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-do-we-need-to-simulate-particle-systems">Why do we need to simulate particle systems?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mean-field-particle-systems">Mean-field particle systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-mathematical-point-of-view">The mathematical point of view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simulating-mean-field-particle-systems">Simulating mean-field particle systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-sisyphe-library">The SiSyPHE library</a></li>
 </ul>
 </li>
 </ul>
@@ -183,15 +191,84 @@
             
   <div class="section" id="background-and-motivation">
 <h1>Background and motivation<a class="headerlink" href="#background-and-motivation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="scope-of-application">
+<h2>Scope of application<a class="headerlink" href="#scope-of-application" title="Permalink to this headline">¶</a></h2>
 <p>Over the past decades, the study of systems of particles has become an important part of many research areas, from theoretical physics to applied biology and computational mathematics. Some current research trends include the following.</p>
 <ul class="simple">
 <li><p>Since the 80’s, there is a joint effort from biologists, physicists, computer graphics scientists and more recently mathematicians to propose accurate models for large <strong>self-organized</strong> animal societies. While the motivations of the different communities are largely independent, a commmon goal is to be able to explain and reproduce the <strong>emergence of complex patterns from simple interaction rules</strong>. Typical examples of complex systems include flocks of birds, fish schools, herds of mammals or ant colonies. It seems clear that none of these animals has an accute consciousness of the whole system organization but rather follows simple behavioral patterns: stay close to the group, do not collide with another individual, copy the attitude of the close neighbours etc.</p></li>
 <li><p>The microscopic world if full of complex systems made of many simple entities. Colonies of bacteria are a natural example reminiscent of the macroscopic animal societies described above. But complex patterns can also emerge from <strong>systems of non-living particles</strong>. Our body is actually a very complex self-organized assembly of cells which dictate every aspect of our life: our brain works thanks to the communications between billions of neurons, the reproduction is based on the competition between millions of spermatozoa and sometimes, death is sadly caused by the relentless division of cancer cells. For sure, there is no universal mechanism which explains these phenomena. Some models are based on chemical factors, other on physical (geometrical) constraints etc.</p></li>
 <li><p>On a completely different side, there is an ever growing number of methods in computational mathematics which are based on the simulation of systems of particles. The pioneering Particle Swarm Optimization method has shown how biologically-inspired artificial systems of particles can be used to solve tough optimization problems. Following these ideas, other <strong>Swarm Intelligence</strong> optimization algorithms have been proposed up to very recently. Since the beginning of the 2000’s, particle systems are also at the core of widely used filtering and sampling methods. Recently, a particle-based interpretation of the training task of neural networks has lead to new theoretical convergence results.</p></li>
 </ul>
+</div>
 <div class="section" id="why-do-we-need-to-simulate-particle-systems">
 <h2>Why do we need to simulate particle systems?<a class="headerlink" href="#why-do-we-need-to-simulate-particle-systems" title="Permalink to this headline">¶</a></h2>
-<p>Beyond the self-explanatory applications for particle-based algorithms in computational mathematics, the simulation of systems of particles is also a crucial <strong>modelling tool</strong> in Physics and Biology. On the one hand, field experiments are useful to collect data and trigger new modelling ideas. On the other hand, numerical simulations become necessary to test these ideas and to calibrate the models. In the Physics of Active Matter, numerical experiments are conducted to identify which mechanisms are able to produce a specific phenomena in a <strong>controlled environment</strong>. Mathematicians often seek theoretical proofs and quantitative explanations for the observed phenomena. In turns out that the direct mathematical study of particle systems can rapidly become incredibly difficult. Inspired by the kinetic theory of gases, many <strong>mesoscopic</strong> models have been proposed to model the average statistical behavior of particle systems rather than the individual motion of each particle. These models are often based on Partial Differential Equations (PDE) which are more easily theoretically and numerically tractable. However, <strong>cheking the validity</strong> of these models is not always easy and is sometimes only postulated based on phenomenological considerations. In order to design good models, it is often necessary to go back-and-forth between the PDE models and the numerical simulation of the underlying particle systems.</p>
+<p>Beyond the self-explanatory applications for particle-based algorithms in computational mathematics, the simulation of systems of particles is also a crucial <strong>modelling tool</strong> in Physics and Biology.</p>
+<ul class="simple">
+<li><p>On the one hand, field experiments are useful to collect data and trigger new modelling ideas. On the other hand, numerical simulations become necessary to test these ideas and to calibrate the models. <strong>Numerical experiments</strong> can be conducted to identify which mechanisms are able to produce a specific phenomena in a <strong>controlled environment</strong>.</p></li>
+<li><p>On a more theoretical side, the direct mathematical study of particle systems can rapidly become incredibly difficult. Inspired by the kinetic theory of gases, many <strong>mesoscopic</strong> and <strong>macroscopic</strong> models have been proposed to model the average statistical behavior of particle systems rather than the individual motion of each particle. These models are often based on Partial Differential Equations (PDE) which are more easily theoretically and numerically tractable. However, <strong>cheking the validity</strong> of these models is not always easy and is sometimes only postulated based on phenomenological considerations. In order to design good models, it is often necessary to go back-and-forth between the PDE models and the numerical simulation of the underlying particle systems.</p></li>
+</ul>
+<p>The development of the SiSyPHE library was initially motivated by the study of <a class="reference internal" href="api/API_particles.html#sisyphe.particles.BOParticles" title="sisyphe.particles.BOParticles"><code class="xref py py-class docutils literal notranslate"><span class="pre">body-oriented</span> <span class="pre">particles</span></code></a>. The (formal) derivation of a macroscopic PDE model from the particle system lead to a novel conjecture which postulates the existence of a class of so-called <strong>bulk topological states</strong>. The quantitative comparison between this theoretical prediction and the numerical simulation of the particle system in a suitable regime has confirmed the existence of these new states of matter. The study of their physical properties which are observed in the numerical experiments but not readily explained by the PDE model is an ongoing work.</p>
+</div>
+<div class="section" id="mean-field-particle-systems">
+<h2>Mean-field particle systems<a class="headerlink" href="#mean-field-particle-systems" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the models implemented in the SiSyPHE library belong to the family of <strong>mean-field models</strong>. It means that the motion of each particle is influenced by the average behavior of the whole system. The Vicsek model is an example of mean-field model where each particle tries to move in the average direction of motion of its neighbours.</p>
+<div class="section" id="the-mathematical-point-of-view">
+<h3>The mathematical point of view<a class="headerlink" href="#the-mathematical-point-of-view" title="Permalink to this headline">¶</a></h3>
+<p>From a mathematical point of view, a mean-field particle system with <span class="math notranslate nohighlight">\(N\)</span> particles is defined as a Markov process in <span class="math notranslate nohighlight">\((\mathbb{R}^d)^N\)</span> with a generator <span class="math notranslate nohighlight">\(\mathcal{L}_N\)</span> whose action on a test function <span class="math notranslate nohighlight">\(\varphi_N\)</span> is of the form:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_N\varphi_N(x^1,\ldots,x^N) = \sum_{i=1}^N L_{\mu_{\mathbf{x}^N}}\diamond_i \varphi_N (x^1,\ldots,x^N),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}^N = (x^1,\ldots,x^N)\in (\mathbb{R}^d)^N\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\mu_{\mathbf{x}^N} := \frac{1}{N}\sum_{i=1}^N \delta_{x^i},\]</div>
+<p>is the so-called <strong>empirical measure</strong>. The operator <span class="math notranslate nohighlight">\(L_{\mu_{\mathbf{x}_N}}\)</span> depends on the empirical measure and acts on one-variable test functions on <span class="math notranslate nohighlight">\(\mathbb{R}^d\)</span>. Given an operator <span class="math notranslate nohighlight">\(L\)</span> and a test function <span class="math notranslate nohighlight">\(\varphi_N\)</span>, the notation <span class="math notranslate nohighlight">\(L\diamond_i \varphi_N\)</span> denotes the function</p>
+<div class="math notranslate nohighlight">
+\[L\diamond_i \varphi_N : (x^1,\ldots,x^N) \in (\mathbb{R}^d)^N \mapsto L[x\mapsto\varphi_N(x_1,\ldots,x^{i-1},x,x^{i+1},\ldots,x^N)](x^i)\in \mathbb{R}.\]</div>
+<p>The dynamics of the mean-field system depends on the operator <span class="math notranslate nohighlight">\(L_{\mu_{\mathbf{x}_N}}\)</span> which is typically either a <strong>diffusion operator</strong> or a <strong>jump operator</strong>. In the first case, the mean-field particle systems is alternatively defined by a system of <span class="math notranslate nohighlight">\(N\)</span> coupled Stochastic Differential Equations of the form:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{d}X^i_t = b(X^i_t,\mu_{\mathcal{X}^N_t})\mathrm{d}t + \sigma(X^i_t,\mu_{\mathcal{X}^N_t})\mathrm{d} B^i_t,\quad i\in\{1,\ldots,N\},\]</div>
+<div class="math notranslate nohighlight">
+\[\mu_{\mathcal{X}^N_t} := \frac{1}{N}\sum_{i=1}^N \delta_{X^i_t},\]</div>
+<p>where <span class="math notranslate nohighlight">\((B^i_t)_t\)</span> are <span class="math notranslate nohighlight">\(N\)</span> independent Brownian motions and the coefficients <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are called the <em>drift</em> and <em>diffusion</em> coefficients. In most cases, these coefficients are <em>linear</em> or <em>quasi-linear</em> which means that they are of the form</p>
+<div class="math notranslate nohighlight">
+\[b(X^i_t,\mu_{\mathcal{X}^N_t}) = \tilde{b}{\left(X^i_t, \frac{1}{N}\sum_{j=1}^N K(X^i_t,X^j_t)\right)},\]</div>
+<p>for two given functions <span class="math notranslate nohighlight">\(\tilde{b}:\mathbb{R}^d\times\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(K:\mathbb{R}^d\times\mathbb{R}^d\to \mathbb{R}^n\)</span>.</p>
+<p>When the particles are initially statistically independent, it can be shown that when <span class="math notranslate nohighlight">\(N\to+\infty\)</span>, each particle <span class="math notranslate nohighlight">\(X^i_t\)</span> converges towards an independent copy of the solution of the so-called <strong>McKean-Vlasov</strong> diffusion process defined by the Stochastic Differential Equation</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{d}\overline{X}_t = b(\overline{X}_t,f_t)\mathrm{d}t + \sigma(\overline{X}_t,f_t)\mathrm{d} B_t,\]</div>
+<p>where <span class="math notranslate nohighlight">\((B_t)_t\)</span> is a Brownian motion and <span class="math notranslate nohighlight">\(f_t\)</span> is the law of the process <span class="math notranslate nohighlight">\(\overline{X}_t\)</span>. It satisfies the <strong>Fokker-Planck</strong> Partial Differential Equation</p>
+<div class="math notranslate nohighlight">
+\[\partial_t f_t = - \nabla\cdot(b(x,f_t)f_t) + \frac{1}{2}\sum_{i,j=1}^N \partial_{x_i}\partial_{x_j}(a_{ij}(x,f_t)f_t),\]</div>
+<p>with <span class="math notranslate nohighlight">\(x=(x_1,\ldots,x_d)\in \mathbb{R}^d\)</span> and <span class="math notranslate nohighlight">\(a=\sigma\sigma^\mathrm{T}\)</span>. This phenomenon is called <strong>propagation of chaos</strong>, following the terminology introduced by Kac in the 50’s.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A popular example of mean-field particle system is the (stochastic) Cucker-Smale model. Each particle is defined by its position <span class="math notranslate nohighlight">\(X^i_t \in\mathbb{R}^d\)</span> and its velocity <span class="math notranslate nohighlight">\(V^i_t\in\mathbb{R}^d\)</span> which evolve according to the system of <span class="math notranslate nohighlight">\(2N\)</span> Stochastic Differential Equations:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{d}X^i_t = V^i_t\mathrm{d}t,\quad \mathrm{d}V^i_t = \frac{1}{N}\sum_{i=1}^N K(|X^j_t-X^i_t|)(V^j_t-V^i_t)\mathrm{d}t + \mathrm{d}B^i_t,\]</div>
+<p>where <span class="math notranslate nohighlight">\(K:[0,+\infty)\to[0,+\infty)\)</span> is an <strong>observation kernel</strong> which models the visual perception of the particles. In this example, the function <span class="math notranslate nohighlight">\(K\)</span> is a smooth function vanishing at infinity and the communication between the particles is based on the distance between them. The motion of the particles follows the Newton’s laws of motion with an additional stochastic term. The term <span class="math notranslate nohighlight">\(V^j_t-V^i_t\)</span> is a relaxation force (for a quadratic potential) which tends to align the velocities of particle <span class="math notranslate nohighlight">\(i\)</span> and particle <span class="math notranslate nohighlight">\(j\)</span>.</p>
+</div>
+</div>
+<div class="section" id="simulating-mean-field-particle-systems">
+<h3>Simulating mean-field particle systems<a class="headerlink" href="#simulating-mean-field-particle-systems" title="Permalink to this headline">¶</a></h3>
+<p>On a computer, the above examples which are time-continuous needs to be discretized, using for instance one of the classical numerical schemes for Stochastic Differential Equations. Then the difficulty lies in the evaluation of the empirical measure <strong>at each time-step</strong> of the numerical scheme.</p>
+<p>In the example of the Cucker-Smale model, the force exerted on a particle is the sum of <span class="math notranslate nohighlight">\(N\)</span> small relaxation forces of order <span class="math notranslate nohighlight">\(1/N\)</span>. The total number of operations required is thus of order <span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span> <strong>for each particle</strong>. Since there are <span class="math notranslate nohighlight">\(N\)</span> particles, the total time complexity of the algorithm is thus <span class="math notranslate nohighlight">\(\mathcal{O}(N^2T)\)</span> where <span class="math notranslate nohighlight">\(T\)</span> is the total number of iterations of the numerical scheme.</p>
+<p>This <strong>quadratic cost</strong> is the main bottleneck in the simulation of mean-field particle systems. As explained in the documentation of the KeOps library, the evaluation of the <span class="math notranslate nohighlight">\(N\)</span> forces at time <span class="math notranslate nohighlight">\(t\)</span></p>
+<div class="math notranslate nohighlight">
+\[F_i(t) = \frac{1}{N}\sum_{i=1}^N K(|X^j_t-X^i_t|)(V^j_t-V^i_t), \quad i\in\{1,\ldots,N\},\]</div>
+<p>is called a <strong>kernel operation</strong> and can be understood as a discrete convolution operation (or matrix-vector product) between the matrix of distances <span class="math notranslate nohighlight">\((K_{ij})_{i,j\in\{1\,ldots,N\}}\)</span> where <span class="math notranslate nohighlight">\(K_{ij} = K(|X^j_t-X^i_t|)\)</span> and the vector of velocities <span class="math notranslate nohighlight">\((V^j_t-V^i_t)_{j\in\{1,\ldots, N}\)</span>. When <span class="math notranslate nohighlight">\(N\)</span> is large (say <span class="math notranslate nohighlight">\(N&gt;10^4\)</span>), such operation is too costly even for array-based programming languages such as Matlab: the <span class="math notranslate nohighlight">\(N\times N\)</span> kernel matrix <span class="math notranslate nohighlight">\((K_{ij})_{i,j}\)</span> would simply not fit into the memory.</p>
+<p>Over the past decades, several workarounds have been proposed. Popular methods include</p>
+<ul class="simple">
+<li><p>the low-rank decomposition of the kernel matrix,</p></li>
+<li><p>the fast-multipole methods which to treat differently short- and long-range interactions,</p></li>
+<li><p>the Verlet list method which is based on a grid decompostion of the spatial domain to reduce the problem to only short-range interactions between subsets of the particle system,</p></li>
+<li><p>the Random Batch Method which is based on a stochastic approximation where only interactions between randomly sampled subsets (<em>batches</em>) of the particle system are computed.</p></li>
+</ul>
+<p>All these methods require an significant amount of work, either in terms of code or to justify the approximation procedures.</p>
+</div>
+</div>
+<div class="section" id="the-sisyphe-library">
+<h2>The SiSyPHE library<a class="headerlink" href="#the-sisyphe-library" title="Permalink to this headline">¶</a></h2>
+<p>The present implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate such tensor (array) computations, namely the <a class="reference external" href="https://github.com/pytorch/pytorch">PyTorch</a> package and the <a class="reference external" href="https://www.kernel-operations.io/keops/index.html">KeOps</a> library.</p>
+<p>The <strong>versatile object-oriented Python interface</strong> is well suited to the comparison of new and classical many-particle models, enabling ambitious numerical experiments and leading to novel conjectures. The SiSyPHE library speeds up both traditional Python and low-level implementations by <strong>one to three orders of magnitude</strong>.</p>
 </div>
 </div>
 
