@@ -9,8 +9,8 @@ from setuptools import setup
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-# with open(path.join(here, "sisyphe", "README.md"), encoding="utf-8") as f:
-#     long_description = f.read()
+with open(path.join(here, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
 
 
 setup(
@@ -37,7 +37,7 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Programming Language :: Python :: 3 :: Only",
     ],
-    keywords="particles gpu",
+    keywords="particles gpu self-organization swarming mean-field",
     packages=[
         "sisyphe",
         "sisyphe.test",
