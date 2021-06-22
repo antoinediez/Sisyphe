@@ -188,8 +188,12 @@
 <li><p>the GPU version of SiSyPHE with single precision tensors (float32) with and without the <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">blocksparse-reduction method</span></a> (BSR), run on a <a class="reference external" href="http://sysnews.ma.ic.ac.uk/GPU-computing/">GPU cluster</a> at Imperial College London using an nVidia GTX 2080 Ti GPU ;</p></li>
 <li><p>the GPU version of SiSyPHE with double precision tensors (float64) with and without the <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">blocksparse-reduction method</span></a> (BSR), run on a <a class="reference external" href="http://sysnews.ma.ic.ac.uk/GPU-computing/">GPU cluster</a> at Imperial College London using an nVidia GTX 2080 Ti GPU.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The choice of single or double precision tensors is automatically made according to the floating point precision of the input tensors.</p>
+</div>
 <p>We run a <a class="reference internal" href="api/API_models.html#sisyphe.models.Vicsek" title="sisyphe.models.Vicsek"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vicsek</span></code></a> model in a square periodic box with fixed parameters <span class="math notranslate nohighlight">\(L=100\)</span>, <span class="math notranslate nohighlight">\(\nu=5\)</span>, <span class="math notranslate nohighlight">\(\sigma=1\)</span>, <span class="math notranslate nohighlight">\(c=R\)</span>, <span class="math notranslate nohighlight">\(dt=0.01\)</span> and various choices of <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. The simulation is run for 10 units of time (i.e. 1000 iterations).</p>
-<p>For each value of <span class="math notranslate nohighlight">\(N\)</span>, three value of <span class="math notranslate nohighlight">\(R\)</span> are tested which correspond to a dilute regime, a moderate regime and a dense mean-field regime. When the particles are uniformly scattered in the box, the average number of neighbours in the three regimes is respectively <span class="math notranslate nohighlight">\(\sim3\)</span>, <span class="math notranslate nohighlight">\(\sim30\)</span> and <span class="math notranslate nohighlight">\(\sim300\)</span>. The regime has a strong effect on the efficiency of the Verlet list and blocksparse reduction methods.</p>
+<p>For each value of <span class="math notranslate nohighlight">\(N\)</span>, three values of <span class="math notranslate nohighlight">\(R\)</span> are tested which correspond to a dilute regime, a moderate regime and a dense mean-field regime. When the particles are uniformly scattered in the box, the average number of neighbours in the three regimes is respectively <span class="math notranslate nohighlight">\(\sim3\)</span>, <span class="math notranslate nohighlight">\(\sim30\)</span> and <span class="math notranslate nohighlight">\(\sim300\)</span>. The regime has a strong effect on the efficiency of the Verlet list and blocksparse reduction methods.</p>
 <p>In the table below, the total computation times are given in seconds except when they exceed 12 hours. The best times are indicated in <strong>bold</strong> and the worst times in <em>italic</em>.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -304,6 +308,59 @@
 </tbody>
 </table>
 <p>The GPU implementation is at least 5 times faster in the dilute regime and outperform the other methods by three orders of magnitude in the mean-field regime with large values of <span class="math notranslate nohighlight">\(N\)</span>. Without the block-sparse reduction method, the GPU implementation does suffer from the quadratic complexity. The block-sparse reduction method is less sensitive to the density of particles than the traditional Verlet list method. It comes at the price of a higher memory cost (see <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">Tutorial 04: Block-sparse reduction</span></a>) but allows to run large scale simulations even on a CPU. On a CPU, the performances are not critically affected by the precision of the floating-point format so only simulations with double precision tensors are shown.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The parameters of the blocksparse reduction method are chosen using the method <a class="reference internal" href="api/API_particles.html#sisyphe.particles.Particles.best_blocksparse_parameters" title="sisyphe.particles.Particles.best_blocksparse_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">best_blocksparse_parameters()</span></code></a> (see <a class="reference internal" href="_auto_tutorials/plot_d_blocksparse.html#tutobsr"><span class="std std-ref">Tutorial 04: Block-sparse reduction</span></a>). As a guideline, in this example and on the GPU, the best number of cells is respectively <span class="math notranslate nohighlight">\(\sim 15^2\)</span>, <span class="math notranslate nohighlight">\(\sim 42^2\)</span> and <span class="math notranslate nohighlight">\(\sim 70^2\)</span> for <span class="math notranslate nohighlight">\(N=10^4\)</span>, <span class="math notranslate nohighlight">\(N=10^5\)</span> and <span class="math notranslate nohighlight">\(N=10^6\)</span> with sisyphe32 and  <span class="math notranslate nohighlight">\(\sim 25^2\)</span>, <span class="math notranslate nohighlight">\(\sim 60^2\)</span> and <span class="math notranslate nohighlight">\(\sim 110^2\)</span> for sisyphe64. Note that the number of cells will be automatically capped at <span class="math notranslate nohighlight">\((L/R)^2\)</span>. For the last case (sisyphe64 with <span class="math notranslate nohighlight">\(R=1\)</span>), the maximal number of cells depends on the memory available.</p>
+</div>
+<p>As an example, the case sisyphe32 GPU BSR with <span class="math notranslate nohighlight">\(N=10^5\)</span> and <span class="math notranslate nohighlight">\(R=1\)</span> is obtained with the following script.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">sisyphe.models</span> <span class="k">as</span> <span class="nn">models</span>
+<span class="kn">from</span> <span class="nn">sisyphe.display</span> <span class="kn">import</span> <span class="n">save</span>
+
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">FloatTensor</span>
+
+<span class="c1"># Replace by the following line for double precision tensors.</span>
+<span class="c1"># dtype = torch.cuda.DoubleTensor</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">.01</span>
+
+<span class="n">nu</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">R</span>
+
+<span class="c1"># The type of the initial condition will determine the floating point precision.</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="n">L</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="o">/</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">simu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Vicsek</span><span class="p">(</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">,</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="p">,</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span><span class="p">,</span>
+    <span class="n">interaction_radius</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+    <span class="n">box_size</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="p">,</span>
+    <span class="n">block_sparse_reduction</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">number_of_cells</span> <span class="o">=</span> <span class="mi">42</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">simu</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span> <span class="c1"># GPU warmup</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">save</span><span class="p">(</span><span class="n">simu</span><span class="p">,</span> <span class="p">[</span><span class="mf">10.</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[])</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 
 
