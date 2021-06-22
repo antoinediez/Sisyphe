@@ -55,6 +55,7 @@ extensions = [
 ]
 
 bibtex_bibfiles = ['biblio_sisyphe.bib']
+bibtex_default_style = 'plain'
 
 from sphinx_gallery.sorting import FileNameSortKey
 
