@@ -1,6 +1,6 @@
 # Simulation of Systems of Particles with High Efficiency
 
-![logo](./doc/_static/ball.png)
+<img src="./doc/_static/ball.png" alt="logo" width="100"/>
 
 Please visit the [website](https://sisyphe.readthedocs.io/en/latest/) for a full documentation.
 
