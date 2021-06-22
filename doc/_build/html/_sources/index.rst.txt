@@ -17,8 +17,28 @@ The project is hosted on `GitHub <https://github.com/antoinediez/Sisyphe>`_, und
 |PyPi version| 
 
 
-|mill|       |band|
+.. image:: _static/mill.gif
+    :scale: 100% 
+    :alt: Mill
+    :align: center
 
+Contributing
+======================
+
+Contributions to make SiSyPHE grow are warmly welcome! Examples of possible (and ongoing) developments include the following. 
+
+* The implementation of new models.
+
+* The implementation of more complex boundary conditions and of models on *non-flat* manifolds. 
+
+* An improved visualization method (currently only basic visualization functions relying on `Matplotlib <https://matplotlib.org/>`_ are implemented). 
+
+Contributions can be made by opening an issue on the GitHub repository, via a pull request or by contacting directly the author.  
+
+.. image:: _static/band.gif
+    :scale: 100% 
+    :alt: Band
+    :align: center
 
 
 Author
@@ -74,14 +94,6 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-.. |band| image:: _static/band.gif
-    :scale: 100% 
-    :alt: Band
-
-.. |mill| image:: _static/mill.gif
-    :scale: 100% 
-    :alt: Mill
 
 
 .. |PyPi version| image:: https://img.shields.io/pypi/v/sisyphe?color=blue
