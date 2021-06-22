@@ -1,6 +1,8 @@
 # Simulation of Systems of Particles with High Efficiency
 
-<div style="text-align:center"><img src="./doc/_static/ball.png" alt="logo" width="224"/></div>
+<p align="center">
+<img src="./doc/_static/ball.png" alt="logo" width="224"/>
+</p>
 
 Please visit the [website](https://sisyphe.readthedocs.io/en/latest/) for a full documentation.
 
@@ -9,7 +11,9 @@ Please visit the [website](https://sisyphe.readthedocs.io/en/latest/) for a full
 
 The SiSyPHE library builds on recent advances in hardware and software for the efficient simulation of **large scale interacting particle systems**, both on the **GPU** and on the CPU. The implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate tensor (array) computations, namely the [PyTorch](https://github.com/pytorch/pytorch) package and the [KeOps](https://www.kernel-operations.io/keops/index.html) library. The **versatile object-oriented Python interface** is well suited to the comparison of new and classical many-particle models, enabling ambitious numerical experiments and leading to novel conjectures. The SiSyPHE library speeds up both traditional Python and low-level implementations by **one to three orders of magnitude**. 
 
-<div style="text-align:center">![mill](./doc/_static/mill.gif)</div>
+<p align="center">
+<img src="./doc/_static/mill.gif" alt="mill">
+</p>
 
 ## Installation 
 
@@ -54,8 +58,9 @@ import sisyphe
 sisyphe.test_sisyphe()
 ```    
 
-<div style="text-align:center">![band](./doc/_static/band.gif)</div>
-   
+<p align="center">
+<img src="./doc/_static/band.gif" alt="band">
+</p>   
 
 ## Contributing
 
