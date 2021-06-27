@@ -42,7 +42,7 @@ The `SiSyPHE` library builds on recent advances in hardware and software
 for the efficient simulation of large scale interacting *mean-field* particle systems, 
 both on the GPU and on the CPU. The implementation is based on recent libraries 
 originally developed for machine learning purposes to significantly accelerate 
-tensor (array) computations, namely the `PyTorch` package and the `KeOps` library [@charlier_kernel_2021]. 
+tensor (array) computations, namely the `PyTorch` package [@paszke_pytorch_2019] and the `KeOps` library [@charlier_kernel_2021]. 
 The versatile object-oriented Python interface is well suited to the comparison 
 of new and classical many-particle models, enabling ambitious numerical 
 experiments and leading to novel conjectures. The SiSyPHE library speeds up 
