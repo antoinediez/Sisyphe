@@ -66,7 +66,7 @@ projection on the plane orthgonal to $V^i_t$, $(B^i_t)^{}_t$ is an independent B
 The quantity $J^i_t\in\mathbb{R}^d$ is called a *target*: it is the orientation that particle $i$ is trying to adopt. 
 In the classical Vicsek model, 
 \begin{equation}\label{eq:target}
-J^i_t = \frac{\sum_{j=1} K(|X^j_t-X^i_t|)V^j_t}{\big|\sum_{j=1} K(|X^j_t-X^i_t|)V^j_t\big|}, 
+J^i_t = \frac{\sum_{j=1}^N K(|X^j_t-X^i_t|)V^j_t}{\big|\sum_{j=1}^N K(|X^j_t-X^i_t|)V^j_t\big|}, 
 \end{equation}
 where the *kernel* $K:[0,+\infty)\to[0,+\infty)$ is a smooth nonnegative
 function vanishing at infinity which models the visual perception of the particles: 
