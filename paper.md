@@ -57,7 +57,7 @@ of magnitude for systems with up to several millions of particles.
 A typical model which is implemented in the `SiSyPHE` library is the Vicsek model
 defined in [@degond_continuum_2008] by the system of $N$ Stratonovich Stochastic Differential Equations
 \begin{equation}\label{eq:sde}
-\mathrm{d}X^i_t &= c_0 V^i_t \mathrm{d}t, \quad \mathrm{d}V^i_t = \sigma \mathsf{P}(V^i_t)\circ(J^i_t\mathrm{d}t+\mathrm{d}B^i_t),
+\mathrm{d}X^i_t = c_0 V^i_t \mathrm{d}t, \quad \mathrm{d}V^i_t = \sigma \mathsf{P}(V^i_t)\circ(J^i_t\mathrm{d}t+\mathrm{d}B^i_t),
 \end{equation}
 where for a particle indexed by $i\in\{1,\ldots,N\}$ at time $t$, its position is a vector $X^i_t\in\mathbb{R}^d$, 
 its orientation is a unit vector $V^i_t\in\mathbb{R}^d$ with $|V^i_t|=1$. The coefficient $c_0>0$ is the speed
