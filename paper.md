@@ -61,8 +61,8 @@ defined in [@degond_continuum_2008] by the system of $N$ Stratonovich Stochastic
 \end{equation}
 where for a particle indexed by $i\in\{1,\ldots,N\}$ at time $t$, its position is a vector $X^i_t\in\mathbb{R}^d$, 
 its orientation is a unit vector $V^i_t\in\mathbb{R}^d$ with $|V^i_t|=1$. The coefficient $c_0>0$ is the speed
-of the particles (assumed to be constant), the matrix $P(V^i_t)= I_d - V^i_t\otimes V^i_t$ is the orthogonal 
-projection on the plane orthgonal to $V^i_t$, $B^i_t$ is an independent Brownian motion and $\sigma$ is a diffusion coefficient. 
+of the particles (assumed to be constant), the matrix $\mathsf{P}(V^i_t)= I_d - V^i_t\otimes V^i_t$ is the orthogonal 
+projection on the plane orthgonal to $V^i_t$, $(B^i_t)^{}_t$ is an independent Brownian motion and $\sigma>0$ is a diffusion coefficient. 
 The quantity $J^i_t\in\mathbb{R}^d$ is called a *target*: it is the orientation that particle $i$ is trying to adopt. 
 In the classical Vicsek model, 
 \begin{equation}\label{eq:target}
