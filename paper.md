@@ -54,9 +54,8 @@ introduced by @degond_continuum_2008 and defined by the system of $2N$ Stratonov
 \begin{equation}\label{eq:sde}
 \mathrm{d}X^i_t = c_0 V^i_t \mathrm{d}t, \quad \mathrm{d}V^i_t = \sigma \mathsf{P}(V^i_t)\circ(J^i_t\mathrm{d}t+\mathrm{d}B^i_t),
 \end{equation}
-where for a particle indexed by $i\in\{1,\ldots,N\}$ at time $t$, its position is a vector $X^i_t\in\mathbb{R}^d$ and its orientation is a unit vector $V^i_t\in\mathbb{R}^d$ with $|V^i_t|=1$. The coefficient $c_0>0$ is the speed
-of the particles (assumed to be constant), the matrix $\mathsf{P}(V^i_t)= I_d - V^i_t\otimes V^i_t$ is the orthogonal 
-projection on the plane orthgonal to $V^i_t$, $(B^i_t)^{}_t$ is an independent Brownian motion and $\sigma>0$ is a diffusion coefficient which models the level of noise. 
+where the position at time $t$ of a particle indexed by $i\in\{1,\ldots,N\}$ is a vector $X^i_t\in\mathbb{R}^d$ and its orientation (or velocity) is a unit vector $V^i_t\in\mathbb{R}^d$ with $|V^i_t|=1$. The coefficient $c_0>0$ is the speed
+of the particles (assumed to be constant), the matrix $\mathsf{P}(V^i_t)= I_d - V^i_t\otimes V^i_t$ is the orthogonal projection matrix on the plane orthgonal to $V^i_t$, $(B^i_t)^{}_t$ is an independent Brownian motion and $\sigma>0$ is a diffusion coefficient which models the level of noise. 
 The quantity $J^i_t\in\mathbb{R}^d$ is called a *target*: it is the orientation that particle $i$ is trying to adopt. 
 In the Vicsek model introduced by @degond_continuum_2008, 
 \begin{equation}\label{eq:target}
@@ -72,9 +71,9 @@ the most expensive operation is the computation of the target given by \autoref{
 operations for each of the $N$ particles. The total simulation cost is thus $\mathcal{O}(N^2T)$ where $T$ is the
 total number of iterations. Within the framework of the `KeOps` library on which `SiSyPHE` is based, 
 the computation of the target \autoref{eq:target} is called a *kernel operation* which is efficiently carried out
-using a *symbolic* definition of the $N\times N$ interaction matrix whose $(i,j)$-entry is $K(|X^j_t-X^i_t)$. 
+using a *symbolic* definition of the $N\times N$ interaction matrix whose $(i,j)$-entry is $K(|X^j_t-X^i_t)$. The computation of the target is then understood as a symbolic matrix-vector product between the interaction matrix and the vector of orientations.  
 
-Many other classical models and their variants are already implemented in the `SiSyPHE` library. All these models are directly taken from the literature on collective dynamics in Mathematics and Active Matter Physics and are detailed in the Example gallery of the documentation. Moreover, the `SiSyPHE` library is designed so that new custom models can easily be implemented in order to facilite the study and comparison of models from a research perspective.  
+Many other classical models and their variants are already implemented in the `SiSyPHE` library. All these models are directly taken from the literature on collective dynamics in Mathematics and Active Matter Physics and are detailed in the Example gallery of the documentation. Moreover, the `SiSyPHE` library is designed in such a way that new custom models can easily be implemented in order to facilite the study and comparison of models from a research perspective.  
 
 The development of the `SiSyPHE` library was initially motivated by the study of *body-oriented particles* [@giacomin_alignment_2019]. 
 The (formal) derivation of a macroscopic PDE model from the particle system has lead to a novel conjecture 
