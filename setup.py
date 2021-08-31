@@ -16,7 +16,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 setup(
     name="sisyphe",
     version="0.1.5",
-    description="Simulation of Systems of Particles with High Efficiency",  # Required
+    description="Simulation of Systems of interacting mean-field Particles with High Efficiency",  # Required
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://sisyphe.readthedocs.io",

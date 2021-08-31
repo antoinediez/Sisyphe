@@ -1,4 +1,4 @@
-# Simulation of Systems of Particles with High Efficiency
+# Simulation of Systems of interacting mean-field Particles with High Efficiency
 
 <p align="center">
 <img src="./doc/_static/ball.png" alt="logo" width="224"/>

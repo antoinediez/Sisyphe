@@ -1,5 +1,5 @@
 ---
-title: '`SiSyPHE`: A Python package for the Simulation of Systems of Particles with High Efficiency'
+title: '`SiSyPHE`: A Python package for the Simulation of Systems of interacting mean-field Particles with High Efficiency'
 tags:
   - Python
   - GPU

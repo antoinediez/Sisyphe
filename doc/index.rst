@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Simulation of Systems of Particles with High Efficiency
+Simulation of Systems of interacting mean-field Particles with High Efficiency
 **********************************************************
 
 .. image:: _static/ball.png
