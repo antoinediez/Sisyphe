@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Simulation of Systems of interacting mean-field Particles with High Efficiency
-**********************************************************
+************************************************************************************
 
 .. image:: _static/ball.png
     :scale: 70% 

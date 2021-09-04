@@ -52,6 +52,9 @@ Testing the installation
 
 The following test function will check the configuration and run the simulation of a system of body-oriented particles (see the example gallery). This simulation uses the main features of the SiSyPHE library: a complex system, nontrivial boundary conditions, a sampling-based interaction mechanism, the blocksparse reduction method and a nontrivial initial condition. Moreover, this model is `theoretically well-understood <https://arxiv.org/abs/2101.10864>`_ which provides a theoretical baseline to check the accuracy of the output of the simulation. 
 
+.. warning::
+    This function is mainly intended to be runned on a GPU. Running this function on a CPU will take a long time! See below for a quick testing procedure. 
+
 In a Python terminal, type 
 
 .. code-block:: python
@@ -102,5 +105,13 @@ On a fresh environment, it should return
      SiSyPHE is working!    
 
     
-    
+The core functionalities of the library are automatically and continuously tested through a GitHub workflow based on the module :mod:`sisyphe.test.quick_test`. The testing functions include basic computations on simple examples (computation of simple local averages in various situations) and small scales simulations. Note that unlike the function :meth:`sisyphe.test_sisyphe()`, these testing functions do not check the accuracy of the output of the simulations but only check that the code runs without errors. It is possible to use the `Pytest package <https://docs.pytest.org/en/6.2.x/>`_ to run these tests manually: on a Python terminal, type
+
+.. code-block:: python
+
+    import pytest
+    from sisyphe.test import quick_test
+    retcode = pytest.main(quick_test.__file__)
+
+
     

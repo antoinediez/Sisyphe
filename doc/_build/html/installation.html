@@ -236,6 +236,10 @@
 <div class="section" id="testing-the-installation">
 <h2>Testing the installation<a class="headerlink" href="#testing-the-installation" title="Permalink to this headline">¶</a></h2>
 <p>The following test function will check the configuration and run the simulation of a system of body-oriented particles (see the example gallery). This simulation uses the main features of the SiSyPHE library: a complex system, nontrivial boundary conditions, a sampling-based interaction mechanism, the blocksparse reduction method and a nontrivial initial condition. Moreover, this model is <a class="reference external" href="https://arxiv.org/abs/2101.10864">theoretically well-understood</a> which provides a theoretical baseline to check the accuracy of the output of the simulation.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is mainly intended to be runned on a GPU. Running this function on a CPU will take a long time! See below for a quick testing procedure.</p>
+</div>
 <p>In a Python terminal, type</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sisyphe</span>
 <span class="n">sisyphe</span><span class="o">.</span><span class="n">test_sisyphe</span><span class="p">()</span>
@@ -279,6 +283,12 @@
 <span class="go">Done.</span>
 
 <span class="go"> SiSyPHE is working!</span>
+</pre></div>
+</div>
+<p>The core functionalities of the library are automatically and continuously tested through a GitHub workflow based on the module <code class="xref py py-mod docutils literal notranslate"><span class="pre">sisyphe.test.quick_test</span></code>. The testing functions include basic computations on simple examples (computation of simple local averages in various situations) and small scales simulations. Note that unlike the function <code class="xref py py-meth docutils literal notranslate"><span class="pre">sisyphe.test_sisyphe()</span></code>, these testing functions do not check the accuracy of the output of the simulations but only check that the code runs without errors. It is possible to use the <a class="reference external" href="https://docs.pytest.org/en/6.2.x/">Pytest package</a> to run these tests manually: on a Python terminal, type</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">sisyphe.test</span> <span class="kn">import</span> <span class="n">quick_test</span>
+<span class="n">retcode</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">quick_test</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
