@@ -3,13 +3,8 @@
 
 name: Testing SiSyPHE
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-  workflow_dispatch:
-    branches: [ $default-branch ]
+on: [push, pull_request, workflow_dispatch]
+
 jobs:
   build:
 
