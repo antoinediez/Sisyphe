@@ -7,7 +7,7 @@ from pykeops.torch import LazyTensor
 def volume_ball(d):
     r"""Volume of the ball of radius 1 in dimension d"""
     if np.remainder(d, 2) == 0:
-        V = (np.pi ** (d / 2)) / np.math.factorial(d / 2)
+        V = (np.pi ** (d / 2)) / np.math.factorial(int(d / 2))
     else:
         k = (d - 1) / 2
         V = 2 * np.math.factorial(k) * (4 * np.pi) ** k / np.math.factorial(d)
