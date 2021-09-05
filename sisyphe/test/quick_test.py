@@ -178,3 +178,38 @@ def test_volume_exclusion():
                                   dt=dt)
     frames = [0, 1, 2, 3, 4, 5, 10]
     scatter_particles(simu, frames)
+
+
+def test_vicsek_disk():
+    r"""Run a small scale Vicsek model in a disk."""
+    N = 10000
+    L = 10.
+    dt = .01
+    nu = 3
+    sigma = 1.
+    R = .1
+    c = 1.
+    center = torch.tensor([L / 2, L / 2]).type(dtype).reshape((1, 2))
+    radius = L / 2
+    pos = L * torch.rand((N, 2)).type(dtype)
+    out = ((pos - center) ** 2).sum(1) > radius ** 2
+    while out.sum() > 0:
+        pos[out, :] = L * torch.rand((out.sum(), 2)).type(dtype)
+        out = ((pos - center) ** 2).sum(1) > radius ** 2
+    vel = torch.randn(N, 2).type(dtype)
+    vel = vel / torch.norm(vel, dim=1).reshape((N, 1))
+    simu = models.Vicsek(pos=pos, vel=vel,
+                         v=c,
+                         sigma=sigma, nu=nu,
+                         interaction_radius=R,
+                         box_size=L,
+                         boundary_conditions='spherical',
+                         variant={"name": "max_kappa",
+                                  "parameters": {"kappa_max": 10.}},
+                         options={},
+                         numerical_scheme='projection',
+                         dt=dt,
+                         block_sparse_reduction=True,
+                         number_of_cells=80 ** 2)
+    frames = [0, .1]
+    it, op = display_kinetic_particles(simu, frames, N_dispmax=100000)
