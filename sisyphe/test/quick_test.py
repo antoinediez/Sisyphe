@@ -3,14 +3,14 @@ import torch
 import sisyphe.models as models
 import sisyphe.particles as particles
 from sisyphe.toolbox import block_sparse_reduction_parameters
-from sisyphe.display import save
+from sisyphe.display import save, display_kinetic_particles, scatter_particles
 
 use_cuda = torch.cuda.is_available()
 dtype = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
 
 
 def test_neighbours():
-    """Test the computation of the number of neighbours for a simple
+    r"""Test the computation of the number of neighbours for a simple
     configuration with various boundary conditions and vision angles.
     """
     L = 10.
@@ -51,7 +51,7 @@ def test_neighbours():
 
 
 def test_bsr():
-    """Test the labelling of the particles for the block sparse
+    r"""Test the labelling of the particles for the block sparse
     reduction method."""
     L = 9.
     R = .1
@@ -97,8 +97,8 @@ def test_bsr():
     assert int(labels_x[8]) == 8
 
 
-def test_simu():
-    """Run a simulation on a small scale example."""
+def test_vicsek():
+    r"""Run a simulation of a small scale Vicsek model."""
     N = 10000
     L = 100.
     dt = .01
@@ -121,3 +121,60 @@ def test_simu():
         block_sparse_reduction=True,
         number_of_cells=42 ** 2)
     data = save(simu, [.1], [], [])
+
+
+def test_dorsogna():
+    r"""Run a simulation of a small scale D'Orsogna model."""
+    N = 1000
+    mass = 1000.
+    L = 10.
+    Ca = .5
+    la = 2.
+    Cr = 1.
+    lr = .5
+    alpha = 1.6
+    beta = .5
+    v0 = math.sqrt(alpha / beta)
+    pos = L * torch.rand((N, 2)).type(dtype)
+    vel = torch.randn(N, 2).type(dtype)
+    vel = vel / torch.norm(vel, dim=1).reshape((N, 1))
+    vel = v0 * vel
+    dt = .01
+    simu = models.AttractionRepulsion(pos=pos,
+                                      vel=vel,
+                                      interaction_radius=math.sqrt(mass),
+                                      box_size=L,
+                                      propulsion=alpha,
+                                      friction=beta,
+                                      Ca=Ca,
+                                      la=la,
+                                      Cr=Cr,
+                                      lr=lr,
+                                      dt=dt,
+                                      p=1,
+                                      isaverage=True)
+
+    frames = [0, 1]
+    it, op = display_kinetic_particles(simu, frames)
+
+
+def test_volume_exclusion():
+    r"""Run a small scale volume exclusion model."""
+    N = 100
+    rmin = .1
+    rmax = 1.
+    R = (rmax - rmin) * torch.rand(N).type(dtype) + rmin
+    L = 100.
+    D0 = 5.
+    pos = (D0 * torch.rand((N, 2)).type(dtype) - D0 / 2) + torch.tensor(
+        [L / 2, L / 2]).type(dtype)
+    dt = .1
+    simu = models.VolumeExclusion(pos=pos,
+                                  interaction_radius=R,
+                                  box_size=L,
+                                  alpha=2.5,
+                                  division_rate=.1,
+                                  death_rate=.1,
+                                  dt=dt)
+    frames = [0, 1, 2, 3, 4, 5, 10]
+    scatter_particles(simu, frames)
