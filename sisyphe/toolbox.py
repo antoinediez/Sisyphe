@@ -5,7 +5,7 @@ from pykeops.torch import LazyTensor
 
 
 def volume_ball(d):
-    """Volume of the ball of radius 1 in dimension d"""
+    r"""Volume of the ball of radius 1 in dimension d"""
     if np.remainder(d, 2) == 0:
         V = (np.pi ** (d / 2)) / np.math.factorial(d / 2)
     else:
@@ -147,7 +147,7 @@ def cluster_ranges(lab, Nlab=None):
 
 def block_sparse_reduction_parameters(x, y, centroids, eps, L, keep,
                                       where_dummies=False):
-    """Compute the block sparse reduction parameters.
+    r"""Compute the block sparse reduction parameters.
 
     Classical block sparse reduction as explained in the documentation
     of the KeOps library. The main difference is that the centroids and
@@ -289,8 +289,9 @@ def quat_mult(q_1, q_2):
 
     return q_1_q_2
 
+
 def angles_directions_to_quat(angles, directions):
-    """Represents a list of rotation angles and axes as quaternions."""
+    r"""Represents a list of rotation angles and axes as quaternions."""
     t = angles / 2
     return torch.cat((t.cos().view(-1, 1),
                       t.sin().view(-1, 1) * directions),

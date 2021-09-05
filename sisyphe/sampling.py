@@ -4,7 +4,7 @@ from .toolbox import angles_directions_to_quat, quat_mult
 
 
 def uniform_sphere_rand(N, d, device, dtype=torch.float32):
-    """Uniform sample on the unit sphere :math:`\mathbb{S}^{d-1}`.
+    r"""Uniform sample on the unit sphere :math:`\mathbb{S}^{d-1}`.
 
     Args:
         N (int): Number of samples.
@@ -27,7 +27,7 @@ def uniform_sphere_rand(N, d, device, dtype=torch.float32):
 
 
 def uniform_angle_rand(mu, eta):
-    """Uniform sample in an angle interval in dimension 2.
+    r"""Uniform sample in an angle interval in dimension 2.
 
     Add a uniform angle in :math:`[-\pi\eta,\pi\eta]` to the angle of
     **mu**.
@@ -61,7 +61,7 @@ on the (D-1)-sphere using the Ulrich-Wood algorithm
 """
 
 def sample_W(kappa,N,d):
-    """Sample the first coordinate of a von Mises distribution with
+    r"""Sample the first coordinate of a von Mises distribution with
     center at :math:`(1,0,...0)^T` and concentration **kappa**.
 
     Args:
@@ -101,7 +101,7 @@ def sample_W(kappa,N,d):
 
 
 def vonmises_rand(mu,kappa):
-    """Von Mises sample on the sphere :math:`\mathbb{S}^{d-1}` using
+    r"""Von Mises sample on the sphere :math:`\mathbb{S}^{d-1}` using
     the Ulrich-Wood algorithm [W1994]_.
 
     .. [W1994] A. Wood, Simulation of the von Mises Fisher distribution,
@@ -153,7 +153,7 @@ def vonmises_rand(mu,kappa):
 #### Rejection sampler: uniform quaternion in a ball around Id ####
 
 def sample_angles(N, scales):
-    """Sample angles by rejection sampling."""
+    r"""Sample angles by rejection sampling."""
     # if scales.size()==torch.Size([1]):
     #     s = scales
     # else:
@@ -177,7 +177,7 @@ def sample_angles(N, scales):
 
 
 def uniformball_unitquat_rand(q, scales):
-    """Sample rotations at random in balls centered around q,
+    r"""Sample rotations at random in balls centered around q,
     with radii given by the scales array."""
 
     N, d = list(q.size())
@@ -192,7 +192,7 @@ def uniformball_unitquat_rand(q, scales):
 
 
 def uniform_unitquat_rand(N, device, dtype=torch.float32):
-    """Uniform sample in the space of unit quaternions.
+    r"""Uniform sample in the space of unit quaternions.
 
     Args:
         N (int): Number of samples.
@@ -217,7 +217,7 @@ on the space of unit quaternions using the BACG method.
 """
 
 def sample_q0(kappa, N):
-    """Sample **N** random variables distributed according to the von
+    r"""Sample **N** random variables distributed according to the von
     Mises distribution on the space of quaternions with center
     :math:`(1,0,0,0)` and concentration parameter **kappa**.
 
@@ -279,7 +279,7 @@ def sample_q0(kappa, N):
 
 
 def vonmises_quat_rand(q, kappa):
-    """ Von Mises random variables on the space of quaternions with
+    r""" Von Mises random variables on the space of quaternions with
     center **q** and concentration parameter **kappa**.
 
     Multiply **q** with a sample from the von Mises distribution on the

@@ -4,7 +4,7 @@ from pykeops.torch import LazyTensor
 
 
 def squared_distances_tensor(x, y, L, boundary_conditions='periodic'):
-    """Squared distances matrix as torch Tensors.
+    r"""Squared distances matrix as torch Tensors.
 
     Args:
         x ((M,d) Tensor): Rows.
@@ -51,7 +51,7 @@ def squared_distances_tensor(x, y, L, boundary_conditions='periodic'):
 
 
 def lazy_xy_matrix(x, y, L, boundary_conditions='periodic'):
-    """XY matrix as LazyTensors.
+    r"""XY matrix as LazyTensors.
 
     Args:
         x ((M,d) Tensor): Rows.
@@ -98,7 +98,7 @@ def lazy_xy_matrix(x, y, L, boundary_conditions='periodic'):
 
 
 def squared_distances(x, y, L, boundary_conditions='periodic'):
-    """Squared distances LazyTensor.
+    r"""Squared distances LazyTensor.
 
     Args:
         x ((M,d) Tensor): Rows.
@@ -133,7 +133,7 @@ def squared_distances(x, y, L, boundary_conditions='periodic'):
 
 
 def sqdist_angles(x, y, x_orientation, L, boundary_conditions='periodic'):
-    """Squared distances and angles LazyTensors.
+    r"""Squared distances and angles LazyTensors.
 
     Args:
         x ((M,d) Tensor): Rows.
@@ -173,7 +173,7 @@ def sqdist_angles(x, y, x_orientation, L, boundary_conditions='periodic'):
 
 def lazy_interaction_kernel(x, y, Rx, L, boundary_conditions,
                             vision_angle=2 * math.pi, axis=None, **kwargs):
-    """Interaction kernel as LazyTensor.
+    r"""Interaction kernel as LazyTensor.
 
     Args:
         x ((M,d) Tensor): Row.
@@ -225,7 +225,7 @@ def lazy_interaction_kernel(x, y, Rx, L, boundary_conditions,
 
 
 def lazy_overlapping_kernel(x, y, Rx, Ry, L, boundary_conditions, **kwargs):
-    """Overlapping kernel as LazyTensor.
+    r"""Overlapping kernel as LazyTensor.
 
     Args:
         x ((M,d) Tensor): Rows.
