@@ -111,7 +111,7 @@ The core functionalities of the library are automatically and continuously teste
 
     import pytest
     from sisyphe.test import quick_test
-    retcode = pytest.main(quick_test.__file__)
+    retcode = pytest.main([quick_test.__file__,])
 
 
     
