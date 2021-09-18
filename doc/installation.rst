@@ -10,6 +10,9 @@ Requirements
 - **PyTorch** : version>= 1.5
 - **PyKeops** : version>= 1.5
 
+.. note::
+    In order to have a working version of PyKeOps, it may be necessary to install and upgrade Cmake to Cmake>=3.18 as discussed `here <https://github.com/getkeops/keops/issues/142>`_.
+
 Installation
 ============= 
 
