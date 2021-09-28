@@ -15,6 +15,29 @@ The SiSyPHE library builds on recent advances in hardware and software for the e
 <img src="./doc/_static/mill.gif" alt="mill">
 </p>
 
+## Citation 
+
+If you use SiSyPHE in a research paper, please cite the [JOSS publication](https://joss.theoj.org/papers/10.21105/joss.03653#) :
+
+```
+@article{Diez2021,
+  doi = {10.21105/joss.03653},
+  url = {https://doi.org/10.21105/joss.03653},
+  year = {2021},
+  publisher = {The Open Journal},
+  volume = {6},
+  number = {65},
+  pages = {3653},
+  author = {Antoine Diez},
+  title = {`SiSyPHE`: A Python package for the Simulation of Systems of interacting mean-field Particles with High Efficiency},
+  journal = {Journal of Open Source Software}
+}
+```
+
+Diez, A., (2021). SiSyPHE: A Python package for the Simulation of Systems of interacting mean-field Particles with High Efficiency. Journal of Open Source Software, 6(65), 3653, https://doi.org/10.21105/joss.03653
+
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03653/status.svg)](https://doi.org/10.21105/joss.03653)
+
 ## Installation 
 
 ### Requirements
