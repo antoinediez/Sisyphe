@@ -14,13 +14,32 @@ Simulation of Systems of interacting mean-field Particles with High Efficiency
 The SiSyPHE library builds on recent advances in hardware and software for the efficient simulation of **large scale interacting particle systems**, both on the **GPU** and on the CPU. The implementation is based on recent libraries originally developed for machine learning purposes to significantly accelerate tensor (array) computations, namely the `PyTorch <https://github.com/pytorch/pytorch>`_ package and the `KeOps <https://www.kernel-operations.io/keops/index.html>`_ library. The **versatile object-oriented Python interface** is well suited to the comparison of new and classical many-particle models, enabling ambitious numerical experiments and leading to novel conjectures. The SiSyPHE library speeds up both traditional Python and low-level implementations by **one to three orders of magnitude** for systems with up to **several millions** of particles. 
 
 The project is hosted on `GitHub <https://github.com/antoinediez/Sisyphe>`_, under the permissive `MIT license <https://en.wikipedia.org/wiki/MIT_License>`_. |br|  
-|PyPi version| 
+|PyPi version| |JOSS paper| |doc badge|
 
 
 .. image:: _static/mill.gif
     :scale: 100% 
     :alt: Mill
     :align: center
+    
+Citation
+=====================
+
+If you use SiSyPHE in a research paper, please cite the `JOSS publication <https://joss.theoj.org/papers/10.21105/joss.03653#>`_ : ::
+
+  @article{Diez2021,
+  doi = {10.21105/joss.03653},
+  url = {https://doi.org/10.21105/joss.03653},
+  year = {2021},
+  publisher = {The Open Journal},
+  volume = {6},
+  number = {65},
+  pages = {3653},
+  author = {Antoine Diez},
+  title = {`SiSyPHE`: A Python package for the Simulation of Systems of interacting mean-field Particles with High Efficiency},
+  journal = {Journal of Open Source Software}}
+  
+Diez, A., (2021). SiSyPHE: A Python package for the Simulation of Systems of interacting mean-field Particles with High Efficiency. Journal of Open Source Software, 6(65), 3653, https://doi.org/10.21105/joss.03653
 
 Contributing
 ======================
@@ -98,6 +117,13 @@ Indices and tables
 
 .. |PyPi version| image:: https://img.shields.io/pypi/v/sisyphe?color=blue
    :target: https://pypi.org/project/sisyphe/
+   
+.. |JOSS paper| image:: https://joss.theoj.org/papers/10.21105/joss.03653/status.svg
+   :target: https://doi.org/10.21105/joss.03653
+   
+.. |doc badge| image:: https://readthedocs.org/projects/sisyphe/badge/?version=latest
+   :target: https://sisyphe.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
    
 .. |br| raw:: html
 
