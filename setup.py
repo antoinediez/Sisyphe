@@ -15,7 +15,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="sisyphe",
-    version="1.0",
+    version="1.1",
     description="Simulation of Systems of interacting mean-field Particles with High Efficiency",  # Required
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -26,7 +26,7 @@ setup(
     },
     author="Antoine Diez",
     author_email="antoine.diez18@imperial.ac.uk",
-    python_requires=">=3",
+    python_requires=">=3, !=3.10.*",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
