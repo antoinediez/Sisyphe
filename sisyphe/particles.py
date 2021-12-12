@@ -1592,13 +1592,13 @@ class BOParticles(Particles):
             else:
                 eps = self.L[0] / K
             index = (self.pos[:, 0] / eps).floor().int()
-        if axis == 'y':
+        elif axis == 'y':
             if self.L.shape == torch.Size([]):
                 eps = self.L / K
             else:
                 eps = self.L[1] / K
             index = (self.pos[:, 1] / eps).floor().int()
-        if axis == 'z':
+        elif axis == 'z':
             if self.L.shape == torch.Size([]):
                 eps = self.L / K
             else:
