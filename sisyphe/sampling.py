@@ -127,7 +127,7 @@ def vonmises_rand(mu,kappa):
         V = torch.randn((N, D - 1), dtype=mu.dtype, device=mu.device)
         V = V / torch.norm(V, dim=1).reshape((N, 1))
     # Construct a von Mises random variable X with center (1,0,0...)^T
-    X = torch.cat((W[:, None], torch.sqrt((1 - W[:, None] ** 2)) * V), 1)
+    X = torch.cat((W[:, None], torch.sqrt((1 - W[:, None] ** 2).relu()) * V), 1)
     if D == 2:
         angle_mu = torch.atan2(mu[:, 1], mu[:, 0])
         X_angle = torch.atan2(X[:, 1], X[:, 0])
