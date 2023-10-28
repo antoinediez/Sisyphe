@@ -15,7 +15,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="sisyphe",
-    version="1.1",
+    version="1.2",
     description="Simulation of Systems of interacting mean-field Particles with High Efficiency",  # Required
     long_description=long_description,
     long_description_content_type="text/markdown",
